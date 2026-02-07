@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>배당+주가 매트릭스 | Dividend Matrix</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #000; --bg-card: #0a0a0a; --border: #1a1a1a;
+  --text: #e8e8e8; --text-dim: #888; --text-muted: #555;
+  --green: #00ff88; --red: #ff4466; --gold: #ffd700; --blue: #4488ff; --cyan: #00ddcc;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Noto Sans KR',sans-serif; min-height:100vh; }
+
+.header { padding:40px 24px 20px; max-width:1200px; margin:0 auto; position:relative; }
+.header::before { content:''; position:absolute; top:0;left:0;right:0; height:180px;
+  background:radial-gradient(ellipse at 20% 0%,rgba(0,255,136,0.06) 0%,transparent 60%),
+             radial-gradient(ellipse at 80% 0%,rgba(255,68,102,0.04) 0%,transparent 60%); pointer-events:none; }
+.badge { display:inline-flex; align-items:center; gap:6px; padding:4px 12px;
+  background:rgba(0,255,136,0.08); border:1px solid rgba(0,255,136,0.2); border-radius:20px;
+  font:600 11px 'JetBrains Mono',monospace; color:var(--green); letter-spacing:0.5px;
+  text-transform:uppercase; margin-bottom:14px; }
+.badge .dot { width:6px;height:6px; background:var(--green); border-radius:50%; animation:pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.header h1 { font-size:30px; font-weight:900; letter-spacing:-1px; margin-bottom:6px;
+  background:linear-gradient(135deg,#fff,#aaa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.header .sub { font-size:13px; color:var(--text-dim); }
+.header .time { font:11px 'JetBrains Mono',monospace; color:var(--text-muted); margin-top:6px; }
+
+/* Legend */
+.legend { max-width:1200px; margin:0 auto; padding:0 24px 16px; display:flex; flex-wrap:wrap; gap:16px; align-items:center; }
+.legend-item { display:flex; align-items:center; gap:6px; font-size:12px; color:var(--text-dim); }
+.legend-dot { width:10px; height:10px; border-radius:50%; }
+.legend-zone { display:flex; gap:12px; margin-left:auto; }
+.zone-tag { padding:3px 10px; border-radius:12px; font:600 11px 'JetBrains Mono',monospace; }
+.zone-gold { background:rgba(255,215,0,0.1); border:1px solid rgba(255,215,0,0.3); color:var(--gold); }
+.zone-danger { background:rgba(255,68,102,0.1); border:1px solid rgba(255,68,102,0.3); color:var(--red); }
+
+/* Chart container */
+.chart-area { max-width:1200px; margin:0 auto; padding:0 24px 20px; }
+.chart-box { background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:24px; position:relative; overflow:hidden; }
+.chart-box::before { content:''; position:absolute; top:0;left:0;right:0; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(0,255,136,0.3),transparent); }
+
+canvas { width:100% !important; cursor:crosshair; }
+
+/* Tooltip */
+.tooltip { position:absolute; display:none; background:rgba(10,10,10,0.95); border:1px solid var(--border);
+  border-radius:10px; padding:12px 16px; pointer-events:none; z-index:100; min-width:200px;
+  backdrop-filter:blur(10px); font-size:13px; }
+.tooltip .tt-ticker { font:700 16px 'JetBrains Mono',monospace; color:var(--text); }
+.tooltip .tt-name { font-size:11px; color:var(--text-muted); margin-bottom:8px; }
+.tooltip .tt-row { display:flex; justify-content:space-between; gap:16px; margin-top:4px; }
+.tooltip .tt-label { color:var(--text-muted); font-size:11px; }
+.tooltip .tt-val { font:600 13px 'JetBrains Mono',monospace; }
+
+/* Quadrant stats */
+.quad-stats { max-width:1200px; margin:0 auto; padding:0 24px 20px; display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+.quad-card { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:14px; text-align:center; }
+.quad-icon { font-size:20px; margin-bottom:6px; }
+.quad-label { font:600 10px 'JetBrains Mono',monospace; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; }
+.quad-value { font:700 18px 'JetBrains Mono',monospace; }
+.quad-desc { font-size:11px; color:var(--text-muted); margin-top:4px; }
+
+/* Top stocks in golden zone */
+.golden-list { max-width:1200px; margin:0 auto; padding:0 24px 40px; }
+.golden-title { font:700 16px 'Noto Sans KR',sans-serif; color:var(--gold); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+.golden-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:10px; }
+.golden-card { background:var(--bg-card); border:1px solid rgba(255,215,0,0.15); border-radius:12px; padding:14px;
+  transition:border-color 0.2s; }
+.golden-card:hover { border-color:rgba(255,215,0,0.4); }
+.gc-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.gc-ticker { font:700 15px 'JetBrains Mono',monospace; }
+.gc-sector { font-size:10px; color:var(--text-muted); padding:2px 8px; border:1px solid var(--border); border-radius:10px; }
+.gc-metrics { display:flex; gap:12px; }
+.gc-metric { }
+.gc-metric-label { font:10px 'JetBrains Mono',monospace; color:var(--text-muted); }
+.gc-metric-val { font:600 14px 'JetBrains Mono',monospace; }
+
+.footer { max-width:1200px; margin:0 auto; padding:0 24px 40px; text-align:center;
+  font:11px 'JetBrains Mono',monospace; color:var(--text-muted); }
+
+@media(max-width:768px) {
+  .header { padding:20px 16px 14px; }
+  .header h1 { font-size:22px; }
+  .legend { padding:0 16px 12px; gap:8px; }
+  .legend-zone { margin-left:0; width:100%; justify-content:flex-start; }
+  .chart-area { padding:0 12px 16px; }
+  .chart-box { padding:12px; border-radius:12px; }
+  .quad-stats { grid-template-columns:repeat(2,1fr); padding:0 12px 16px; }
+  .quad-value { font-size:15px; }
+  .golden-list { padding:0 12px 30px; }
+  .golden-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge"><span class="dot"></span>DIVIDEND MATRIX</div>
+  <h1>배당+주가 매트릭스</h1>
+  <div class="sub">배당수익률 vs 52주 주가수익률 — 오른쪽 위가 최고의 조합</div>
+  <div class="time" id="updateTime">Loading...</div>
+</div>
+
+<div class="legend" id="legendBar"></div>
+
+<div class="chart-area">
+  <div class="chart-box">
+    <canvas id="scatterChart" height="500"></canvas>
+    <div class="tooltip" id="tooltip"></div>
+  </div>
+</div>
+
+<div class="quad-stats" id="quadStats"></div>
+
+<div class="golden-list">
+  <div class="golden-title">⭐ 황금 구간 (Golden Zone) — 고배당 + 주가 상승</div>
+  <div class="golden-grid" id="goldenGrid"></div>
+</div>
+
+<div class="footer">데이터 출처: Yahoo Finance (yfinance) · 투자 판단은 본인의 책임입니다</div>
+
+<script>
+const SECTOR_COLORS = {
+  'Energy':'#ff6b35','Utilities':'#ffd700','Real Estate':'#00ddcc',
+  'Financial Services':'#4488ff','Consumer Defensive':'#00ff88','Healthcare':'#ff66aa',
+  'Technology':'#aa66ff','Industrials':'#ff9944','Communication Services':'#66bbff','Basic Materials':'#88cc44'
+};
+const SECTOR_KR = {
+  'Energy':'에너지','Utilities':'유틸리티','Real Estate':'리츠',
+  'Financial Services':'금융','Consumer Defensive':'필수소비','Healthcare':'헬스케어',
+  'Technology':'기술','Industrials':'산업재','Communication Services':'통신','Basic Materials':'소재'
+};
+
+// Sample data
+const SAMPLE = [
+  {ticker:"AVGO",name:"Broadcom Inc",dividendYield:1.8,yearReturn:98.5,marketCap:800e9,sector:"Technology",payoutRatio:45},
+  {ticker:"OKE",name:"ONEOK Inc",dividendYield:5.6,yearReturn:18.9,marketCap:38.9e9,sector:"Energy",payoutRatio:86},
+  {ticker:"WMB",name:"Williams Companies",dividendYield:5.0,yearReturn:22.4,marketCap:46.3e9,sector:"Energy",payoutRatio:78},
+  {ticker:"ABBV",name:"AbbVie Inc",dividendYield:3.9,yearReturn:11.2,marketCap:273e9,sector:"Healthcare",payoutRatio:48},
+  {ticker:"KMI",name:"Kinder Morgan",dividendYield:5.9,yearReturn:15.6,marketCap:42.8e9,sector:"Energy",payoutRatio:98},
+  {ticker:"MO",name:"Altria Group",dividendYield:7.8,yearReturn:12.3,marketCap:96.8e9,sector:"Consumer Defensive",payoutRatio:79},
+  {ticker:"LMT",name:"Lockheed Martin",dividendYield:2.7,yearReturn:13.4,marketCap:109e9,sector:"Industrials",payoutRatio:42},
+  {ticker:"IBM",name:"IBM",dividendYield:3.9,yearReturn:14.2,marketCap:153e9,sector:"Technology",payoutRatio:73},
+  {ticker:"SPG",name:"Simon Property",dividendYield:5.8,yearReturn:3.2,marketCap:47.2e9,sector:"Real Estate",payoutRatio:68},
+  {ticker:"VZ",name:"Verizon",dividendYield:6.1,yearReturn:-2.4,marketCap:184e9,sector:"Communication Services",payoutRatio:57},
+  {ticker:"T",name:"AT&T",dividendYield:6.0,yearReturn:5.7,marketCap:158e9,sector:"Communication Services",payoutRatio:65},
+  {ticker:"PFE",name:"Pfizer",dividendYield:6.0,yearReturn:-18.5,marketCap:154e9,sector:"Healthcare",payoutRatio:null},
+  {ticker:"KEY",name:"KeyCorp",dividendYield:5.3,yearReturn:-12.8,marketCap:11.2e9,sector:"Financial Services",payoutRatio:48},
+  {ticker:"DOW",name:"Dow Inc",dividendYield:5.2,yearReturn:-7.4,marketCap:37.8e9,sector:"Basic Materials",payoutRatio:92},
+  {ticker:"D",name:"Dominion Energy",dividendYield:5.6,yearReturn:-1.8,marketCap:40.1e9,sector:"Utilities",payoutRatio:88},
+  {ticker:"O",name:"Realty Income",dividendYield:5.4,yearReturn:-8.1,marketCap:43.6e9,sector:"Real Estate",payoutRatio:75},
+  {ticker:"XOM",name:"Exxon Mobil",dividendYield:3.6,yearReturn:9.8,marketCap:435e9,sector:"Energy",payoutRatio:42},
+  {ticker:"CVX",name:"Chevron",dividendYield:3.9,yearReturn:4.5,marketCap:292e9,sector:"Energy",payoutRatio:52},
+  {ticker:"JPM",name:"JPMorgan Chase",dividendYield:2.4,yearReturn:25.1,marketCap:520e9,sector:"Financial Services",payoutRatio:26},
+  {ticker:"MSFT",name:"Microsoft",dividendYield:0.8,yearReturn:32.4,marketCap:2800e9,sector:"Technology",payoutRatio:25},
+  {ticker:"CAT",name:"Caterpillar",dividendYield:1.6,yearReturn:28.7,marketCap:170e9,sector:"Industrials",payoutRatio:22},
+  {ticker:"CSCO",name:"Cisco Systems",dividendYield:3.1,yearReturn:7.8,marketCap:203e9,sector:"Technology",payoutRatio:47},
+  {ticker:"BMY",name:"Bristol-Myers",dividendYield:4.7,yearReturn:-15.6,marketCap:103e9,sector:"Healthcare",payoutRatio:56},
+  {ticker:"INTC",name:"Intel",dividendYield:1.6,yearReturn:-28.3,marketCap:130e9,sector:"Technology",payoutRatio:null},
+  {ticker:"PM",name:"Philip Morris",dividendYield:5.1,yearReturn:8.1,marketCap:160e9,sector:"Consumer Defensive",payoutRatio:88},
+  {ticker:"KO",name:"Coca-Cola",dividendYield:3.0,yearReturn:2.3,marketCap:260e9,sector:"Consumer Defensive",payoutRatio:71},
+  {ticker:"DUK",name:"Duke Energy",dividendYield:4.2,yearReturn:2.1,marketCap:75.2e9,sector:"Utilities",payoutRatio:73},
+  {ticker:"SO",name:"Southern Co",dividendYield:3.8,yearReturn:5.4,marketCap:78.9e9,sector:"Utilities",payoutRatio:77},
+  {ticker:"GIS",name:"General Mills",dividendYield:3.6,yearReturn:-3.2,marketCap:37.6e9,sector:"Consumer Defensive",payoutRatio:54},
+  {ticker:"AMGN",name:"Amgen",dividendYield:3.2,yearReturn:6.7,marketCap:150e9,sector:"Healthcare",payoutRatio:58},
+];
+
+let allData = [];
+let canvas, ctx, tooltip;
+let chartBounds = {};
+const PADDING = { top:30, right:30, bottom:60, left:70 };
+
+function init(data) {
+  allData = data;
+  canvas = document.getElementById('scatterChart');
+  ctx = canvas.getContext('2d');
+  tooltip = document.getElementById('tooltip');
+  
+  buildLegend();
+  buildQuadStats();
+  buildGoldenList();
+  drawChart();
+  
+  window.addEventListener('resize', drawChart);
+  canvas.addEventListener('mousemove', handleHover);
+  canvas.addEventListener('mouseleave', () => tooltip.style.display = 'none');
+  canvas.addEventListener('touchmove', e => { e.preventDefault(); handleTouch(e); }, {passive:false});
+  canvas.addEventListener('touchend', () => tooltip.style.display = 'none');
+}
+
+function buildLegend() {
+  const sectors = [...new Set(allData.map(s=>s.sector))];
+  const bar = document.getElementById('legendBar');
+  bar.innerHTML = sectors.map(s => 
+    `<div class="legend-item"><div class="legend-dot" style="background:${SECTOR_COLORS[s]||'#888'}"></div>${SECTOR_KR[s]||s}</div>`
+  ).join('') + `
+    <div class="legend-zone">
+      <div class="zone-tag zone-gold">⭐ 황금구간</div>
+      <div class="zone-tag zone-danger">⚠ 위험구간</div>
+    </div>`;
+}
+
+function buildQuadStats() {
+  const golden = allData.filter(s => s.dividendYield >= 3 && s.yearReturn >= 5);
+  const highYieldDown = allData.filter(s => s.dividendYield >= 3 && s.yearReturn < 0);
+  const growthLowDiv = allData.filter(s => s.dividendYield < 3 && s.yearReturn >= 10);
+  const struggling = allData.filter(s => s.dividendYield < 3 && s.yearReturn < 0);
+  
+  document.getElementById('quadStats').innerHTML = `
+    <div class="quad-card"><div class="quad-icon">⭐</div>
+      <div class="quad-label">황금 구간</div>
+      <div class="quad-value" style="color:var(--gold)">${golden.length}개</div>
+      <div class="quad-desc">고배당 + 주가상승</div></div>
+    <div class="quad-card"><div class="quad-icon">⚠️</div>
+      <div class="quad-label">배당 함정?</div>
+      <div class="quad-value" style="color:var(--red)">${highYieldDown.length}개</div>
+      <div class="quad-desc">고배당 + 주가하락</div></div>
+    <div class="quad-card"><div class="quad-icon">🚀</div>
+      <div class="quad-label">성장주</div>
+      <div class="quad-value" style="color:var(--cyan)">${growthLowDiv.length}개</div>
+      <div class="quad-desc">저배당 + 주가상승</div></div>
+    <div class="quad-card"><div class="quad-icon">💀</div>
+      <div class="quad-label">위험 구간</div>
+      <div class="quad-value" style="color:var(--text-muted)">${struggling.length}개</div>
+      <div class="quad-desc">저배당 + 주가하락</div></div>`;
+}
+
+function buildGoldenList() {
+  const golden = allData
+    .filter(s => s.dividendYield >= 3 && s.yearReturn >= 5)
+    .sort((a,b) => (b.dividendYield + b.yearReturn) - (a.dividendYield + a.yearReturn));
+  
+  document.getElementById('goldenGrid').innerHTML = golden.map(s => `
+    <div class="golden-card">
+      <div class="gc-top">
+        <span class="gc-ticker">${s.ticker}</span>
+        <span class="gc-sector">${SECTOR_KR[s.sector]||s.sector}</span>
+      </div>
+      <div class="gc-metrics">
+        <div class="gc-metric">
+          <div class="gc-metric-label">배당률</div>
+          <div class="gc-metric-val" style="color:var(--green)">${s.dividendYield.toFixed(1)}%</div>
+        </div>
+        <div class="gc-metric">
+          <div class="gc-metric-label">52주수익</div>
+          <div class="gc-metric-val" style="color:var(--cyan)">+${s.yearReturn.toFixed(1)}%</div>
+        </div>
+        <div class="gc-metric">
+          <div class="gc-metric-label">배당성향</div>
+          <div class="gc-metric-val">${s.payoutRatio ? s.payoutRatio.toFixed(0)+'%' : '—'}</div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function drawChart() {
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  const w = rect.width - 48;
+  const h = Math.min(500, Math.max(350, w * 0.55));
+  
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  canvas.style.width = w + 'px';
+  canvas.style.height = h + 'px';
+  ctx.scale(dpr, dpr);
+  
+  const plotW = w - PADDING.left - PADDING.right;
+  const plotH = h - PADDING.top - PADDING.bottom;
+  
+  // Data ranges
+  const yields = allData.map(s=>s.dividendYield);
+  const returns = allData.map(s=>s.yearReturn);
+  const mcaps = allData.map(s=>s.marketCap);
+  
+  const xMin = 0, xMax = Math.ceil(Math.max(...yields) + 1);
+  const yMin = Math.floor(Math.min(...returns) - 5);
+  const yMax = Math.ceil(Math.max(...returns) + 5);
+  const mcapMax = Math.max(...mcaps);
+  
+  chartBounds = { xMin, xMax, yMin, yMax, plotW, plotH, w, h };
+  
+  const xScale = v => PADDING.left + ((v - xMin) / (xMax - xMin)) * plotW;
+  const yScale = v => PADDING.top + ((yMax - v) / (yMax - yMin)) * plotH;
+  
+  // Clear
+  ctx.clearRect(0, 0, w, h);
+  
+  // Quadrant backgrounds
+  const zeroY = yScale(0);
+  const threeX = xScale(3);
+  
+  // Golden zone (top-right)
+  ctx.fillStyle = 'rgba(255,215,0,0.03)';
+  ctx.fillRect(threeX, PADDING.top, PADDING.left + plotW - threeX, zeroY - PADDING.top);
+  
+  // Danger zone (bottom-left)
+  ctx.fillStyle = 'rgba(255,68,102,0.03)';
+  ctx.fillRect(PADDING.left, zeroY, threeX - PADDING.left, PADDING.top + plotH - zeroY);
+  
+  // Grid lines
+  ctx.strokeStyle = '#151515';
+  ctx.lineWidth = 1;
+  
+  // X grid
+  for (let x = 0; x <= xMax; x += 1) {
+    const px = xScale(x);
+    ctx.beginPath(); ctx.moveTo(px, PADDING.top); ctx.lineTo(px, PADDING.top + plotH); ctx.stroke();
+  }
+  // Y grid
+  const yStep = yMax - yMin > 60 ? 20 : yMax - yMin > 30 ? 10 : 5;
+  for (let y = Math.ceil(yMin/yStep)*yStep; y <= yMax; y += yStep) {
+    const py = yScale(y);
+    ctx.beginPath(); ctx.moveTo(PADDING.left, py); ctx.lineTo(PADDING.left + plotW, py); ctx.stroke();
+  }
+  
+  // Zero line
+  ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([4,4]);
+  ctx.beginPath(); ctx.moveTo(PADDING.left, zeroY); ctx.lineTo(PADDING.left+plotW, zeroY); ctx.stroke();
+  // 3% yield line
+  ctx.beginPath(); ctx.moveTo(threeX, PADDING.top); ctx.lineTo(threeX, PADDING.top+plotH); ctx.stroke();
+  ctx.setLineDash([]);
+  
+  // Axis labels
+  ctx.font = '10px JetBrains Mono';
+  ctx.fillStyle = '#555';
+  ctx.textAlign = 'center';
+  for (let x = 0; x <= xMax; x += 1) {
+    ctx.fillText(x + '%', xScale(x), PADDING.top + plotH + 20);
+  }
+  ctx.textAlign = 'right';
+  for (let y = Math.ceil(yMin/yStep)*yStep; y <= yMax; y += yStep) {
+    ctx.fillText((y>0?'+':'') + y + '%', PADDING.left - 10, yScale(y) + 4);
+  }
+  
+  // Axis titles
+  ctx.save();
+  ctx.font = '12px Noto Sans KR';
+  ctx.fillStyle = '#666';
+  ctx.textAlign = 'center';
+  ctx.fillText('배당수익률 →', PADDING.left + plotW/2, h - 8);
+  ctx.translate(14, PADDING.top + plotH/2);
+  ctx.rotate(-Math.PI/2);
+  ctx.fillText('52주 주가수익률 →', 0, 0);
+  ctx.restore();
+  
+  // Quadrant labels
+  ctx.font = '11px Noto Sans KR';
+  ctx.globalAlpha = 0.3;
+  ctx.fillStyle = '#ffd700';
+  ctx.textAlign = 'right';
+  ctx.fillText('⭐ 황금구간', PADDING.left+plotW-5, PADDING.top+16);
+  ctx.fillStyle = '#ff4466';
+  ctx.textAlign = 'left';
+  ctx.fillText('⚠ 위험구간', PADDING.left+5, PADDING.top+plotH-8);
+  ctx.globalAlpha = 1;
+  
+  // Draw bubbles
+  allData.forEach(s => {
+    const x = xScale(s.dividendYield);
+    const y = yScale(s.yearReturn);
+    const r = Math.max(5, Math.min(25, Math.sqrt(s.marketCap / mcapMax) * 30));
+    const color = SECTOR_COLORS[s.sector] || '#888';
+    
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI*2);
+    ctx.fillStyle = color + '33';
+    ctx.fill();
+    ctx.strokeStyle = color + 'aa';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    
+    // Ticker label
+    if (r >= 7) {
+      ctx.font = `${Math.max(8,Math.min(11,r*0.9))}px JetBrains Mono`;
+      ctx.fillStyle = color;
+      ctx.textAlign = 'center';
+      ctx.fillText(s.ticker, x, y + 3);
+    }
+  });
+  
+  // Store positions for hover
+  allData._positions = allData.map(s => ({
+    x: xScale(s.dividendYield),
+    y: yScale(s.yearReturn),
+    r: Math.max(5, Math.min(25, Math.sqrt(s.marketCap / mcapMax) * 30)),
+  }));
+}
+
+function handleHover(e) {
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+  findPoint(mx, my, e.clientX, e.clientY);
+}
+
+function handleTouch(e) {
+  const touch = e.touches[0];
+  const rect = canvas.getBoundingClientRect();
+  const mx = touch.clientX - rect.left;
+  const my = touch.clientY - rect.top;
+  findPoint(mx, my, touch.clientX, touch.clientY);
+}
+
+function findPoint(mx, my, pageX, pageY) {
+  if (!allData._positions) return;
+  let found = null;
+  allData._positions.forEach((p, i) => {
+    const dist = Math.sqrt((mx-p.x)**2 + (my-p.y)**2);
+    if (dist < p.r + 5) found = i;
+  });
+  
+  if (found !== null) {
+    const s = allData[found];
+    const mc = s.marketCap >= 1e12 ? (s.marketCap/1e12).toFixed(1)+'T' :
+               s.marketCap >= 1e9 ? (s.marketCap/1e9).toFixed(0)+'B' : (s.marketCap/1e6).toFixed(0)+'M';
+    
+    tooltip.innerHTML = `
+      <div class="tt-ticker">${s.ticker}</div>
+      <div class="tt-name">${s.name}</div>
+      <div class="tt-row"><span class="tt-label">배당수익률</span><span class="tt-val" style="color:var(--green)">${s.dividendYield.toFixed(2)}%</span></div>
+      <div class="tt-row"><span class="tt-label">52주 수익률</span><span class="tt-val" style="color:${s.yearReturn>=0?'var(--cyan)':'var(--red)'}">${s.yearReturn>=0?'+':''}${s.yearReturn.toFixed(1)}%</span></div>
+      <div class="tt-row"><span class="tt-label">시가총액</span><span class="tt-val">$${mc}</span></div>
+      <div class="tt-row"><span class="tt-label">배당성향</span><span class="tt-val">${s.payoutRatio?s.payoutRatio.toFixed(0)+'%':'—'}</span></div>
+      <div class="tt-row"><span class="tt-label">섹터</span><span class="tt-val">${SECTOR_KR[s.sector]||s.sector}</span></div>`;
+    tooltip.style.display = 'block';
+    
+    const chartRect = canvas.parentElement.getBoundingClientRect();
+    let tx = pageX - chartRect.left + 15;
+    let ty = pageY - chartRect.top - 30;
+    if (tx + 220 > chartRect.width) tx = tx - 240;
+    if (ty < 0) ty = 10;
+    tooltip.style.left = tx + 'px';
+    tooltip.style.top = ty + 'px';
+  } else {
+    tooltip.style.display = 'none';
+  }
+}
+
+// Load data
+async function load() {
+  try {
+    const res = await fetch('scatter_data.json');
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    document.getElementById('updateTime').textContent = `마지막 업데이트: ${data.updated}`;
+    init(data.stocks);
+  } catch(e) {
+    document.getElementById('updateTime').textContent = '⚠ 샘플 데이터 · scatter_data.json 없음';
+    init(SAMPLE);
+  }
+}
+load();
+</script>
+</body>
+</html>

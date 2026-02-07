@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>$10,000 투자 시뮬레이터</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--card:#0a0a0a;--border:#1a1a1a;--border2:#222;
+  --text:#e8e8e8;--dim:#888;--muted:#555;--green:#00ff88;--red:#ff4466;--gold:#ffd700;--blue:#4488ff;--cyan:#00ddcc;--purple:#aa66ff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;min-height:100vh}
+
+.header{padding:40px 24px 20px;max-width:1200px;margin:0 auto;position:relative}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:180px;
+  background:radial-gradient(ellipse at 40% 0%,rgba(255,215,0,0.06) 0%,transparent 60%),
+  radial-gradient(ellipse at 80% 0%,rgba(0,255,136,0.04) 0%,transparent 60%);pointer-events:none}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:rgba(255,215,0,0.08);
+  border:1px solid rgba(255,215,0,0.25);border-radius:20px;font:600 11px 'JetBrains Mono',monospace;
+  color:var(--gold);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:14px}
+.badge .dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.header h1{font-size:30px;font-weight:900;letter-spacing:-1px;margin-bottom:6px;
+  background:linear-gradient(135deg,#fff,#aaa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{font-size:13px;color:var(--dim)}.time{font:11px 'JetBrains Mono',monospace;color:var(--muted);margin-top:6px}
+
+/* Controls */
+.controls{max-width:1200px;margin:0 auto;padding:0 24px 20px;display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
+.ctrl-group{display:flex;flex-direction:column;gap:4px}
+.ctrl-label{font:600 10px 'JetBrains Mono',monospace;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.ctrl-select,.ctrl-input{padding:10px 14px;border-radius:10px;border:1px solid var(--border2);background:var(--card);
+  color:var(--text);font:14px 'JetBrains Mono',monospace;outline:none;transition:border-color 0.2s;
+  -webkit-appearance:none}
+.ctrl-select:focus,.ctrl-input:focus{border-color:var(--gold)}
+.ctrl-select{min-width:160px;cursor:pointer}
+.ctrl-input{width:120px}
+.ctrl-btn{padding:10px 24px;border-radius:10px;border:1px solid var(--gold);background:rgba(255,215,0,0.1);
+  color:var(--gold);font:600 14px 'Noto Sans KR',sans-serif;cursor:pointer;transition:all 0.2s;-webkit-tap-highlight-color:transparent}
+.ctrl-btn:hover{background:rgba(255,215,0,0.2)}
+
+/* Result cards */
+.results{max-width:1200px;margin:0 auto;padding:0 24px 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.result-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center;position:relative;overflow:hidden}
+.result-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px}
+.rc-label{font:10px 'JetBrains Mono',monospace;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.rc-value{font:700 26px 'JetBrains Mono',monospace;margin-bottom:4px}
+.rc-sub{font:11px 'JetBrains Mono',monospace;color:var(--dim)}
+.rc-green::after{background:linear-gradient(90deg,transparent,rgba(0,255,136,0.4),transparent)}
+.rc-gold::after{background:linear-gradient(90deg,transparent,rgba(255,215,0,0.4),transparent)}
+.rc-blue::after{background:linear-gradient(90deg,transparent,rgba(68,136,255,0.4),transparent)}
+
+/* Chart */
+.chart-area{max-width:1200px;margin:0 auto;padding:0 24px 20px}
+.chart-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden}
+.chart-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,215,0,0.3),transparent)}
+canvas{width:100%!important}
+
+/* Legend */
+.chart-legend{display:flex;gap:20px;justify-content:center;margin-top:16px;font-size:12px;color:var(--dim)}
+.cl-item{display:flex;align-items:center;gap:6px}
+.cl-line{width:20px;height:3px;border-radius:2px}
+
+/* KRW note */
+.krw-note{max-width:1200px;margin:0 auto;padding:0 24px 20px}
+.krw-card{background:var(--card);border:1px solid rgba(0,221,204,0.15);border-radius:14px;padding:16px 20px;
+  display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.krw-icon{font-size:24px}
+.krw-text{flex:1;font-size:13px;color:var(--dim);line-height:1.6}
+.krw-val{font:700 20px 'JetBrains Mono',monospace;color:var(--cyan)}
+
+.footer{max-width:1200px;margin:0 auto;padding:0 24px 40px;text-align:center;font:11px 'JetBrains Mono',monospace;color:var(--muted)}
+
+@media(max-width:768px){
+  .header{padding:20px 16px 14px} .header h1{font-size:22px}
+  .controls{padding:0 16px 16px;gap:8px}
+  .ctrl-group{flex:1;min-width:calc(50% - 4px)}
+  .ctrl-select,.ctrl-input{width:100%;font-size:13px}
+  .ctrl-btn{width:100%;text-align:center}
+  .results{grid-template-columns:1fr;padding:0 16px 16px;gap:8px}
+  .rc-value{font-size:22px}
+  .chart-area{padding:0 12px 16px} .chart-box{padding:14px;border-radius:12px}
+  .krw-note{padding:0 16px 16px}
+  .footer{padding:0 16px 30px}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge"><span class="dot"></span>INVESTMENT SIMULATOR</div>
+  <h1>$10,000 투자 시뮬레이터</h1>
+  <div class="sub">"5년 전에 이 종목에 투자했다면?" — 배당 재투자 vs 미재투자 비교</div>
+  <div class="time" id="updateTime">Loading...</div>
+</div>
+
+<div class="controls">
+  <div class="ctrl-group">
+    <div class="ctrl-label">종목 선택</div>
+    <select class="ctrl-select" id="tickerSelect" onchange="simulate()"></select>
+  </div>
+  <div class="ctrl-group">
+    <div class="ctrl-label">투자 금액 ($)</div>
+    <input class="ctrl-input" id="amountInput" type="number" value="10000" min="100" step="100" onchange="simulate()">
+  </div>
+  <div class="ctrl-group">
+    <div class="ctrl-label">기간</div>
+    <select class="ctrl-select" id="periodSelect" onchange="simulate()">
+      <option value="1y">1년</option>
+      <option value="3y">3년</option>
+      <option value="5y" selected>5년</option>
+    </select>
+  </div>
+</div>
+
+<div class="results" id="resultCards"></div>
+
+<div class="chart-area">
+  <div class="chart-box">
+    <canvas id="simChart" height="350"></canvas>
+    <div class="chart-legend">
+      <div class="cl-item"><div class="cl-line" style="background:var(--green)"></div>배당 재투자</div>
+      <div class="cl-item"><div class="cl-line" style="background:var(--blue)"></div>주가만 (배당 미재투자)</div>
+      <div class="cl-item"><div class="cl-line" style="background:var(--muted);border:1px dashed var(--muted);height:0"></div>투자 원금</div>
+    </div>
+  </div>
+</div>
+
+<div class="krw-note" id="krwNote"></div>
+
+<div class="footer">데이터 출처: Yahoo Finance (yfinance) · 과거 성과는 미래 수익을 보장하지 않습니다</div>
+
+<script>
+// Sample data for when JSON not available
+const SAMPLE_HISTORIES = {
+  "AVGO": {
+    monthlyPrices: generatePrices(60, 300, 1500, 0.015),
+    dividends: generateDivs(20, 3.0, 5.25, "2020-01")
+  },
+  "MO": {
+    monthlyPrices: generatePrices(60, 42, 57, 0.003),
+    dividends: generateDivs(20, 0.86, 1.02, "2020-01")
+  },
+  "XOM": {
+    monthlyPrices: generatePrices(60, 45, 115, 0.012),
+    dividends: generateDivs(20, 0.87, 0.95, "2020-01")
+  },
+  "ABBV": {
+    monthlyPrices: generatePrices(60, 85, 175, 0.01),
+    dividends: generateDivs(20, 1.18, 1.55, "2020-01")
+  },
+  "O": {
+    monthlyPrices: generatePrices(60, 55, 62, 0.001),
+    dividends: generateDivs(60, 0.235, 0.263, "2020-01")
+  },
+  "KO": {
+    monthlyPrices: generatePrices(60, 48, 62, 0.004),
+    dividends: generateDivs(20, 0.41, 0.485, "2020-01")
+  },
+  "VZ": {
+    monthlyPrices: generatePrices(60, 55, 43, -0.003),
+    dividends: generateDivs(20, 0.6275, 0.665, "2020-01")
+  },
+  "JPM": {
+    monthlyPrices: generatePrices(60, 100, 200, 0.01),
+    dividends: generateDivs(20, 0.90, 1.15, "2020-01")
+  },
+};
+const SAMPLE_NAMES = {"AVGO":"Broadcom","MO":"Altria Group","XOM":"Exxon Mobil","ABBV":"AbbVie",
+  "O":"Realty Income","KO":"Coca-Cola","VZ":"Verizon","JPM":"JPMorgan Chase"};
+
+function generatePrices(n, start, end, vol) {
+  const prices = [];
+  const d = new Date("2020-01-01");
+  for (let i = 0; i < n; i++) {
+    const t = i / (n-1);
+    const base = start + (end - start) * t;
+    const noise = base * (Math.random() - 0.5) * 0.08;
+    prices.push({ date: d.toISOString().slice(0,7), price: Math.max(1, +(base + noise).toFixed(2)) });
+    d.setMonth(d.getMonth() + 1);
+  }
+  return prices;
+}
+
+function generateDivs(n, start, end, startDate) {
+  const divs = [];
+  const d = new Date(startDate + "-15");
+  for (let i = 0; i < n; i++) {
+    const t = i / (n-1);
+    divs.push({ date: d.toISOString().slice(0,10), amount: +(start + (end - start) * t).toFixed(4) });
+    d.setMonth(d.getMonth() + 3);
+  }
+  return divs;
+}
+
+let simData = null;
+let canvas, ctx;
+
+function populateTickers(tickers, names) {
+  const sel = document.getElementById('tickerSelect');
+  sel.innerHTML = tickers.map(t => `<option value="${t}">${t} — ${names[t]||t}</option>`).join('');
+}
+
+function simulate() {
+  if (!simData) return;
+  
+  const ticker = document.getElementById('tickerSelect').value;
+  const amount = parseFloat(document.getElementById('amountInput').value) || 10000;
+  const period = document.getElementById('periodSelect').value;
+  
+  const hist = simData.histories[ticker];
+  if (!hist || !hist.monthlyPrices.length) return;
+  
+  const months = period === '1y' ? 12 : period === '3y' ? 36 : 60;
+  const prices = hist.monthlyPrices.slice(-months);
+  const divs = hist.dividends || [];
+  
+  if (prices.length < 2) return;
+  
+  const startPrice = prices[0].price;
+  const shares = amount / startPrice;
+  
+  // Build dividend map (month -> total dividend per share)
+  const divMap = {};
+  divs.forEach(d => {
+    const m = d.date.slice(0,7);
+    divMap[m] = (divMap[m] || 0) + d.amount;
+  });
+  
+  // Simulate
+  const priceOnly = []; // Just stock price movement
+  const withDivs = [];  // With dividend reinvestment
+  let reinvestShares = shares;
+  let totalDivsReceived = 0;
+  
+  prices.forEach(p => {
+    // Price-only value
+    priceOnly.push({ date: p.date, value: +(shares * p.price).toFixed(2) });
+    
+    // Reinvestment: if dividend this month, buy more shares
+    const divPerShare = divMap[p.date] || 0;
+    if (divPerShare > 0) {
+      const divIncome = reinvestShares * divPerShare;
+      totalDivsReceived += divIncome;
+      const newShares = divIncome / p.price;
+      reinvestShares += newShares;
+    }
+    withDivs.push({ date: p.date, value: +(reinvestShares * p.price).toFixed(2) });
+  });
+  
+  const finalPriceOnly = priceOnly[priceOnly.length-1].value;
+  const finalWithDivs = withDivs[withDivs.length-1].value;
+  const divBoost = finalWithDivs - finalPriceOnly;
+  
+  // Result cards
+  const periodLabel = period==='1y'?'1년':period==='3y'?'3년':'5년';
+  document.getElementById('resultCards').innerHTML = `
+    <div class="result-card rc-green">
+      <div class="rc-label">배당 재투자 시</div>
+      <div class="rc-value" style="color:var(--green)">$${finalWithDivs.toLocaleString(undefined,{maximumFractionDigits:0})}</div>
+      <div class="rc-sub">${((finalWithDivs/amount-1)*100).toFixed(1)}% 수익</div>
+    </div>
+    <div class="result-card rc-blue">
+      <div class="rc-label">주가만 (배당 미재투자)</div>
+      <div class="rc-value" style="color:var(--blue)">$${finalPriceOnly.toLocaleString(undefined,{maximumFractionDigits:0})}</div>
+      <div class="rc-sub">${((finalPriceOnly/amount-1)*100).toFixed(1)}% 수익</div>
+    </div>
+    <div class="result-card rc-gold">
+      <div class="rc-label">배당 재투자 효과</div>
+      <div class="rc-value" style="color:var(--gold)">+$${divBoost.toLocaleString(undefined,{maximumFractionDigits:0})}</div>
+      <div class="rc-sub">복리 효과 ${periodLabel}</div>
+    </div>`;
+  
+  // KRW conversion (approximate)
+  const krwRate = 1350;
+  const krwInvest = amount * krwRate;
+  const krwFinal = finalWithDivs * krwRate;
+  document.getElementById('krwNote').innerHTML = `
+    <div class="krw-card">
+      <div class="krw-icon">🇰🇷</div>
+      <div class="krw-text">
+        원화 환산 (1 USD ≈ ${krwRate.toLocaleString()}원 기준)<br>
+        투자 원금 <strong>${(krwInvest/10000).toFixed(0)}만원</strong> →
+      </div>
+      <div class="krw-val">${(krwFinal/10000).toFixed(0)}만원</div>
+    </div>`;
+  
+  // Draw chart
+  drawChart(priceOnly, withDivs, amount);
+}
+
+function drawChart(priceOnly, withDivs, amount) {
+  canvas = document.getElementById('simChart');
+  ctx = canvas.getContext('2d');
+  
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  const w = rect.width - 48;
+  const h = Math.min(350, Math.max(250, w * 0.4));
+  
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  canvas.style.width = w + 'px';
+  canvas.style.height = h + 'px';
+  ctx.scale(dpr, dpr);
+  
+  const pad = {top:20, right:20, bottom:40, left:70};
+  const plotW = w - pad.left - pad.right;
+  const plotH = h - pad.top - pad.bottom;
+  
+  const allVals = [...priceOnly.map(p=>p.value), ...withDivs.map(p=>p.value), amount];
+  const yMin = Math.min(...allVals) * 0.95;
+  const yMax = Math.max(...allVals) * 1.05;
+  const n = priceOnly.length;
+  
+  const xScale = i => pad.left + (i/(n-1)) * plotW;
+  const yScale = v => pad.top + ((yMax-v)/(yMax-yMin)) * plotH;
+  
+  ctx.clearRect(0, 0, w, h);
+  
+  // Grid
+  ctx.strokeStyle = '#111';
+  ctx.lineWidth = 1;
+  const ySteps = 5;
+  for (let i = 0; i <= ySteps; i++) {
+    const v = yMin + (yMax-yMin) * (i/ySteps);
+    const y = yScale(v);
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(pad.left+plotW, y); ctx.stroke();
+    ctx.font = '10px JetBrains Mono';
+    ctx.fillStyle = '#444';
+    ctx.textAlign = 'right';
+    ctx.fillText('$'+Math.round(v).toLocaleString(), pad.left-8, y+3);
+  }
+  
+  // X labels
+  ctx.textAlign = 'center';
+  const xStep = Math.max(1, Math.floor(n/6));
+  for (let i = 0; i < n; i += xStep) {
+    ctx.fillText(priceOnly[i].date, xScale(i), h - 8);
+  }
+  
+  // Investment line (dashed)
+  const invY = yScale(amount);
+  ctx.strokeStyle = '#333';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4,4]);
+  ctx.beginPath(); ctx.moveTo(pad.left, invY); ctx.lineTo(pad.left+plotW, invY); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#444';
+  ctx.textAlign = 'left';
+  ctx.fillText('원금 $'+amount.toLocaleString(), pad.left+4, invY-6);
+  
+  // Fill area between lines
+  ctx.beginPath();
+  for (let i = 0; i < n; i++) { ctx[i===0?'moveTo':'lineTo'](xScale(i), yScale(withDivs[i].value)); }
+  for (let i = n-1; i >= 0; i--) { ctx.lineTo(xScale(i), yScale(priceOnly[i].value)); }
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(0,255,136,0.06)';
+  ctx.fill();
+  
+  // Price-only line
+  ctx.beginPath();
+  ctx.strokeStyle = '#4488ff';
+  ctx.lineWidth = 2;
+  for (let i = 0; i < n; i++) { ctx[i===0?'moveTo':'lineTo'](xScale(i), yScale(priceOnly[i].value)); }
+  ctx.stroke();
+  
+  // With dividends line
+  ctx.beginPath();
+  ctx.strokeStyle = '#00ff88';
+  ctx.lineWidth = 2.5;
+  for (let i = 0; i < n; i++) { ctx[i===0?'moveTo':'lineTo'](xScale(i), yScale(withDivs[i].value)); }
+  ctx.stroke();
+  
+  // End dots
+  const lastX = xScale(n-1);
+  [
+    {y: yScale(withDivs[n-1].value), color: '#00ff88', val: withDivs[n-1].value},
+    {y: yScale(priceOnly[n-1].value), color: '#4488ff', val: priceOnly[n-1].value},
+  ].forEach(dot => {
+    ctx.beginPath(); ctx.arc(lastX, dot.y, 4, 0, Math.PI*2);
+    ctx.fillStyle = dot.color; ctx.fill();
+    ctx.font = '11px JetBrains Mono';
+    ctx.fillStyle = dot.color;
+    ctx.textAlign = 'right';
+    ctx.fillText('$'+Math.round(dot.val).toLocaleString(), lastX-10, dot.y-8);
+  });
+}
+
+async function load() {
+  try {
+    const res = await fetch('simulator_data.json');
+    if (!res.ok) throw new Error();
+    simData = await res.json();
+    document.getElementById('updateTime').textContent = `마지막 업데이트: ${simData.updated}`;
+    populateTickers(simData.tickers, simData.names);
+  } catch(e) {
+    document.getElementById('updateTime').textContent = '⚠ 샘플 데이터';
+    simData = { histories: SAMPLE_HISTORIES, tickers: Object.keys(SAMPLE_HISTORIES), names: SAMPLE_NAMES };
+    populateTickers(simData.tickers, simData.names);
+  }
+  simulate();
+  window.addEventListener('resize', simulate);
+}
+load();
+</script>
+</body>
+</html>

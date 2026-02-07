@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>월배당 포트폴리오 캘린더</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--card:#0a0a0a;--border:#1a1a1a;--border2:#222;
+  --text:#e8e8e8;--dim:#888;--muted:#555;--green:#00ff88;--red:#ff4466;--gold:#ffd700;--blue:#4488ff;--cyan:#00ddcc;--purple:#aa66ff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;min-height:100vh}
+
+.header{padding:40px 24px 20px;max-width:1200px;margin:0 auto;position:relative}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:180px;
+  background:radial-gradient(ellipse at 50% 0%,rgba(0,221,204,0.06) 0%,transparent 60%);pointer-events:none}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:rgba(0,221,204,0.08);
+  border:1px solid rgba(0,221,204,0.25);border-radius:20px;font:600 11px 'JetBrains Mono',monospace;
+  color:var(--cyan);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:14px}
+.badge .dot{width:6px;height:6px;background:var(--cyan);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.header h1{font-size:30px;font-weight:900;letter-spacing:-1px;margin-bottom:6px;
+  background:linear-gradient(135deg,#fff,#aaa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{font-size:13px;color:var(--dim)}.time{font:11px 'JetBrains Mono',monospace;color:var(--muted);margin-top:6px}
+
+/* Summary */
+.summary{max-width:1200px;margin:0 auto;padding:0 24px 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.sum-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;text-align:center;position:relative;overflow:hidden}
+.sum-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,221,204,0.3),transparent)}
+.sum-label{font:10px 'JetBrains Mono',monospace;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.sum-val{font:700 24px 'JetBrains Mono',monospace}
+.sum-sub{font-size:11px;color:var(--muted);margin-top:4px}
+
+/* Calendar grid */
+.calendar{max-width:1200px;margin:0 auto;padding:0 24px 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.month-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;transition:border-color 0.2s;min-height:120px}
+.month-card:hover{border-color:var(--cyan)}
+.month-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.month-name{font:700 14px 'Noto Sans KR',sans-serif}
+.month-count{font:600 11px 'JetBrains Mono',monospace;color:var(--cyan);padding:2px 8px;background:rgba(0,221,204,0.1);border-radius:10px}
+.month-empty{color:var(--muted);font:12px 'JetBrains Mono',monospace}
+.month-stocks{display:flex;flex-wrap:wrap;gap:4px}
+.month-ticker{font:600 11px 'JetBrains Mono',monospace;padding:3px 8px;border-radius:8px;cursor:pointer;transition:all 0.15s;-webkit-tap-highlight-color:transparent}
+.month-ticker:hover{transform:scale(1.05)}
+
+/* Selected portfolio */
+.portfolio{max-width:1200px;margin:0 auto;padding:0 24px 20px}
+.port-title{font:700 16px 'Noto Sans KR',sans-serif;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.port-desc{font-size:13px;color:var(--dim);margin-bottom:14px;line-height:1.6}
+.port-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.port-card{background:var(--card);border:1px solid rgba(255,215,0,0.15);border-radius:12px;padding:14px;cursor:pointer;
+  transition:all 0.2s;-webkit-tap-highlight-color:transparent}
+.port-card:hover{border-color:rgba(255,215,0,0.4);transform:translateY(-2px)}
+.port-card.selected{border-color:var(--gold);background:rgba(255,215,0,0.05)}
+.pc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.pc-ticker{font:700 15px 'JetBrains Mono',monospace}
+.pc-yield{font:700 14px 'JetBrains Mono',monospace;color:var(--green)}
+.pc-name{font-size:11px;color:var(--muted);margin-bottom:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pc-months{display:flex;gap:3px;flex-wrap:wrap}
+.pc-month{width:22px;height:22px;border-radius:6px;font:600 9px 'JetBrains Mono',monospace;
+  display:flex;align-items:center;justify-content:center}
+.pc-month-active{background:rgba(0,221,204,0.15);color:var(--cyan);border:1px solid rgba(0,221,204,0.3)}
+.pc-month-empty{background:var(--border);color:var(--muted)}
+
+/* My portfolio section */
+.my-port{max-width:1200px;margin:0 auto;padding:0 24px 20px}
+.my-title{font:700 14px 'Noto Sans KR',sans-serif;margin-bottom:10px;color:var(--cyan)}
+.my-bar{display:flex;height:40px;border-radius:10px;overflow:hidden;background:var(--card);border:1px solid var(--border)}
+.my-bar-month{flex:1;display:flex;align-items:center;justify-content:center;font:600 10px 'JetBrains Mono',monospace;
+  border-right:1px solid var(--border);transition:background 0.3s}
+.my-bar-month:last-child{border-right:none}
+.my-bar-active{background:rgba(0,221,204,0.12);color:var(--cyan)}
+.my-bar-empty{color:var(--muted)}
+.my-selected{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.my-chip{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:10px;background:var(--card);border:1px solid var(--border2);
+  font:12px 'JetBrains Mono',monospace;cursor:pointer;transition:all 0.2s}
+.my-chip:hover{border-color:var(--red)}
+.my-chip .x{color:var(--red);font-weight:700}
+
+.footer{max-width:1200px;margin:0 auto;padding:20px 24px 40px;text-align:center;font:11px 'JetBrains Mono',monospace;color:var(--muted)}
+
+@media(max-width:768px){
+  .header{padding:20px 16px 14px} .header h1{font-size:22px}
+  .summary{grid-template-columns:1fr;padding:0 16px 16px;gap:8px}
+  .sum-val{font-size:20px}
+  .calendar{grid-template-columns:repeat(2,1fr);padding:0 12px 16px;gap:8px}
+  .month-card{padding:12px;min-height:auto}
+  .portfolio{padding:0 16px 16px}
+  .port-grid{grid-template-columns:1fr}
+  .my-port{padding:0 16px 16px}
+  .footer{padding:20px 16px 30px}
+}
+@media(max-width:380px){
+  .calendar{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge"><span class="dot"></span>DIVIDEND CALENDAR</div>
+  <h1>월배당 포트폴리오 캘린더</h1>
+  <div class="sub">매달 배당 받는 포트폴리오를 만들어보세요 — 종목을 클릭하면 자동 추가됩니다</div>
+  <div class="time" id="updateTime">Loading...</div>
+</div>
+
+<div class="summary" id="summaryBar">
+  <div class="sum-card"><div class="sum-label">선택한 종목</div><div class="sum-val" style="color:var(--cyan)" id="sumCount">0</div><div class="sum-sub">종목</div></div>
+  <div class="sum-card"><div class="sum-label">커버되는 달</div><div class="sum-val" style="color:var(--green)" id="sumMonths">0/12</div><div class="sum-sub">월</div></div>
+  <div class="sum-card"><div class="sum-label">평균 배당수익률</div><div class="sum-val" style="color:var(--gold)" id="sumYield">0%</div><div class="sum-sub">선택 종목 평균</div></div>
+</div>
+
+<div class="my-port" id="myPortArea" style="display:none">
+  <div class="my-title">📅 내 배당 캘린더</div>
+  <div class="my-bar" id="myBar"></div>
+  <div class="my-selected" id="mySelected"></div>
+</div>
+
+<div class="calendar" id="calendarGrid"></div>
+
+<div class="portfolio">
+  <div class="port-title">📋 전체 배당 종목 — 클릭하여 포트폴리오에 추가</div>
+  <div class="port-desc">각 종목이 어느 달에 배당을 지급하는지 확인하고, 12개월 모두 커버되는 포트폴리오를 구성해보세요.</div>
+  <div class="port-grid" id="portGrid"></div>
+</div>
+
+<div class="footer">데이터 출처: Yahoo Finance (yfinance) · 배당 지급월은 과거 기준이며 변경될 수 있습니다</div>
+
+<script>
+const MONTHS_KR = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+const SECTOR_COLORS = {'Energy':'#ff6b35','Utilities':'#ffd700','Real Estate':'#00ddcc',
+  'Financial Services':'#4488ff','Consumer Defensive':'#00ff88','Healthcare':'#ff66aa',
+  'Technology':'#aa66ff','Industrials':'#ff9944','Communication Services':'#66bbff','Basic Materials':'#88cc44'};
+
+const SAMPLE = [
+  {ticker:"O",name:"Realty Income",dividendYield:5.4,dividendRate:3.07,sector:"Real Estate",divMonths:[1,2,3,4,5,6,7,8,9,10,11,12],consecIncreases:28},
+  {ticker:"MO",name:"Altria Group",dividendYield:7.8,dividendRate:4.08,sector:"Consumer Defensive",divMonths:[1,4,7,10],consecIncreases:54},
+  {ticker:"XOM",name:"Exxon Mobil",dividendYield:3.6,dividendRate:3.72,sector:"Energy",divMonths:[3,6,9,12],consecIncreases:41},
+  {ticker:"ABBV",name:"AbbVie",dividendYield:3.9,dividendRate:6.00,sector:"Healthcare",divMonths:[2,5,8,11],consecIncreases:11},
+  {ticker:"VZ",name:"Verizon",dividendYield:6.1,dividendRate:2.68,sector:"Communication Services",divMonths:[2,5,8,11],consecIncreases:19},
+  {ticker:"KO",name:"Coca-Cola",dividendYield:3.0,dividendRate:1.94,sector:"Consumer Defensive",divMonths:[4,7,10,12],consecIncreases:61},
+  {ticker:"PG",name:"Procter & Gamble",dividendYield:2.4,dividendRate:3.76,sector:"Consumer Defensive",divMonths:[2,5,8,11],consecIncreases:67},
+  {ticker:"JPM",name:"JPMorgan Chase",dividendYield:2.4,dividendRate:4.60,sector:"Financial Services",divMonths:[1,4,7,10],consecIncreases:12},
+  {ticker:"JNJ",name:"Johnson & Johnson",dividendYield:3.0,dividendRate:4.76,sector:"Healthcare",divMonths:[3,6,9,12],consecIncreases:61},
+  {ticker:"IBM",name:"IBM",dividendYield:3.9,dividendRate:6.64,sector:"Technology",divMonths:[3,6,9,12],consecIncreases:28},
+  {ticker:"AVGO",name:"Broadcom",dividendYield:1.8,dividendRate:21.0,sector:"Technology",divMonths:[3,6,9,12],consecIncreases:13},
+  {ticker:"OKE",name:"ONEOK",dividendYield:5.6,dividendRate:3.96,sector:"Energy",divMonths:[2,5,8,11],consecIncreases:6},
+  {ticker:"SPG",name:"Simon Property",dividendYield:5.8,dividendRate:7.60,sector:"Real Estate",divMonths:[3,6,9,12],consecIncreases:3},
+  {ticker:"D",name:"Dominion Energy",dividendYield:5.6,dividendRate:2.67,sector:"Utilities",divMonths:[3,6,9,12],consecIncreases:0},
+  {ticker:"DUK",name:"Duke Energy",dividendYield:4.2,dividendRate:4.08,sector:"Utilities",divMonths:[3,6,9,12],consecIncreases:18},
+  {ticker:"T",name:"AT&T",dividendYield:6.0,dividendRate:1.33,sector:"Communication Services",divMonths:[2,5,8,11],consecIncreases:0},
+  {ticker:"PFE",name:"Pfizer",dividendYield:6.0,dividendRate:1.68,sector:"Healthcare",divMonths:[3,6,9,12],consecIncreases:0},
+  {ticker:"LMT",name:"Lockheed Martin",dividendYield:2.7,dividendRate:12.15,sector:"Industrials",divMonths:[3,6,9,12],consecIncreases:20},
+  {ticker:"CAT",name:"Caterpillar",dividendYield:1.6,dividendRate:5.20,sector:"Industrials",divMonths:[2,5,8,11],consecIncreases:29},
+  {ticker:"WMB",name:"Williams Cos",dividendYield:5.0,dividendRate:1.90,sector:"Energy",divMonths:[3,6,9,12],consecIncreases:5},
+];
+
+let allStocks = [];
+let selectedTickers = new Set();
+
+function toggleStock(ticker) {
+  if (selectedTickers.has(ticker)) {
+    selectedTickers.delete(ticker);
+  } else {
+    selectedTickers.add(ticker);
+  }
+  updateAll();
+}
+
+function updateAll() {
+  updateSummary();
+  updateMyPortfolio();
+  updatePortGrid();
+  updateCalendar();
+}
+
+function updateSummary() {
+  const selected = allStocks.filter(s => selectedTickers.has(s.ticker));
+  const coveredMonths = new Set();
+  selected.forEach(s => s.divMonths.forEach(m => coveredMonths.add(m)));
+  
+  document.getElementById('sumCount').textContent = selected.length;
+  document.getElementById('sumMonths').textContent = coveredMonths.size + '/12';
+  document.getElementById('sumMonths').style.color = coveredMonths.size === 12 ? 'var(--green)' : coveredMonths.size >= 8 ? 'var(--cyan)' : 'var(--gold)';
+  
+  const avgYield = selected.length ? (selected.reduce((s,x) => s + x.dividendYield, 0) / selected.length) : 0;
+  document.getElementById('sumYield').textContent = avgYield.toFixed(2) + '%';
+}
+
+function updateMyPortfolio() {
+  const area = document.getElementById('myPortArea');
+  if (selectedTickers.size === 0) { area.style.display = 'none'; return; }
+  area.style.display = 'block';
+  
+  const selected = allStocks.filter(s => selectedTickers.has(s.ticker));
+  const monthMap = {};
+  for (let m = 1; m <= 12; m++) monthMap[m] = [];
+  selected.forEach(s => s.divMonths.forEach(m => monthMap[m].push(s.ticker)));
+  
+  // Bar
+  document.getElementById('myBar').innerHTML = MONTHS_KR.map((name, i) => {
+    const m = i + 1;
+    const active = monthMap[m].length > 0;
+    return `<div class="my-bar-month ${active?'my-bar-active':'my-bar-empty'}">
+      <div>${name}<br><span style="font-size:8px">${active?monthMap[m].length+'종목':'—'}</span></div>
+    </div>`;
+  }).join('');
+  
+  // Chips
+  document.getElementById('mySelected').innerHTML = selected.map(s => 
+    `<div class="my-chip" onclick="toggleStock('${s.ticker}')">
+      <span>${s.ticker}</span>
+      <span style="color:var(--green);font-size:11px">${s.dividendYield.toFixed(1)}%</span>
+      <span class="x">×</span>
+    </div>`
+  ).join('');
+}
+
+function updateCalendar() {
+  const selected = allStocks.filter(s => selectedTickers.has(s.ticker));
+  const monthMap = {};
+  for (let m = 1; m <= 12; m++) monthMap[m] = [];
+  
+  allStocks.forEach(s => {
+    s.divMonths.forEach(m => {
+      monthMap[m].push(s);
+    });
+  });
+  
+  document.getElementById('calendarGrid').innerHTML = MONTHS_KR.map((name, i) => {
+    const m = i + 1;
+    const stocks = monthMap[m] || [];
+    const selectedInMonth = stocks.filter(s => selectedTickers.has(s.ticker));
+    const hasSelected = selectedInMonth.length > 0;
+    
+    return `<div class="month-card" style="${hasSelected?'border-color:rgba(0,221,204,0.3)':''}">
+      <div class="month-header">
+        <span class="month-name">${name}</span>
+        <span class="month-count">${stocks.length}개</span>
+      </div>
+      ${stocks.length === 0 ? '<div class="month-empty">배당 없음</div>' :
+        `<div class="month-stocks">${stocks.map(s => {
+          const color = SECTOR_COLORS[s.sector] || '#888';
+          const isSel = selectedTickers.has(s.ticker);
+          return `<span class="month-ticker" onclick="toggleStock('${s.ticker}')"
+            style="background:${isSel ? color+'22' : 'var(--border)'};color:${isSel ? color : 'var(--dim)'};
+            border:1px solid ${isSel ? color+'66' : 'transparent'}">${s.ticker}</span>`;
+        }).join('')}</div>`
+      }
+    </div>`;
+  }).join('');
+}
+
+function updatePortGrid() {
+  document.getElementById('portGrid').innerHTML = allStocks.map(s => {
+    const isSel = selectedTickers.has(s.ticker);
+    const color = SECTOR_COLORS[s.sector] || '#888';
+    
+    return `<div class="port-card ${isSel?'selected':''}" onclick="toggleStock('${s.ticker}')">
+      <div class="pc-top">
+        <span class="pc-ticker">${s.ticker}</span>
+        <span class="pc-yield">${s.dividendYield.toFixed(1)}%</span>
+      </div>
+      <div class="pc-name">${s.name}</div>
+      <div class="pc-months">
+        ${[1,2,3,4,5,6,7,8,9,10,11,12].map(m => {
+          const active = s.divMonths.includes(m);
+          return `<div class="pc-month ${active?'pc-month-active':'pc-month-empty'}">${m}</div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function load() {
+  try {
+    const res = await fetch('calendar_data.json');
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    document.getElementById('updateTime').textContent = `마지막 업데이트: ${data.updated}`;
+    allStocks = data.stocks;
+  } catch(e) {
+    document.getElementById('updateTime').textContent = '⚠ 샘플 데이터';
+    allStocks = SAMPLE;
+  }
+  allStocks.sort((a,b) => b.dividendYield - a.dividendYield);
+  updateAll();
+}
+load();
+</script>
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>총 수익률 랭킹 | Total Return</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#000;--card:#0a0a0a;--row:#0d0d0d;--row-h:#141414;--border:#1a1a1a;--border2:#222;
+  --text:#e8e8e8;--dim:#888;--muted:#555;--green:#00ff88;--red:#ff4466;--gold:#ffd700;--blue:#4488ff;--cyan:#00ddcc;--purple:#aa66ff; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;min-height:100vh}
+
+.header{padding:40px 24px 20px;max-width:1400px;margin:0 auto;position:relative}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:180px;
+  background:radial-gradient(ellipse at 30% 0%,rgba(0,255,136,0.06) 0%,transparent 60%),
+  radial-gradient(ellipse at 70% 0%,rgba(170,102,255,0.04) 0%,transparent 60%);pointer-events:none}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:rgba(170,102,255,0.08);
+  border:1px solid rgba(170,102,255,0.25);border-radius:20px;font:600 11px 'JetBrains Mono',monospace;
+  color:var(--purple);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:14px}
+.badge .dot{width:6px;height:6px;background:var(--purple);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.header h1{font-size:30px;font-weight:900;letter-spacing:-1px;margin-bottom:6px;
+  background:linear-gradient(135deg,#fff,#aaa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{font-size:13px;color:var(--dim)}.time{font:11px 'JetBrains Mono',monospace;color:var(--muted);margin-top:6px}
+
+/* Period tabs */
+.tabs{max-width:1400px;margin:0 auto;padding:0 24px 16px;display:flex;gap:8px}
+.tab{padding:8px 20px;border-radius:20px;border:1px solid var(--border2);background:transparent;
+  color:var(--dim);font:500 13px 'Noto Sans KR',sans-serif;cursor:pointer;transition:all 0.2s;-webkit-tap-highlight-color:transparent}
+.tab:hover{border-color:var(--dim);color:var(--text)}
+.tab.active{background:rgba(170,102,255,0.12);border-color:var(--purple);color:var(--purple)}
+
+/* Key insight */
+.insight{max-width:1400px;margin:0 auto;padding:0 24px 16px}
+.insight-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;
+  display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.insight-stat{text-align:center;min-width:120px}
+.insight-label{font:10px 'JetBrains Mono',monospace;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.insight-val{font:700 22px 'JetBrains Mono',monospace}
+.insight-desc{flex:1;font-size:13px;color:var(--dim);min-width:200px;line-height:1.6}
+
+/* Table */
+.table-wrap{max-width:1400px;margin:0 auto;padding:0 24px 20px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{padding:12px 14px;text-align:left;font:600 10px 'JetBrains Mono',monospace;
+  text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);border-bottom:1px solid var(--border);
+  cursor:pointer;user-select:none;white-space:nowrap;transition:color 0.2s;position:sticky;top:0;background:var(--bg);z-index:10}
+thead th:hover{color:var(--purple)}
+thead th.sorted{color:var(--purple)}
+tbody tr{border-bottom:1px solid var(--border);transition:background 0.15s}
+tbody tr:hover{background:var(--row-h)}
+tbody td{padding:14px;white-space:nowrap}
+
+.rank{font:700 14px 'JetBrains Mono',monospace;color:var(--muted);text-align:center;width:30px}
+.rank-top{color:var(--gold)}
+.ticker-cell{display:flex;flex-direction:column;gap:2px}
+.t-sym{font:700 14px 'JetBrains Mono',monospace;color:var(--text)}
+.t-name{font-size:11px;color:var(--muted);max-width:140px;overflow:hidden;text-overflow:ellipsis}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* Return bar visualization */
+.return-bar-wrap{display:flex;align-items:center;gap:8px;min-width:180px}
+.return-bar-track{flex:1;height:20px;background:var(--row);border-radius:4px;position:relative;overflow:hidden;min-width:100px}
+.return-bar-price{position:absolute;top:0;bottom:0;left:0;border-radius:4px 0 0 4px;transition:width 0.5s}
+.return-bar-div{position:absolute;top:0;bottom:0;border-radius:0 4px 4px 0;transition:left 0.5s,width 0.5s}
+.return-val{font:700 13px 'JetBrains Mono',monospace;min-width:55px;text-align:right}
+
+.consec{font:600 12px 'JetBrains Mono',monospace;color:var(--gold)}
+.sector-tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:500;border:1px solid var(--border2);color:var(--dim)}
+
+/* Mobile cards */
+.card-list{display:none}
+.stock-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:10px}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.card-rank{font:11px 'JetBrains Mono',monospace;color:var(--muted);background:var(--row);border-radius:6px;padding:2px 8px;margin-right:8px}
+.card-rank-top{color:var(--gold)}
+.card-ticker{font:700 16px 'JetBrains Mono',monospace}
+.card-name{font-size:12px;color:var(--muted);margin-top:2px}
+.card-total{font:700 20px 'JetBrains Mono',monospace;text-align:right}
+.card-bar{height:24px;background:var(--row);border-radius:6px;position:relative;overflow:hidden;margin:10px 0}
+.card-bar-price{position:absolute;top:0;bottom:0;left:0;border-radius:6px 0 0 6px}
+.card-bar-div{position:absolute;top:0;bottom:0;border-radius:0 6px 6px 0}
+.card-bar-labels{display:flex;justify-content:space-between;font:11px 'JetBrains Mono',monospace;color:var(--dim)}
+.card-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
+
+.footer{max-width:1400px;margin:0 auto;padding:0 24px 40px;text-align:center;font:11px 'JetBrains Mono',monospace;color:var(--muted)}
+
+/* Legend bar */
+.bar-legend{max-width:1400px;margin:0 auto;padding:0 24px 12px;display:flex;gap:16px;align-items:center;font-size:12px;color:var(--dim)}
+.bl-item{display:flex;align-items:center;gap:5px}
+.bl-swatch{width:12px;height:12px;border-radius:3px}
+
+@media(max-width:768px){
+  .header{padding:20px 16px 14px} .header h1{font-size:22px}
+  .tabs{padding:0 16px 12px;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{white-space:nowrap;flex-shrink:0;padding:8px 16px}
+  .insight{padding:0 16px 12px}
+  .insight-card{padding:14px;gap:14px}
+  .insight-val{font-size:18px}
+  .table-wrap table{display:none!important}
+  .card-list{display:block;padding:0 16px 20px}
+  .bar-legend{padding:0 16px 10px}
+  .footer{padding:0 16px 30px}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge"><span class="dot"></span>TOTAL RETURN</div>
+  <h1>총 수익률 랭킹</h1>
+  <div class="sub">주가 수익 + 배당 수익 = 진짜 수익률 · 배당 재투자의 힘을 확인하세요</div>
+  <div class="time" id="updateTime">Loading...</div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="setPeriod('1y')">1년</button>
+  <button class="tab" onclick="setPeriod('3y')">3년</button>
+  <button class="tab" onclick="setPeriod('5y')">5년</button>
+</div>
+
+<div class="insight" id="insightArea"></div>
+
+<div class="bar-legend">
+  <div class="bl-item"><div class="bl-swatch" style="background:var(--blue)"></div>주가 수익</div>
+  <div class="bl-item"><div class="bl-swatch" style="background:var(--green)"></div>배당 수익 (추가분)</div>
+</div>
+
+<div class="table-wrap">
+  <table id="mainTable" style="display:none">
+    <thead><tr>
+      <th>#</th><th>종목</th><th>총 수익률</th><th>수익 구성</th>
+      <th>배당수익률</th><th>배당 연속 인상</th><th class="hide-mobile">섹터</th>
+    </tr></thead>
+    <tbody id="tbody"></tbody>
+  </table>
+</div>
+<div class="card-list" id="cardList"></div>
+
+<div class="footer">데이터 출처: Yahoo Finance (yfinance) · 배당 재투자 미반영 단순 합산 기준</div>
+
+<script>
+const SECTOR_KR = {'Energy':'에너지','Utilities':'유틸리티','Real Estate':'리츠',
+  'Financial Services':'금융','Consumer Defensive':'필수소비','Healthcare':'헬스케어',
+  'Technology':'기술','Industrials':'산업재','Communication Services':'통신','Basic Materials':'소재'};
+
+const SAMPLE = [
+  {ticker:"AVGO",name:"Broadcom",dividendYield:1.8,sector:"Technology",consecIncreases:13,totalReturns:{
+    "1y":{priceReturn:98.5,divReturn:1.8,totalReturn:100.3},"3y":{priceReturn:220,divReturn:6.2,totalReturn:226.2},"5y":{priceReturn:480,divReturn:12,totalReturn:492}}},
+  {ticker:"OKE",name:"ONEOK Inc",dividendYield:5.6,sector:"Energy",consecIncreases:6,totalReturns:{
+    "1y":{priceReturn:18.9,divReturn:5.6,totalReturn:24.5},"3y":{priceReturn:55,divReturn:17,totalReturn:72},"5y":{priceReturn:120,divReturn:30,totalReturn:150}}},
+  {ticker:"JPM",name:"JPMorgan Chase",dividendYield:2.4,sector:"Financial Services",consecIncreases:12,totalReturns:{
+    "1y":{priceReturn:25.1,divReturn:2.4,totalReturn:27.5},"3y":{priceReturn:45,divReturn:7.5,totalReturn:52.5},"5y":{priceReturn:95,divReturn:14,totalReturn:109}}},
+  {ticker:"CAT",name:"Caterpillar",dividendYield:1.6,sector:"Industrials",consecIncreases:29,totalReturns:{
+    "1y":{priceReturn:28.7,divReturn:1.8,totalReturn:30.5},"3y":{priceReturn:85,divReturn:5.5,totalReturn:90.5},"5y":{priceReturn:190,divReturn:10,totalReturn:200}}},
+  {ticker:"ABBV",name:"AbbVie",dividendYield:3.9,sector:"Healthcare",consecIncreases:11,totalReturns:{
+    "1y":{priceReturn:11.2,divReturn:3.9,totalReturn:15.1},"3y":{priceReturn:28,divReturn:12,totalReturn:40},"5y":{priceReturn:65,divReturn:22,totalReturn:87}}},
+  {ticker:"WMB",name:"Williams Cos",dividendYield:5.0,sector:"Energy",consecIncreases:5,totalReturns:{
+    "1y":{priceReturn:22.4,divReturn:5.0,totalReturn:27.4},"3y":{priceReturn:60,divReturn:16,totalReturn:76},"5y":{priceReturn:85,divReturn:28,totalReturn:113}}},
+  {ticker:"MO",name:"Altria Group",dividendYield:7.8,sector:"Consumer Defensive",consecIncreases:54,totalReturns:{
+    "1y":{priceReturn:12.3,divReturn:7.8,totalReturn:20.1},"3y":{priceReturn:5,divReturn:24,totalReturn:29},"5y":{priceReturn:-8,divReturn:42,totalReturn:34}}},
+  {ticker:"IBM",name:"IBM",dividendYield:3.9,sector:"Technology",consecIncreases:28,totalReturns:{
+    "1y":{priceReturn:14.2,divReturn:4.0,totalReturn:18.2},"3y":{priceReturn:42,divReturn:13,totalReturn:55},"5y":{priceReturn:35,divReturn:22,totalReturn:57}}},
+  {ticker:"XOM",name:"Exxon Mobil",dividendYield:3.6,sector:"Energy",consecIncreases:41,totalReturns:{
+    "1y":{priceReturn:9.8,divReturn:3.6,totalReturn:13.4},"3y":{priceReturn:58,divReturn:12,totalReturn:70},"5y":{priceReturn:72,divReturn:20,totalReturn:92}}},
+  {ticker:"KO",name:"Coca-Cola",dividendYield:3.0,sector:"Consumer Defensive",consecIncreases:61,totalReturns:{
+    "1y":{priceReturn:2.3,divReturn:3.0,totalReturn:5.3},"3y":{priceReturn:8,divReturn:9.5,totalReturn:17.5},"5y":{priceReturn:18,divReturn:16,totalReturn:34}}},
+  {ticker:"PFE",name:"Pfizer",dividendYield:6.0,sector:"Healthcare",consecIncreases:0,totalReturns:{
+    "1y":{priceReturn:-18.5,divReturn:6.0,totalReturn:-12.5},"3y":{priceReturn:-52,divReturn:15,totalReturn:-37},"5y":{priceReturn:-35,divReturn:25,totalReturn:-10}}},
+  {ticker:"VZ",name:"Verizon",dividendYield:6.1,sector:"Communication Services",consecIncreases:19,totalReturns:{
+    "1y":{priceReturn:-2.4,divReturn:6.1,totalReturn:3.7},"3y":{priceReturn:-25,divReturn:18,totalReturn:-7},"5y":{priceReturn:-18,divReturn:32,totalReturn:14}}},
+  {ticker:"INTC",name:"Intel",dividendYield:1.6,sector:"Technology",consecIncreases:0,totalReturns:{
+    "1y":{priceReturn:-28.3,divReturn:1.2,totalReturn:-27.1},"3y":{priceReturn:-55,divReturn:4,totalReturn:-51},"5y":{priceReturn:-60,divReturn:7,totalReturn:-53}}},
+  {ticker:"LMT",name:"Lockheed Martin",dividendYield:2.7,sector:"Industrials",consecIncreases:20,totalReturns:{
+    "1y":{priceReturn:13.4,divReturn:2.7,totalReturn:16.1},"3y":{priceReturn:35,divReturn:8,totalReturn:43},"5y":{priceReturn:55,divReturn:15,totalReturn:70}}},
+  {ticker:"D",name:"Dominion Energy",dividendYield:5.6,sector:"Utilities",consecIncreases:0,totalReturns:{
+    "1y":{priceReturn:-1.8,divReturn:5.6,totalReturn:3.8},"3y":{priceReturn:-20,divReturn:14,totalReturn:-6},"5y":{priceReturn:-30,divReturn:22,totalReturn:-8}}},
+];
+
+let allData = [], currentPeriod = '1y';
+
+function setPeriod(p) {
+  currentPeriod = p;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  event.target.classList.add('active');
+  render();
+}
+
+function render() {
+  const stocks = allData
+    .filter(s => s.totalReturns && s.totalReturns[currentPeriod])
+    .sort((a,b) => b.totalReturns[currentPeriod].totalReturn - a.totalReturns[currentPeriod].totalReturn);
+  
+  if (!stocks.length) return;
+  
+  // Insight
+  const avgTotal = stocks.reduce((s,x)=>s+x.totalReturns[currentPeriod].totalReturn,0)/stocks.length;
+  const avgDiv = stocks.reduce((s,x)=>s+x.totalReturns[currentPeriod].divReturn,0)/stocks.length;
+  const best = stocks[0];
+  const periodLabel = currentPeriod==='1y'?'1년':currentPeriod==='3y'?'3년':'5년';
+  
+  document.getElementById('insightArea').innerHTML = `
+    <div class="insight-card">
+      <div class="insight-stat">
+        <div class="insight-label">평균 총수익률 (${periodLabel})</div>
+        <div class="insight-val" style="color:${avgTotal>=0?'var(--green)':'var(--red)'}">${avgTotal>=0?'+':''}${avgTotal.toFixed(1)}%</div>
+      </div>
+      <div class="insight-stat">
+        <div class="insight-label">배당이 추가한 수익</div>
+        <div class="insight-val" style="color:var(--cyan)">+${avgDiv.toFixed(1)}%p</div>
+      </div>
+      <div class="insight-stat">
+        <div class="insight-label">1위</div>
+        <div class="insight-val" style="color:var(--gold)">${best.ticker}</div>
+      </div>
+      <div class="insight-desc">
+        💡 주가만 보면 놓치는 수익! ${periodLabel} 기준 배당이 평균 <strong style="color:var(--cyan)">${avgDiv.toFixed(1)}%p</strong> 추가 수익을 만들었습니다.
+      </div>
+    </div>`;
+  
+  // Scale for bars
+  const maxAbs = Math.max(...stocks.map(s => Math.abs(s.totalReturns[currentPeriod].totalReturn)), 1);
+  
+  // Desktop table
+  document.getElementById('tbody').innerHTML = stocks.map((s,i) => {
+    const r = s.totalReturns[currentPeriod];
+    const totalColor = r.totalReturn >= 0 ? 'var(--green)' : 'var(--red)';
+    
+    // Bar widths (handle negative)
+    const barMax = maxAbs;
+    const priceW = Math.abs(r.priceReturn) / barMax * 50;
+    const divW = Math.abs(r.divReturn) / barMax * 50;
+    const priceColor = r.priceReturn >= 0 ? 'rgba(68,136,255,0.6)' : 'rgba(255,68,102,0.4)';
+    
+    return `<tr>
+      <td class="rank ${i<3?'rank-top':''}">${i+1}</td>
+      <td><div class="ticker-cell"><span class="t-sym">${s.ticker}</span><span class="t-name">${s.name}</span></div></td>
+      <td class="mono" style="color:${totalColor};font-weight:700;font-size:15px">${r.totalReturn>=0?'+':''}${r.totalReturn.toFixed(1)}%</td>
+      <td>
+        <div class="return-bar-wrap">
+          <div class="return-bar-track">
+            <div class="return-bar-price" style="width:${priceW}%;background:${priceColor}"></div>
+            <div class="return-bar-div" style="left:${priceW}%;width:${divW}%;background:rgba(0,255,136,0.5)"></div>
+          </div>
+          <span class="mono" style="font-size:11px;color:var(--dim)">${r.priceReturn>=0?'+':''}${r.priceReturn.toFixed(0)} + ${r.divReturn.toFixed(0)}</span>
+        </div>
+      </td>
+      <td class="mono" style="color:var(--green)">${s.dividendYield.toFixed(2)}%</td>
+      <td class="consec">${s.consecIncreases>0?s.consecIncreases+'년 연속 ↑':'—'}</td>
+      <td class="hide-mobile"><span class="sector-tag">${SECTOR_KR[s.sector]||s.sector}</span></td>
+    </tr>`;
+  }).join('');
+  
+  // Mobile cards
+  document.getElementById('cardList').innerHTML = stocks.map((s,i) => {
+    const r = s.totalReturns[currentPeriod];
+    const totalColor = r.totalReturn >= 0 ? 'var(--green)' : 'var(--red)';
+    const priceW = Math.max(1, Math.abs(r.priceReturn) / maxAbs * 50);
+    const divW = Math.max(1, Math.abs(r.divReturn) / maxAbs * 50);
+    const priceColor = r.priceReturn >= 0 ? 'rgba(68,136,255,0.6)' : 'rgba(255,68,102,0.4)';
+    
+    return `<div class="stock-card">
+      <div class="card-top">
+        <div style="display:flex;align-items:center">
+          <span class="card-rank ${i<3?'card-rank-top':''}">${i+1}</span>
+          <div><div class="card-ticker">${s.ticker}</div><div class="card-name">${s.name}</div></div>
+        </div>
+        <div class="card-total" style="color:${totalColor}">${r.totalReturn>=0?'+':''}${r.totalReturn.toFixed(1)}%</div>
+      </div>
+      <div class="card-bar">
+        <div class="card-bar-price" style="width:${priceW}%;background:${priceColor}"></div>
+        <div class="card-bar-div" style="left:${priceW}%;width:${divW}%;background:rgba(0,255,136,0.5)"></div>
+      </div>
+      <div class="card-bar-labels">
+        <span>주가 ${r.priceReturn>=0?'+':''}${r.priceReturn.toFixed(1)}%</span>
+        <span style="color:var(--green)">배당 +${r.divReturn.toFixed(1)}%</span>
+      </div>
+      <div class="card-bottom">
+        <span class="sector-tag">${SECTOR_KR[s.sector]||s.sector}</span>
+        <span class="consec">${s.consecIncreases>0?s.consecIncreases+'년 연속 ↑':'—'}</span>
+        <span class="mono" style="font-size:12px;color:var(--green)">${s.dividendYield.toFixed(1)}%</span>
+      </div>
+    </div>`;
+  }).join('');
+  
+  document.getElementById('mainTable').style.display = 'table';
+}
+
+async function load() {
+  try {
+    const res = await fetch('total_return_data.json');
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    document.getElementById('updateTime').textContent = `마지막 업데이트: ${data.updated}`;
+    allData = data.stocks;
+  } catch(e) {
+    document.getElementById('updateTime').textContent = '⚠ 샘플 데이터';
+    allData = SAMPLE;
+  }
+  render();
+}
+load();
+</script>
+</body>
+</html>
