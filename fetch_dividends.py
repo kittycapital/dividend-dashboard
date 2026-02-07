@@ -49,6 +49,10 @@ def fetch_all_data():
             dividend_yield = info.get("dividendYield", 0) or 0
             if dividend_yield == 0:
                 continue
+            # yfinance returns yield as decimal (e.g. 0.0648 = 6.48%)
+            # but sometimes as already percentage — normalize to decimal
+            if dividend_yield > 1:
+                dividend_yield = dividend_yield / 100
             
             dividend_rate = info.get("dividendRate", 0) or 0
             payout_ratio = info.get("payoutRatio", 0) or 0
