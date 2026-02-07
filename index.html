@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>S&P 500 배당 수익률 TOP 30</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #000000;
+    --bg-card: #0a0a0a;
+    --bg-row: #0d0d0d;
+    --bg-row-hover: #141414;
+    --border: #1a1a1a;
+    --border-accent: #222;
+    --text-primary: #e8e8e8;
+    --text-secondary: #888;
+    --text-muted: #555;
+    --accent-green: #00ff88;
+    --accent-green-dim: #00cc6a;
+    --accent-red: #ff4466;
+    --accent-gold: #ffd700;
+    --accent-blue: #4488ff;
+    --accent-cyan: #00ddcc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Noto Sans KR', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* === HEADER === */
+  .header {
+    padding: 40px 24px 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 200px;
+    background: radial-gradient(ellipse at 30% 0%, rgba(0,255,136,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 0%, rgba(68,136,255,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    background: rgba(0,255,136,0.08);
+    border: 1px solid rgba(0,255,136,0.2);
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent-green);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .badge .dot {
+    width: 6px; height: 6px;
+    background: var(--accent-green);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .header h1 {
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .header .subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+
+  .header .update-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 8px;
+  }
+
+  /* === CONTROLS === */
+  .controls {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .filter-btn {
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border-accent);
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+  }
+
+  .filter-btn.active {
+    background: rgba(0,255,136,0.1);
+    border-color: var(--accent-green);
+    color: var(--accent-green);
+  }
+
+  .search-box {
+    margin-left: auto;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border-accent);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    width: 180px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-box::placeholder { color: var(--text-muted); }
+  .search-box:focus { border-color: var(--accent-green); }
+
+  /* === STATS BAR === */
+  .stats-bar {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,255,136,0.3), transparent);
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent-green);
+  }
+
+  .stat-value.gold { color: var(--accent-gold); }
+  .stat-value.blue { color: var(--accent-blue); }
+  .stat-value.cyan { color: var(--accent-cyan); }
+
+  .stat-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* === TABLE === */
+  .table-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead th {
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    transition: color 0.2s;
+    position: sticky;
+    top: 0;
+    background: var(--bg-primary);
+    z-index: 10;
+  }
+
+  thead th:hover { color: var(--accent-green); }
+  thead th.sorted { color: var(--accent-green); }
+  thead th .sort-arrow { font-size: 9px; margin-left: 4px; }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s ease;
+  }
+
+  tbody tr:hover { background: var(--bg-row-hover); }
+
+  tbody td {
+    padding: 14px;
+    white-space: nowrap;
+  }
+
+  .rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text-muted);
+    width: 30px;
+    text-align: center;
+  }
+
+  .rank-top { color: var(--accent-gold); }
+
+  .ticker-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .ticker-symbol {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text-primary);
+  }
+
+  .ticker-name {
+    font-size: 11px;
+    color: var(--text-muted);
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .yield-cell {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .yield-high { color: var(--accent-green); }
+  .yield-mid { color: var(--accent-cyan); }
+  .yield-low { color: var(--accent-blue); }
+
+  .yield-bar-container {
+    width: 60px;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 4px;
+    overflow: hidden;
+  }
+
+  .yield-bar {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.5s ease;
+  }
+
+  .mono {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-primary);
+  }
+
+  .payout-safe { color: var(--accent-green); }
+  .payout-warn { color: var(--accent-gold); }
+  .payout-danger { color: var(--accent-red); }
+
+  .sector-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    border: 1px solid var(--border-accent);
+    color: var(--text-secondary);
+  }
+
+  .return-positive { color: var(--accent-green); }
+  .return-negative { color: var(--accent-red); }
+
+  .mcap-text {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-secondary);
+    font-size: 12px;
+  }
+
+  /* === LOADING === */
+  .loading {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--text-muted);
+  }
+
+  .loading .spinner {
+    width: 40px; height: 40px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent-green);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 16px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .error-msg {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--accent-red);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+
+  /* === FOOTER === */
+  .footer {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* === MOBILE CARD VIEW === */
+  .card-list { display: none; }
+
+  .stock-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 10px;
+    transition: border-color 0.2s;
+  }
+
+  .stock-card:active { border-color: var(--accent-green); }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .card-rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    background: var(--bg-row);
+    border-radius: 6px;
+    padding: 2px 8px;
+    margin-right: 10px;
+  }
+
+  .card-rank-top { color: var(--accent-gold); }
+
+  .card-ticker-group { flex: 1; }
+
+  .card-ticker {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--text-primary);
+  }
+
+  .card-name {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px;
+  }
+
+  .card-yield {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 22px;
+    text-align: right;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .card-metric {
+    background: var(--bg-row);
+    border-radius: 8px;
+    padding: 8px 10px;
+  }
+
+  .card-metric-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+
+  .card-metric-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text-primary);
+  }
+
+  .card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+  }
+
+  .card-sector {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    border: 1px solid var(--border-accent);
+    color: var(--text-secondary);
+  }
+
+  .card-mcap {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* === TABLET === */
+  @media (max-width: 1024px) {
+    .header { padding: 30px 20px 20px; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .table-wrapper { padding: 0 12px 40px; }
+    table { font-size: 12px; }
+    tbody td { padding: 10px; }
+    .hide-tablet { display: none; }
+  }
+
+  /* === MOBILE === */
+  @media (max-width: 768px) {
+    .header { padding: 20px 16px 14px; }
+    .header::before { height: 120px; }
+    .header h1 { font-size: 22px; letter-spacing: -0.5px; }
+    .header .subtitle { font-size: 12px; }
+    .badge { font-size: 10px; padding: 3px 10px; margin-bottom: 10px; }
+
+    .controls {
+      padding: 0 16px 12px;
+      gap: 6px;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .controls::-webkit-scrollbar { display: none; }
+
+    .filter-btn {
+      font-size: 12px;
+      padding: 8px 14px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .search-box {
+      width: 100%;
+      flex-shrink: 0;
+      order: -1;
+      margin-left: 0;
+      margin-bottom: 4px;
+      padding: 10px 14px;
+      font-size: 14px;
+      border-radius: 10px;
+    }
+
+    .stats-bar {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0 16px 14px;
+      gap: 8px;
+    }
+
+    .stat-card { padding: 12px; border-radius: 10px; }
+    .stat-value { font-size: 18px; }
+    .stat-label { font-size: 10px; }
+    .stat-sub { font-size: 10px; }
+
+    /* Hide table, show cards on mobile */
+    .table-wrapper table { display: none !important; }
+    .card-list { display: block; padding: 0 16px 40px; }
+
+    .footer { padding: 0 16px 30px; font-size: 10px; }
+  }
+
+  /* === SMALL MOBILE === */
+  @media (max-width: 380px) {
+    .header h1 { font-size: 19px; }
+    .stats-bar { gap: 6px; }
+    .stat-value { font-size: 16px; }
+    .card-grid { grid-template-columns: repeat(2, 1fr); }
+    .card-yield { font-size: 18px; }
+  }
+
+  /* === IFRAME EMBED OPTIMIZATION === */
+  @media (max-height: 600px) {
+    .header { padding: 12px 16px 8px; }
+    .badge { display: none; }
+    .stats-bar { gap: 6px; }
+    .stat-card { padding: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge"><span class="dot"></span>LIVE DIVIDEND TRACKER</div>
+  <h1>S&P 500 배당 수익률 TOP 30</h1>
+  <div class="subtitle">무료 API (yfinance) 기반 · 매일 자동 업데이트</div>
+  <div class="update-time" id="updateTime">Loading...</div>
+</div>
+
+<div class="controls">
+  <button class="filter-btn active" onclick="filterSector('all')">전체</button>
+  <button class="filter-btn" onclick="filterSector('Energy')">에너지</button>
+  <button class="filter-btn" onclick="filterSector('Utilities')">유틸리티</button>
+  <button class="filter-btn" onclick="filterSector('Real Estate')">리츠</button>
+  <button class="filter-btn" onclick="filterSector('Financial Services')">금융</button>
+  <button class="filter-btn" onclick="filterSector('Consumer Defensive')">필수소비</button>
+  <button class="filter-btn" onclick="filterSector('Healthcare')">헬스케어</button>
+  <button class="filter-btn" onclick="filterSector('Technology')">기술</button>
+  <input type="text" class="search-box" placeholder="티커 검색..." oninput="searchStock(this.value)">
+</div>
+
+<div class="stats-bar" id="statsBar">
+  <div class="stat-card">
+    <div class="stat-label">최고 배당수익률</div>
+    <div class="stat-value" id="statMaxYield">—</div>
+    <div class="stat-sub" id="statMaxTicker">—</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">평균 배당수익률</div>
+    <div class="stat-value gold" id="statAvgYield">—</div>
+    <div class="stat-sub">TOP 30 평균</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">평균 배당성향</div>
+    <div class="stat-value blue" id="statAvgPayout">—</div>
+    <div class="stat-sub">낮을수록 안전</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">평균 52주 수익률</div>
+    <div class="stat-value cyan" id="statAvgReturn">—</div>
+    <div class="stat-sub">주가 변동 포함</div>
+  </div>
+</div>
+
+<div class="table-wrapper">
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    데이터를 불러오는 중...
+  </div>
+  <table id="stockTable" style="display:none;">
+    <thead>
+      <tr>
+        <th onclick="sortTable('rank')">#</th>
+        <th onclick="sortTable('ticker')">종목 <span class="sort-arrow"></span></th>
+        <th onclick="sortTable('dividendYield')">배당수익률 <span class="sort-arrow"></span></th>
+        <th onclick="sortTable('dividendRate')">연간배당 ($) <span class="sort-arrow"></span></th>
+        <th onclick="sortTable('price')">주가 ($) <span class="sort-arrow"></span></th>
+        <th onclick="sortTable('payoutRatio')">배당성향 <span class="sort-arrow"></span></th>
+        <th onclick="sortTable('marketCap')" class="hide-mobile hide-tablet">시가총액 <span class="sort-arrow"></span></th>
+        <th onclick="sortTable('yearReturn')">52주 수익률 <span class="sort-arrow"></span></th>
+        <th class="hide-mobile">섹터</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+</div>
+
+<div class="card-list" id="cardList"></div>
+
+<div class="footer">
+  데이터 출처: Yahoo Finance (yfinance) · 투자 판단은 본인의 책임입니다
+</div>
+
+<script>
+let allStocks = [];
+let currentFilter = 'all';
+let currentSort = { key: 'dividendYield', dir: 'desc' };
+
+const SECTOR_MAP = {
+  'Energy': '에너지',
+  'Utilities': '유틸리티',
+  'Real Estate': '리츠',
+  'Financial Services': '금융',
+  'Consumer Defensive': '필수소비',
+  'Healthcare': '헬스케어',
+  'Technology': '기술',
+  'Industrials': '산업재',
+  'Communication Services': '통신',
+  'Basic Materials': '소재',
+};
+
+const SECTOR_COLORS = {
+  'Energy': '#ff6b35',
+  'Utilities': '#ffd700',
+  'Real Estate': '#00ddcc',
+  'Financial Services': '#4488ff',
+  'Consumer Defensive': '#00ff88',
+  'Healthcare': '#ff66aa',
+  'Technology': '#aa66ff',
+  'Industrials': '#ff9944',
+  'Communication Services': '#66bbff',
+  'Basic Materials': '#88cc44',
+};
+
+function formatMarketCap(cap) {
+  if (!cap) return '—';
+  if (cap >= 1e12) return (cap / 1e12).toFixed(1) + 'T';
+  if (cap >= 1e9) return (cap / 1e9).toFixed(0) + 'B';
+  if (cap >= 1e6) return (cap / 1e6).toFixed(0) + 'M';
+  return cap.toLocaleString();
+}
+
+function getYieldClass(y) {
+  if (y >= 5) return 'yield-high';
+  if (y >= 3) return 'yield-mid';
+  return 'yield-low';
+}
+
+function getYieldColor(y) {
+  if (y >= 5) return 'var(--accent-green)';
+  if (y >= 3) return 'var(--accent-cyan)';
+  return 'var(--accent-blue)';
+}
+
+function getPayoutClass(p) {
+  if (p === null || p === undefined) return '';
+  if (p <= 60) return 'payout-safe';
+  if (p <= 80) return 'payout-warn';
+  return 'payout-danger';
+}
+
+function updateStats(stocks) {
+  if (!stocks.length) return;
+  
+  const maxYield = stocks.reduce((a, b) => a.dividendYield > b.dividendYield ? a : b);
+  document.getElementById('statMaxYield').textContent = maxYield.dividendYield.toFixed(2) + '%';
+  document.getElementById('statMaxTicker').textContent = maxYield.ticker;
+  
+  const avgYield = stocks.reduce((s, x) => s + x.dividendYield, 0) / stocks.length;
+  document.getElementById('statAvgYield').textContent = avgYield.toFixed(2) + '%';
+  
+  const payouts = stocks.filter(s => s.payoutRatio != null);
+  const avgPayout = payouts.length ? payouts.reduce((s, x) => s + x.payoutRatio, 0) / payouts.length : 0;
+  document.getElementById('statAvgPayout').textContent = avgPayout.toFixed(1) + '%';
+  
+  const returns = stocks.filter(s => s.yearReturn != null);
+  const avgReturn = returns.length ? returns.reduce((s, x) => s + x.yearReturn, 0) / returns.length : 0;
+  const retEl = document.getElementById('statAvgReturn');
+  retEl.textContent = (avgReturn >= 0 ? '+' : '') + avgReturn.toFixed(1) + '%';
+  retEl.className = 'stat-value ' + (avgReturn >= 0 ? '' : 'stat-value');
+  retEl.style.color = avgReturn >= 0 ? 'var(--accent-cyan)' : 'var(--accent-red)';
+}
+
+function renderTable(stocks) {
+  const maxYield = stocks.length ? Math.max(...stocks.map(s => s.dividendYield)) : 10;
+  const tbody = document.getElementById('tableBody');
+  
+  // Desktop table
+  tbody.innerHTML = stocks.map((s, i) => {
+    const yieldPct = (s.dividendYield / maxYield * 100).toFixed(0);
+    const sectorColor = SECTOR_COLORS[s.sector] || 'var(--text-secondary)';
+    const sectorKr = SECTOR_MAP[s.sector] || s.sector;
+    
+    return `<tr>
+      <td class="rank ${i < 3 ? 'rank-top' : ''}">${i + 1}</td>
+      <td>
+        <div class="ticker-cell">
+          <span class="ticker-symbol">${s.ticker}</span>
+          <span class="ticker-name">${s.name}</span>
+        </div>
+      </td>
+      <td>
+        <div class="yield-cell ${getYieldClass(s.dividendYield)}">${s.dividendYield.toFixed(2)}%</div>
+        <div class="yield-bar-container">
+          <div class="yield-bar" style="width:${yieldPct}%; background:${getYieldColor(s.dividendYield)}"></div>
+        </div>
+      </td>
+      <td class="mono">$${s.dividendRate.toFixed(2)}</td>
+      <td class="mono">$${s.price.toFixed(2)}</td>
+      <td class="mono ${getPayoutClass(s.payoutRatio)}">${s.payoutRatio != null ? s.payoutRatio.toFixed(1) + '%' : '—'}</td>
+      <td class="mcap-text hide-mobile hide-tablet">${formatMarketCap(s.marketCap)}</td>
+      <td class="mono ${s.yearReturn != null ? (s.yearReturn >= 0 ? 'return-positive' : 'return-negative') : ''}">
+        ${s.yearReturn != null ? (s.yearReturn >= 0 ? '+' : '') + s.yearReturn.toFixed(1) + '%' : '—'}
+      </td>
+      <td class="hide-mobile">
+        <span class="sector-tag" style="border-color:${sectorColor}; color:${sectorColor}">${sectorKr}</span>
+      </td>
+    </tr>`;
+  }).join('');
+  
+  // Mobile cards
+  const cardList = document.getElementById('cardList');
+  cardList.innerHTML = stocks.map((s, i) => {
+    const sectorColor = SECTOR_COLORS[s.sector] || 'var(--text-secondary)';
+    const sectorKr = SECTOR_MAP[s.sector] || s.sector;
+    const returnClass = s.yearReturn != null ? (s.yearReturn >= 0 ? 'return-positive' : 'return-negative') : '';
+    const returnText = s.yearReturn != null ? (s.yearReturn >= 0 ? '+' : '') + s.yearReturn.toFixed(1) + '%' : '—';
+    
+    return `<div class="stock-card">
+      <div class="card-top">
+        <div style="display:flex;align-items:center">
+          <span class="card-rank ${i < 3 ? 'card-rank-top' : ''}">${i + 1}</span>
+          <div class="card-ticker-group">
+            <div class="card-ticker">${s.ticker}</div>
+            <div class="card-name">${s.name}</div>
+          </div>
+        </div>
+        <div class="card-yield ${getYieldClass(s.dividendYield)}">${s.dividendYield.toFixed(2)}%</div>
+      </div>
+      <div class="card-grid">
+        <div class="card-metric">
+          <div class="card-metric-label">연간배당</div>
+          <div class="card-metric-value">$${s.dividendRate.toFixed(2)}</div>
+        </div>
+        <div class="card-metric">
+          <div class="card-metric-label">주가</div>
+          <div class="card-metric-value">$${s.price.toFixed(2)}</div>
+        </div>
+        <div class="card-metric">
+          <div class="card-metric-label">배당성향</div>
+          <div class="card-metric-value ${getPayoutClass(s.payoutRatio)}">${s.payoutRatio != null ? s.payoutRatio.toFixed(1) + '%' : '—'}</div>
+        </div>
+      </div>
+      <div class="card-bottom">
+        <span class="card-sector" style="border-color:${sectorColor}; color:${sectorColor}">${sectorKr}</span>
+        <span class="card-mcap">${formatMarketCap(s.marketCap)}</span>
+        <span class="card-metric-value ${returnClass}">${returnText}</span>
+      </div>
+    </div>`;
+  }).join('');
+  
+  updateStats(stocks);
+}
+
+function getFilteredStocks() {
+  let filtered = allStocks;
+  if (currentFilter !== 'all') {
+    filtered = filtered.filter(s => s.sector === currentFilter);
+  }
+  return filtered;
+}
+
+function filterSector(sector) {
+  currentFilter = sector;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  const filtered = getFilteredStocks();
+  sortAndRender(filtered);
+}
+
+function searchStock(query) {
+  const q = query.toUpperCase().trim();
+  if (!q) {
+    sortAndRender(getFilteredStocks());
+    return;
+  }
+  const filtered = getFilteredStocks().filter(s =>
+    s.ticker.includes(q) || s.name.toUpperCase().includes(q)
+  );
+  renderTable(filtered);
+}
+
+function sortTable(key) {
+  if (currentSort.key === key) {
+    currentSort.dir = currentSort.dir === 'desc' ? 'asc' : 'desc';
+  } else {
+    currentSort.key = key;
+    currentSort.dir = 'desc';
+  }
+  
+  // Update headers
+  document.querySelectorAll('thead th').forEach(th => th.classList.remove('sorted'));
+  
+  sortAndRender(getFilteredStocks());
+}
+
+function sortAndRender(stocks) {
+  const { key, dir } = currentSort;
+  const sorted = [...stocks].sort((a, b) => {
+    let va = a[key], vb = b[key];
+    if (va == null) va = -Infinity;
+    if (vb == null) vb = -Infinity;
+    if (typeof va === 'string') {
+      return dir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
+    }
+    return dir === 'asc' ? va - vb : vb - va;
+  });
+  renderTable(sorted);
+}
+
+// Load data
+async function loadData() {
+  try {
+    const response = await fetch('dividend_data.json');
+    if (!response.ok) throw new Error('Failed to load data');
+    const data = await response.json();
+    
+    allStocks = data.stocks;
+    document.getElementById('updateTime').textContent = `마지막 업데이트: ${data.updated} · ${data.count}개 종목`;
+    
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('stockTable').style.display = 'table';
+    
+    renderTable(allStocks);
+  } catch (e) {
+    // If no JSON file, show sample data
+    console.log('Loading sample data...', e);
+    loadSampleData();
+  }
+}
+
+function loadSampleData() {
+  const sampleData = {
+    updated: "샘플 데이터",
+    count: 30,
+    stocks: [
+      { ticker: "MO", name: "Altria Group Inc", price: 57.23, dividendYield: 7.76, dividendRate: 4.08, payoutRatio: 79.2, marketCap: 96800000000, sector: "Consumer Defensive", yearReturn: 12.3 },
+      { ticker: "VZ", name: "Verizon Communications", price: 43.81, dividendYield: 6.12, dividendRate: 2.68, payoutRatio: 57.1, marketCap: 184300000000, sector: "Communication Services", yearReturn: -2.4 },
+      { ticker: "T", name: "AT&T Inc", price: 22.14, dividendYield: 5.98, dividendRate: 1.33, payoutRatio: 65.3, marketCap: 158700000000, sector: "Communication Services", yearReturn: 5.7 },
+      { ticker: "PM", name: "Philip Morris International", price: 103.45, dividendYield: 5.14, dividendRate: 5.20, payoutRatio: 88.5, marketCap: 160200000000, sector: "Consumer Defensive", yearReturn: 8.1 },
+      { ticker: "KMI", name: "Kinder Morgan Inc", price: 18.92, dividendYield: 5.93, dividendRate: 1.15, payoutRatio: 98.2, marketCap: 42800000000, sector: "Energy", yearReturn: 15.6 },
+      { ticker: "VICI", name: "VICI Properties Inc", price: 31.56, dividendYield: 5.27, dividendRate: 1.66, payoutRatio: 72.8, marketCap: 33100000000, sector: "Real Estate", yearReturn: -4.2 },
+      { ticker: "O", name: "Realty Income Corp", price: 56.78, dividendYield: 5.42, dividendRate: 3.07, payoutRatio: 75.3, marketCap: 43600000000, sector: "Real Estate", yearReturn: -8.1 },
+      { ticker: "SPG", name: "Simon Property Group", price: 118.32, dividendYield: 5.84, dividendRate: 7.60, payoutRatio: 68.4, marketCap: 47200000000, sector: "Real Estate", yearReturn: 3.2 },
+      { ticker: "PFE", name: "Pfizer Inc", price: 27.45, dividendYield: 5.98, dividendRate: 1.64, payoutRatio: null, marketCap: 154800000000, sector: "Healthcare", yearReturn: -18.5 },
+      { ticker: "WMB", name: "Williams Companies", price: 38.12, dividendYield: 4.97, dividendRate: 1.90, payoutRatio: 78.1, marketCap: 46300000000, sector: "Energy", yearReturn: 22.4 },
+      { ticker: "OKE", name: "ONEOK Inc", price: 67.89, dividendYield: 5.62, dividendRate: 3.96, payoutRatio: 86.7, marketCap: 38900000000, sector: "Energy", yearReturn: 18.9 },
+      { ticker: "USB", name: "U.S. Bancorp", price: 42.31, dividendYield: 4.54, dividendRate: 1.92, payoutRatio: 52.3, marketCap: 65400000000, sector: "Financial Services", yearReturn: -5.1 },
+      { ticker: "RF", name: "Regions Financial", price: 19.87, dividendYield: 4.88, dividendRate: 0.96, payoutRatio: 41.2, marketCap: 18700000000, sector: "Financial Services", yearReturn: 1.3 },
+      { ticker: "KEY", name: "KeyCorp", price: 12.43, dividendYield: 5.31, dividendRate: 0.66, payoutRatio: 48.6, marketCap: 11200000000, sector: "Financial Services", yearReturn: -12.8 },
+      { ticker: "INTC", name: "Intel Corporation", price: 31.12, dividendYield: 1.61, dividendRate: 0.50, payoutRatio: null, marketCap: 130500000000, sector: "Technology", yearReturn: -28.3 },
+      { ticker: "IBM", name: "International Business Machines", price: 168.45, dividendYield: 3.94, dividendRate: 6.64, payoutRatio: 73.5, marketCap: 153200000000, sector: "Technology", yearReturn: 14.2 },
+      { ticker: "DOW", name: "Dow Inc", price: 53.67, dividendYield: 5.22, dividendRate: 2.80, payoutRatio: 92.1, marketCap: 37800000000, sector: "Basic Materials", yearReturn: -7.4 },
+      { ticker: "D", name: "Dominion Energy", price: 48.23, dividendYield: 5.56, dividendRate: 2.67, payoutRatio: 88.3, marketCap: 40100000000, sector: "Utilities", yearReturn: -1.8 },
+      { ticker: "DUK", name: "Duke Energy Corp", price: 97.56, dividendYield: 4.18, dividendRate: 4.08, payoutRatio: 73.6, marketCap: 75200000000, sector: "Utilities", yearReturn: 2.1 },
+      { ticker: "SO", name: "Southern Company", price: 72.34, dividendYield: 3.80, dividendRate: 2.76, payoutRatio: 77.4, marketCap: 78900000000, sector: "Utilities", yearReturn: 5.4 },
+      { ticker: "XOM", name: "Exxon Mobil Corp", price: 104.87, dividendYield: 3.55, dividendRate: 3.72, payoutRatio: 42.1, marketCap: 435600000000, sector: "Energy", yearReturn: 9.8 },
+      { ticker: "CVX", name: "Chevron Corp", price: 153.21, dividendYield: 3.92, dividendRate: 6.04, payoutRatio: 52.8, marketCap: 292100000000, sector: "Energy", yearReturn: 4.5 },
+      { ticker: "ABBV", name: "AbbVie Inc", price: 154.67, dividendYield: 3.88, dividendRate: 6.00, payoutRatio: 47.9, marketCap: 273400000000, sector: "Healthcare", yearReturn: 11.2 },
+      { ticker: "BMY", name: "Bristol-Myers Squibb", price: 51.23, dividendYield: 4.68, dividendRate: 2.40, payoutRatio: 56.7, marketCap: 103800000000, sector: "Healthcare", yearReturn: -15.6 },
+      { ticker: "GIS", name: "General Mills Inc", price: 66.89, dividendYield: 3.58, dividendRate: 2.40, payoutRatio: 54.2, marketCap: 37600000000, sector: "Consumer Defensive", yearReturn: -3.2 },
+      { ticker: "CSCO", name: "Cisco Systems", price: 50.12, dividendYield: 3.12, dividendRate: 1.56, payoutRatio: 47.8, marketCap: 203400000000, sector: "Technology", yearReturn: 7.8 },
+      { ticker: "ED", name: "Consolidated Edison", price: 94.56, dividendYield: 3.44, dividendRate: 3.24, payoutRatio: 68.9, marketCap: 33500000000, sector: "Utilities", yearReturn: 1.2 },
+      { ticker: "PSA", name: "Public Storage", price: 278.45, dividendYield: 4.32, dividendRate: 12.00, payoutRatio: 82.1, marketCap: 48900000000, sector: "Real Estate", yearReturn: -6.3 },
+      { ticker: "AMGN", name: "Amgen Inc", price: 282.34, dividendYield: 3.24, dividendRate: 9.16, payoutRatio: 58.4, marketCap: 150700000000, sector: "Healthcare", yearReturn: 6.7 },
+      { ticker: "LMT", name: "Lockheed Martin", price: 452.67, dividendYield: 2.68, dividendRate: 12.15, payoutRatio: 42.6, marketCap: 109800000000, sector: "Industrials", yearReturn: 13.4 },
+    ]
+  };
+  
+  allStocks = sampleData.stocks;
+  allStocks.sort((a, b) => b.dividendYield - a.dividendYield);
+  
+  document.getElementById('updateTime').textContent = '⚠ 샘플 데이터 · dividend_data.json이 없습니다 → Python 스크립트를 먼저 실행하세요';
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('stockTable').style.display = 'table';
+  
+  renderTable(allStocks);
+}
+
+document.addEventListener('DOMContentLoaded', loadData);
+</script>
+</body>
+</html>
