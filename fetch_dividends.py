@@ -47,16 +47,20 @@ def fetch_all_data():
             info = stock.info
             
             dividend_yield = info.get("dividendYield", 0) or 0
-            if dividend_yield == 0:
-                continue
-            # yfinance returns yield as decimal (e.g. 0.0648 = 6.48%)
-            # but sometimes as already percentage — normalize to decimal
-            if dividend_yield > 1:
+            dividend_rate = info.get("dividendRate", 0) or 0
+            price = info.get("currentPrice") or info.get("regularMarketPrice", 0) or 0
+            
+            # yfinance dividendYield is unreliable — calculate from rate/price
+            if dividend_rate > 0 and price > 0:
+                dividend_yield = dividend_rate / price  # decimal form (e.g. 0.0648)
+            elif dividend_yield > 0.20:
+                # Fallback: if yield looks like percentage, convert to decimal
                 dividend_yield = dividend_yield / 100
             
-            dividend_rate = info.get("dividendRate", 0) or 0
+            if dividend_yield <= 0:
+                continue
+            
             payout_ratio = info.get("payoutRatio", 0) or 0
-            price = info.get("currentPrice") or info.get("regularMarketPrice", 0) or 0
             market_cap = info.get("marketCap", 0) or 0
             sector = info.get("sector", "N/A")
             name = info.get("shortName", ticker)
