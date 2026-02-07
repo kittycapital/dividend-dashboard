@@ -46,6 +46,38 @@ body { background:var(--bg); color:var(--text); font-family:'Noto Sans KR',sans-
 
 canvas { width:100% !important; cursor:crosshair; }
 
+/* Quadrant corner overlays */
+.quad-overlay {
+  position:absolute;
+  pointer-events:none;
+  z-index:5;
+  padding:8px 12px;
+  border-radius:8px;
+  background:rgba(0,0,0,0.65);
+  backdrop-filter:blur(4px);
+  max-width:160px;
+}
+.quad-overlay .qo-icon { font-size:16px; margin-bottom:2px; }
+.quad-overlay .qo-title { font:700 12px 'Noto Sans KR',sans-serif; margin-bottom:2px; }
+.quad-overlay .qo-desc { font:11px 'Noto Sans KR',sans-serif; color:var(--text-muted); line-height:1.4; }
+
+.qo-top-left { top:32px; left:32px; }
+.qo-top-right { top:32px; right:32px; text-align:right; }
+.qo-bottom-left { bottom:68px; left:32px; }
+.qo-bottom-right { bottom:68px; right:32px; text-align:right; }
+
+/* Bubble note */
+.bubble-note {
+  max-width:1200px; margin:0 auto; padding:0 24px 10px;
+  font:12px 'JetBrains Mono',monospace; color:var(--text-muted);
+  display:flex; align-items:center; gap:12px;
+}
+.bubble-note-dot {
+  display:flex; align-items:center; gap:6px;
+}
+.bn-small { width:8px; height:8px; border-radius:50%; border:1.5px solid var(--text-muted); }
+.bn-large { width:18px; height:18px; border-radius:50%; border:1.5px solid var(--text-muted); }
+
 /* Tooltip */
 .tooltip { position:absolute; display:none; background:rgba(10,10,10,0.95); border:1px solid var(--border);
   border-radius:10px; padding:12px 16px; pointer-events:none; z-index:100; min-width:200px;
@@ -89,10 +121,19 @@ canvas { width:100% !important; cursor:crosshair; }
   .legend-zone { margin-left:0; width:100%; justify-content:flex-start; }
   .chart-area { padding:0 12px 16px; }
   .chart-box { padding:12px; border-radius:12px; }
+  .quad-overlay { padding:5px 8px; max-width:120px; }
+  .quad-overlay .qo-icon { font-size:13px; }
+  .quad-overlay .qo-title { font-size:10px; }
+  .quad-overlay .qo-desc { font-size:9px; }
+  .qo-top-left { top:16px; left:16px; }
+  .qo-top-right { top:16px; right:16px; }
+  .qo-bottom-left { bottom:50px; left:16px; }
+  .qo-bottom-right { bottom:50px; right:16px; }
   .quad-stats { grid-template-columns:repeat(2,1fr); padding:0 12px 16px; }
   .quad-value { font-size:15px; }
   .golden-list { padding:0 12px 30px; }
   .golden-grid { grid-template-columns:1fr; }
+  .bubble-note { padding:0 16px 8px; font-size:10px; }
 }
 </style>
 </head>
@@ -107,8 +148,37 @@ canvas { width:100% !important; cursor:crosshair; }
 
 <div class="legend" id="legendBar"></div>
 
+<div class="bubble-note">
+  <span>원 크기 = 시가총액</span>
+  <div class="bubble-note-dot"><div class="bn-small"></div><span>소형주</span></div>
+  <div class="bubble-note-dot"><div class="bn-large"></div><span>대형주</span></div>
+  <span style="margin-left:8px">색상 = 섹터</span>
+</div>
+
 <div class="chart-area">
   <div class="chart-box">
+    <!-- Quadrant corner overlays -->
+    <div class="quad-overlay qo-top-left">
+      <div class="qo-icon">🚀</div>
+      <div class="qo-title" style="color:var(--cyan)">성장주</div>
+      <div class="qo-desc">저배당이지만 주가상승</div>
+    </div>
+    <div class="quad-overlay qo-top-right">
+      <div class="qo-icon">⭐</div>
+      <div class="qo-title" style="color:var(--gold)">황금구간</div>
+      <div class="qo-desc">고배당 + 주가상승 (이상적)</div>
+    </div>
+    <div class="quad-overlay qo-bottom-left">
+      <div class="qo-icon">💀</div>
+      <div class="qo-title" style="color:var(--text-muted)">회피</div>
+      <div class="qo-desc">저배당 + 주가하락</div>
+    </div>
+    <div class="quad-overlay qo-bottom-right">
+      <div class="qo-icon">⚠️</div>
+      <div class="qo-title" style="color:var(--red)">배당 함정?</div>
+      <div class="qo-desc">고배당이지만 주가하락</div>
+    </div>
+
     <canvas id="scatterChart" height="500"></canvas>
     <div class="tooltip" id="tooltip"></div>
   </div>
@@ -197,11 +267,7 @@ function buildLegend() {
   const bar = document.getElementById('legendBar');
   bar.innerHTML = sectors.map(s => 
     `<div class="legend-item"><div class="legend-dot" style="background:${SECTOR_COLORS[s]||'#888'}"></div>${SECTOR_KR[s]||s}</div>`
-  ).join('') + `
-    <div class="legend-zone">
-      <div class="zone-tag zone-gold">⭐ 황금구간</div>
-      <div class="zone-tag zone-danger">⚠ 위험구간</div>
-    </div>`;
+  ).join('');
 }
 
 function buildQuadStats() {
@@ -350,18 +416,7 @@ function drawChart() {
   ctx.fillText('52주 주가수익률 →', 0, 0);
   ctx.restore();
   
-  // Quadrant labels
-  ctx.font = '11px Noto Sans KR';
-  ctx.globalAlpha = 0.3;
-  ctx.fillStyle = '#ffd700';
-  ctx.textAlign = 'right';
-  ctx.fillText('⭐ 황금구간', PADDING.left+plotW-5, PADDING.top+16);
-  ctx.fillStyle = '#ff4466';
-  ctx.textAlign = 'left';
-  ctx.fillText('⚠ 위험구간', PADDING.left+5, PADDING.top+plotH-8);
-  ctx.globalAlpha = 1;
-  
-  // Draw bubbles
+  // Draw bubbles (quadrant labels are now HTML overlays)
   allData.forEach(s => {
     const x = xScale(s.dividendYield);
     const y = yScale(s.yearReturn);
