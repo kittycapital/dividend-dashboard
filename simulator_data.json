@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-07 07:48",
+  "updated": "2026-02-07 07:55",
   "histories": {
     "XOM": {
       "monthlyPrices": [
@@ -8877,7 +8877,7 @@
         },
         {
           "date": "2022-11",
-          "price": 88.37
+          "price": 88.36
         },
         {
           "date": "2022-12",
@@ -13203,7 +13203,7 @@
         },
         {
           "date": "2022-05",
-          "price": 122.1
+          "price": 122.09
         },
         {
           "date": "2022-06",
@@ -22775,7 +22775,7 @@
         },
         {
           "date": "2021-04",
-          "price": 33.92
+          "price": 33.93
         },
         {
           "date": "2021-05",
@@ -29053,7 +29053,7 @@
         },
         {
           "date": "2021-07",
-          "price": 91.97
+          "price": 91.98
         },
         {
           "date": "2021-08",
@@ -31017,7 +31017,7 @@
         },
         {
           "date": "2021-08",
-          "price": 320.46
+          "price": 320.45
         },
         {
           "date": "2021-09",
@@ -36753,7 +36753,7 @@
         },
         {
           "date": "2022-10",
-          "price": 284.91
+          "price": 284.92
         },
         {
           "date": "2022-11",
@@ -38499,6 +38499,10 @@
     }
   },
   "tickers": [
+    "MSFT",
+    "CAT",
+    "AVGO",
+    "AAPL",
     "MO",
     "PFE",
     "VICI",
@@ -38544,6 +38548,7 @@
     "DLR",
     "PNC",
     "MRK",
+    "K",
     "XOM",
     "MDT",
     "CFG",
@@ -38573,14 +38578,13 @@
     "EMR",
     "RTX",
     "LIN",
-    "NUE",
-    "MSFT",
-    "CAT",
-    "AVGO",
-    "AAPL",
-    "K"
+    "NUE"
   ],
   "names": {
+    "MSFT": "Microsoft Corporation",
+    "CAT": "Caterpillar, Inc.",
+    "AVGO": "Broadcom Inc.",
+    "AAPL": "Apple Inc.",
     "MO": "Altria Group, Inc.",
     "PFE": "Pfizer, Inc.",
     "VICI": "VICI Properties Inc.",
@@ -38626,6 +38630,7 @@
     "DLR": "Digital Realty Trust, Inc.",
     "PNC": "PNC Financial Services Group, I",
     "MRK": "Merck & Company, Inc.",
+    "K": "Kellanova",
     "XOM": "Exxon Mobil Corporation",
     "MDT": "Medtronic plc.",
     "CFG": "Citizens Financial Group, Inc.",
@@ -38655,11 +38660,6 @@
     "EMR": "Emerson Electric Company",
     "RTX": "RTX Corporation",
     "LIN": "Linde plc",
-    "NUE": "Nucor Corporation",
-    "MSFT": "Microsoft Corporation",
-    "CAT": "Caterpillar, Inc.",
-    "AVGO": "Broadcom Inc.",
-    "AAPL": "Apple Inc.",
-    "K": "Kellanova"
+    "NUE": "Nucor Corporation"
   }
 }
