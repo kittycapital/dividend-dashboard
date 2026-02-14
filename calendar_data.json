@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-13 23:07",
+  "updated": "2026-02-14 22:56",
   "stocks": [
     {
       "ticker": "MO",
@@ -148,6 +148,41 @@
           "priceReturn": 22.93,
           "divReturn": 33.06,
           "totalReturn": 55.98
+        }
+      }
+    },
+    {
+      "ticker": "DOW",
+      "name": "Dow Inc.",
+      "price": 32.49,
+      "dividendYield": 5.39,
+      "dividendRate": 1.75,
+      "payoutRatio": 700.0,
+      "marketCap": 23312683008,
+      "sector": "Basic Materials",
+      "yearReturn": -9.7,
+      "divMonths": [
+        2,
+        5,
+        8,
+        11
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": -9.7,
+          "divReturn": 5.84,
+          "totalReturn": -3.86
+        },
+        "3y": {
+          "priceReturn": -35.02,
+          "divReturn": 15.4,
+          "totalReturn": -19.62
+        },
+        "5y": {
+          "priceReturn": -27.41,
+          "divReturn": 29.72,
+          "totalReturn": 2.31
         }
       }
     },
@@ -310,7 +345,7 @@
       "dividendYield": 4.68,
       "dividendRate": 5.12,
       "payoutRatio": 103.7,
-      "marketCap": 36312428544,
+      "marketCap": 36315627520,
       "sector": "Consumer Defensive",
       "yearReturn": -14.16,
       "divMonths": [
@@ -382,41 +417,6 @@
           "priceReturn": 133.47,
           "divReturn": 43.71,
           "totalReturn": 177.18
-        }
-      }
-    },
-    {
-      "ticker": "DOW",
-      "name": "Dow Inc.",
-      "price": 32.49,
-      "dividendYield": 4.31,
-      "dividendRate": 1.4,
-      "payoutRatio": 700.0,
-      "marketCap": 23312683008,
-      "sector": "Basic Materials",
-      "yearReturn": -9.7,
-      "divMonths": [
-        2,
-        5,
-        8,
-        11
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": -9.7,
-          "divReturn": 5.84,
-          "totalReturn": -3.86
-        },
-        "3y": {
-          "priceReturn": -35.02,
-          "divReturn": 15.4,
-          "totalReturn": -19.62
-        },
-        "5y": {
-          "priceReturn": -27.41,
-          "divReturn": 29.72,
-          "totalReturn": 2.31
         }
       }
     },
@@ -544,7 +544,7 @@
       "payoutRatio": 54.4,
       "marketCap": 66392887296,
       "sector": "Financial Services",
-      "yearReturn": 15.05,
+      "yearReturn": 16.21,
       "divMonths": [
         1,
         2,
@@ -559,19 +559,19 @@
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 15.05,
-          "divReturn": 4.61,
-          "totalReturn": 19.66
+          "priceReturn": 16.21,
+          "divReturn": 5.82,
+          "totalReturn": 22.03
         },
         "3y": {
-          "priceReturn": 23.83,
-          "divReturn": 13.65,
-          "totalReturn": 37.48
+          "priceReturn": 25.08,
+          "divReturn": 15.04,
+          "totalReturn": 40.12
         },
         "5y": {
-          "priceReturn": 16.92,
-          "divReturn": 21.74,
-          "totalReturn": 38.66
+          "priceReturn": 18.1,
+          "divReturn": 23.14,
+          "totalReturn": 41.24
         }
       }
     },
@@ -582,7 +582,7 @@
       "dividendYield": 4.0,
       "dividendRate": 12.0,
       "payoutRatio": 133.2,
-      "marketCap": 52700315648,
+      "marketCap": 52713361408,
       "sector": "Real Estate",
       "yearReturn": 5.25,
       "divMonths": [
@@ -624,7 +624,7 @@
       "payoutRatio": 86.1,
       "marketCap": 11792923648,
       "sector": "Consumer Defensive",
-      "yearReturn": 11.58,
+      "yearReturn": 12.7,
       "divMonths": [
         2,
         5,
@@ -632,22 +632,22 @@
         9,
         11
       ],
-      "consecIncreases": 16,
+      "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 11.58,
-          "divReturn": 4.4,
-          "totalReturn": 15.98
+          "priceReturn": 12.7,
+          "divReturn": 5.57,
+          "totalReturn": 18.27
         },
         "3y": {
-          "priceReturn": -16.93,
-          "divReturn": 8.85,
-          "totalReturn": -8.07
+          "priceReturn": -16.09,
+          "divReturn": 9.78,
+          "totalReturn": -6.32
         },
         "5y": {
-          "priceReturn": 14.39,
-          "divReturn": 20.39,
-          "totalReturn": 34.77
+          "priceReturn": 15.53,
+          "divReturn": 21.74,
+          "totalReturn": 37.27
         }
       }
     },
@@ -1084,29 +1084,29 @@
       "payoutRatio": 66.9,
       "marketCap": 99696173056,
       "sector": "Utilities",
-      "yearReturn": 17.94,
+      "yearReturn": 18.94,
       "divMonths": [
         2,
         5,
         8,
         11
       ],
-      "consecIncreases": 19,
+      "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 17.94,
-          "divReturn": 3.88,
-          "totalReturn": 21.82
+          "priceReturn": 18.94,
+          "divReturn": 4.9,
+          "totalReturn": 23.85
         },
         "3y": {
-          "priceReturn": 45.12,
-          "divReturn": 14.06,
-          "totalReturn": 59.18
+          "priceReturn": 46.36,
+          "divReturn": 15.39,
+          "totalReturn": 61.75
         },
         "5y": {
-          "priceReturn": 74.64,
-          "divReturn": 26.34,
-          "totalReturn": 100.98
+          "priceReturn": 76.13,
+          "divReturn": 28.03,
+          "totalReturn": 104.16
         }
       }
     },
@@ -1119,7 +1119,7 @@
       "payoutRatio": 74.2,
       "marketCap": 37685186560,
       "sector": "Utilities",
-      "yearReturn": 15.28,
+      "yearReturn": 16.25,
       "divMonths": [
         2,
         5,
@@ -1127,22 +1127,22 @@
         8,
         11
       ],
-      "consecIncreases": 22,
+      "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 15.28,
-          "divReturn": 3.56,
-          "totalReturn": 18.83
+          "priceReturn": 16.25,
+          "divReturn": 4.54,
+          "totalReturn": 20.79
         },
         "3y": {
-          "priceReturn": 39.4,
-          "divReturn": 11.14,
-          "totalReturn": 50.54
+          "priceReturn": 40.58,
+          "divReturn": 12.39,
+          "totalReturn": 52.97
         },
         "5y": {
-          "priceReturn": 67.27,
-          "divReturn": 21.64,
-          "totalReturn": 88.9
+          "priceReturn": 68.68,
+          "divReturn": 23.21,
+          "totalReturn": 91.88
         }
       }
     },
@@ -1255,6 +1255,46 @@
           "priceReturn": 91.44,
           "divReturn": 26.73,
           "totalReturn": 118.17
+        }
+      }
+    },
+    {
+      "ticker": "PLD",
+      "name": "Prologis, Inc.",
+      "price": 138.97,
+      "dividendYield": 3.08,
+      "dividendRate": 4.28,
+      "payoutRatio": 116.0,
+      "marketCap": 129084645376,
+      "sector": "Real Estate",
+      "yearReturn": 19.09,
+      "divMonths": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        12
+      ],
+      "consecIncreases": 12,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": 19.09,
+          "divReturn": 3.46,
+          "totalReturn": 22.55
+        },
+        "3y": {
+          "priceReturn": 19.62,
+          "divReturn": 9.78,
+          "totalReturn": 29.4
+        },
+        "5y": {
+          "priceReturn": 49.99,
+          "divReturn": 18.39,
+          "totalReturn": 68.39
         }
       }
     },
@@ -1426,7 +1466,7 @@
       "dividendYield": 2.92,
       "dividendRate": 3.8,
       "payoutRatio": 56.2,
-      "marketCap": 69552414720,
+      "marketCap": 70279544832,
       "sector": "Utilities",
       "yearReturn": 31.86,
       "divMonths": [
@@ -1494,46 +1534,6 @@
           "priceReturn": 303.61,
           "divReturn": 50.43,
           "totalReturn": 354.05
-        }
-      }
-    },
-    {
-      "ticker": "PLD",
-      "name": "Prologis, Inc.",
-      "price": 138.97,
-      "dividendYield": 2.91,
-      "dividendRate": 4.04,
-      "payoutRatio": 116.0,
-      "marketCap": 129084645376,
-      "sector": "Real Estate",
-      "yearReturn": 19.09,
-      "divMonths": [
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        9,
-        10,
-        12
-      ],
-      "consecIncreases": 12,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 19.09,
-          "divReturn": 3.46,
-          "totalReturn": 22.55
-        },
-        "3y": {
-          "priceReturn": 19.62,
-          "divReturn": 9.78,
-          "totalReturn": 29.4
-        },
-        "5y": {
-          "priceReturn": 49.99,
-          "divReturn": 18.39,
-          "totalReturn": 68.39
         }
       }
     },
@@ -1883,29 +1883,29 @@
       "payoutRatio": 66.9,
       "marketCap": 198993412096,
       "sector": "Healthcare",
-      "yearReturn": 29.88,
+      "yearReturn": 30.78,
       "divMonths": [
         2,
         5,
         8,
         11
       ],
-      "consecIncreases": 14,
+      "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 29.88,
-          "divReturn": 3.35,
-          "totalReturn": 33.23
+          "priceReturn": 30.78,
+          "divReturn": 4.26,
+          "totalReturn": 35.04
         },
         "3y": {
-          "priceReturn": 67.11,
-          "divReturn": 12.24,
-          "totalReturn": 79.35
+          "priceReturn": 68.27,
+          "divReturn": 13.47,
+          "totalReturn": 81.74
         },
         "5y": {
-          "priceReturn": 84.23,
-          "divReturn": 20.0,
-          "totalReturn": 104.23
+          "priceReturn": 85.5,
+          "divReturn": 21.4,
+          "totalReturn": 106.91
         }
       }
     },
@@ -2302,7 +2302,7 @@
       "dividendYield": 2.14,
       "dividendRate": 5.2,
       "payoutRatio": 46.6,
-      "marketCap": 586542874624,
+      "marketCap": 586689937408,
       "sector": "Healthcare",
       "yearReturn": 60.68,
       "divMonths": [
@@ -2337,7 +2337,7 @@
       "dividendYield": 2.12,
       "dividendRate": 3.28,
       "payoutRatio": 46.6,
-      "marketCap": 192330170368,
+      "marketCap": 192280526848,
       "sector": "Healthcare",
       "yearReturn": 53.07,
       "divMonths": [
@@ -2601,7 +2601,7 @@
       "payoutRatio": 48.7,
       "marketCap": 90497597440,
       "sector": "Industrials",
-      "yearReturn": 17.21,
+      "yearReturn": 17.74,
       "divMonths": [
         2,
         5,
@@ -2612,19 +2612,19 @@
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 17.21,
-          "divReturn": 1.99,
-          "totalReturn": 19.21
+          "priceReturn": 17.74,
+          "divReturn": 2.54,
+          "totalReturn": 20.28
         },
         "3y": {
-          "priceReturn": 101.15,
-          "divReturn": 13.23,
-          "totalReturn": 114.38
+          "priceReturn": 102.05,
+          "divReturn": 14.2,
+          "totalReturn": 116.25
         },
         "5y": {
-          "priceReturn": 38.74,
-          "divReturn": 16.15,
-          "totalReturn": 54.88
+          "priceReturn": 39.36,
+          "divReturn": 16.85,
+          "totalReturn": 56.21
         }
       }
     },
@@ -2680,7 +2680,7 @@
       "payoutRatio": 52.4,
       "marketCap": 83293806592,
       "sector": "Industrials",
-      "yearReturn": 21.63,
+      "yearReturn": 22.1,
       "divMonths": [
         2,
         5,
@@ -2688,22 +2688,22 @@
         10,
         11
       ],
-      "consecIncreases": 34,
+      "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 21.63,
-          "divReturn": 1.76,
-          "totalReturn": 23.39
+          "priceReturn": 22.1,
+          "divReturn": 2.22,
+          "totalReturn": 24.32
         },
         "3y": {
-          "priceReturn": 82.79,
-          "divReturn": 7.81,
-          "totalReturn": 90.59
+          "priceReturn": 83.49,
+          "divReturn": 8.52,
+          "totalReturn": 92.01
         },
         "5y": {
-          "priceReturn": 92.04,
-          "divReturn": 12.86,
-          "totalReturn": 104.9
+          "priceReturn": 92.78,
+          "divReturn": 13.63,
+          "totalReturn": 106.41
         }
       }
     },
