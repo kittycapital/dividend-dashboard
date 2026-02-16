@@ -4,94 +4,244 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>$10,000 투자 시뮬레이터</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"></script>
 <style>
-:root{--bg:#000;--card:#0a0a0a;--border:#1a1a1a;--border2:#222;
-  --text:#e8e8e8;--dim:#888;--muted:#555;--green:#00ff88;--red:#ff4466;--gold:#ffd700;--blue:#4488ff;--cyan:#00ddcc;--purple:#aa66ff}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;min-height:100vh}
+:root {
+  --bg: #000000;
+  --surface: #0a0a0a;
+  --surface2: #111111;
+  --border: #1a1a1a;
+  --border-hover: #2a2a2a;
+  --text: #e4e4e7;
+  --text-dim: #71717a;
+  --text-muted: #52525b;
+  --green: #22c55e;
+  --red: #ef4444;
+  --cyan: #22d3ee;
+  --blue: #4a90ff;
+  --gold: #ffd644;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Noto Sans KR', -apple-system, sans-serif;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
 
-.header{padding:40px 24px 20px;max-width:1200px;margin:0 auto;position:relative}
-.header::before{content:'';position:absolute;top:0;left:0;right:0;height:180px;
-  background:radial-gradient(ellipse at 40% 0%,rgba(255,215,0,0.06) 0%,transparent 60%),
-  radial-gradient(ellipse at 80% 0%,rgba(0,255,136,0.04) 0%,transparent 60%);pointer-events:none}
-.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:rgba(255,215,0,0.08);
-  border:1px solid rgba(255,215,0,0.25);border-radius:20px;font:600 11px 'JetBrains Mono',monospace;
-  color:var(--gold);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:14px}
-.badge .dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
-.header h1{font-size:30px;font-weight:900;letter-spacing:-1px;margin-bottom:6px;
-  background:linear-gradient(135deg,#fff,#aaa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.sub{font-size:13px;color:var(--dim)}.time{font:11px 'JetBrains Mono',monospace;color:var(--muted);margin-top:6px}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scrollbar-width: none; }
+html::-webkit-scrollbar { display: none; }
 
-/* Controls */
-.controls{max-width:1200px;margin:0 auto;padding:0 24px 20px;display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
-.ctrl-group{display:flex;flex-direction:column;gap:4px}
-.ctrl-label{font:600 10px 'JetBrains Mono',monospace;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
-.ctrl-select,.ctrl-input{padding:10px 14px;border-radius:10px;border:1px solid var(--border2);background:var(--card);
-  color:var(--text);font:14px 'JetBrains Mono',monospace;outline:none;transition:border-color 0.2s;
-  -webkit-appearance:none}
-.ctrl-select:focus,.ctrl-input:focus{border-color:var(--gold)}
-.ctrl-select{min-width:160px;cursor:pointer}
-.ctrl-input{width:120px}
-.ctrl-btn{padding:10px 24px;border-radius:10px;border:1px solid var(--gold);background:rgba(255,215,0,0.1);
-  color:var(--gold);font:600 14px 'Noto Sans KR',sans-serif;cursor:pointer;transition:all 0.2s;-webkit-tap-highlight-color:transparent}
-.ctrl-btn:hover{background:rgba(255,215,0,0.2)}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
 
-/* Result cards */
-.results{max-width:1200px;margin:0 auto;padding:0 24px 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.result-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center;position:relative;overflow:hidden}
-.result-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px}
-.rc-label{font:10px 'JetBrains Mono',monospace;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
-.rc-value{font:700 26px 'JetBrains Mono',monospace;margin-bottom:4px}
-.rc-sub{font:11px 'JetBrains Mono',monospace;color:var(--dim)}
-.rc-green::after{background:linear-gradient(90deg,transparent,rgba(0,255,136,0.4),transparent)}
-.rc-gold::after{background:linear-gradient(90deg,transparent,rgba(255,215,0,0.4),transparent)}
-.rc-blue::after{background:linear-gradient(90deg,transparent,rgba(68,136,255,0.4),transparent)}
+/* ====== HEADER ====== */
+.header {
+  padding: 36px 20px 24px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
 
-/* Chart */
-.chart-area{max-width:1200px;margin:0 auto;padding:0 24px 20px}
-.chart-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden}
-.chart-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(255,215,0,0.3),transparent)}
-canvas{width:100%!important}
+.header h1 {
+  font-size: clamp(22px, 5vw, 36px);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
 
-/* Legend */
-.chart-legend{display:flex;gap:20px;justify-content:center;margin-top:16px;font-size:12px;color:var(--dim)}
-.cl-item{display:flex;align-items:center;gap:6px}
-.cl-line{width:20px;height:3px;border-radius:2px}
+.sub { font-size: 13px; color: var(--text-dim); }
+.time { font-family: var(--mono); font-size: 11px; color: var(--text-muted); margin-top: 8px; }
 
-/* KRW note */
-.krw-note{max-width:1200px;margin:0 auto;padding:0 24px 20px}
-.krw-card{background:var(--card);border:1px solid rgba(0,221,204,0.15);border-radius:14px;padding:16px 20px;
-  display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-.krw-icon{font-size:24px}
-.krw-text{flex:1;font-size:13px;color:var(--dim);line-height:1.6}
-.krw-val{font:700 20px 'JetBrains Mono',monospace;color:var(--cyan)}
+/* ====== SHARE ====== */
+.share-bar { display: flex; gap: 6px; justify-content: center; margin: 16px 0 4px; flex-wrap: wrap; }
+.share-btn { display: flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border-hover); background: var(--surface); color: #a1a1aa; font-size: 11px; cursor: pointer; font-family: var(--sans); transition: all 0.2s; }
+.share-btn:hover { border-color: #444; color: var(--text); }
+.share-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+.share-btn.twitter:hover { border-color: #1d9bf0; color: #1d9bf0; }
+.share-btn.kakao:hover { border-color: #fee500; color: #fee500; }
+.share-btn.telegram:hover { border-color: #26a5e4; color: #26a5e4; }
+.share-btn.instagram:hover { border-color: #e1306c; color: #e1306c; }
+.share-btn.instagram.copied { border-color: var(--green); color: var(--green); }
+.share-btn.copy:hover { border-color: var(--green); color: var(--green); }
+.share-btn.copied { border-color: var(--green); color: var(--green); }
 
-.footer{max-width:1200px;margin:0 auto;padding:0 24px 40px;text-align:center;font:11px 'JetBrains Mono',monospace;color:var(--muted)}
+.toast { position: fixed; bottom: 20px; right: 20px; background: var(--green); color: #000; padding: 10px 16px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; z-index: 9999; opacity: 0; transform: translateY(10px); transition: all 0.3s ease; pointer-events: none; }
+.toast.show { opacity: 1; transform: translateY(0); }
 
-@media(max-width:768px){
-  .header{padding:20px 16px 14px} .header h1{font-size:22px}
-  .controls{padding:0 16px 16px;gap:8px}
-  .ctrl-group{flex:1;min-width:calc(50% - 4px)}
-  .ctrl-select,.ctrl-input{width:100%;font-size:13px}
-  .ctrl-btn{width:100%;text-align:center}
-  .results{grid-template-columns:1fr;padding:0 16px 16px;gap:8px}
-  .rc-value{font-size:22px}
-  .chart-area{padding:0 12px 16px} .chart-box{padding:14px;border-radius:12px}
-  .krw-note{padding:0 16px 16px}
-  .footer{padding:0 16px 30px}
+/* ====== CONTROLS ====== */
+.controls {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px 20px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ctrl-group { display: flex; flex-direction: column; gap: 4px; }
+
+.ctrl-label {
+  font: 600 10px var(--mono);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ctrl-select, .ctrl-input {
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-hover);
+  background: var(--surface);
+  color: var(--text);
+  font: 14px var(--mono);
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+
+.ctrl-select:focus, .ctrl-input:focus { border-color: var(--cyan); }
+.ctrl-select { min-width: 160px; cursor: pointer; }
+.ctrl-input { width: 120px; }
+
+/* ====== RESULTS ====== */
+.results {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.result-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+}
+
+.rc-label {
+  font: 10px var(--mono);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.rc-value { font: 700 26px var(--mono); margin-bottom: 4px; }
+.rc-sub { font: 11px var(--mono); color: var(--text-dim); }
+
+/* ====== CHART ====== */
+.chart-area { max-width: 1200px; margin: 0 auto; padding: 0 24px 20px; }
+
+.chart-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  position: relative;
+}
+
+.chart-box::after {
+  content: 'Herdvibe.com';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font: 700 28px var(--mono);
+  color: rgba(255,255,255,0.04);
+  pointer-events: none;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+canvas { width: 100% !important; }
+
+.chart-legend {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 16px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.cl-item { display: flex; align-items: center; gap: 6px; }
+.cl-line { width: 20px; height: 3px; border-radius: 2px; }
+
+/* ====== KRW NOTE ====== */
+.krw-note { max-width: 1200px; margin: 0 auto; padding: 0 24px 20px; }
+
+.krw-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.krw-flag { font: 600 13px var(--mono); color: var(--text-muted); }
+.krw-text { flex: 1; font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+.krw-val { font: 700 20px var(--mono); color: var(--cyan); }
+
+/* ====== FOOTER ====== */
+.footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 40px;
+  text-align: center;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+/* ====== MOBILE ====== */
+@media (max-width: 768px) {
+  .header { padding: 20px 16px 14px; }
+  .header h1 { font-size: 22px; }
+
+  .controls { padding: 12px 16px 16px; gap: 8px; }
+  .ctrl-group { flex: 1; min-width: calc(50% - 4px); }
+  .ctrl-select, .ctrl-input { width: 100%; font-size: 13px; }
+
+  .results { grid-template-columns: 1fr; padding: 0 16px 16px; gap: 8px; }
+  .rc-value { font-size: 22px; }
+
+  .chart-area { padding: 0 12px 16px; }
+  .chart-box { padding: 14px; }
+  .chart-box::after { font-size: 20px; }
+
+  .krw-note { padding: 0 16px 16px; }
+  .footer { padding: 0 16px 30px; }
+  .share-bar { margin: 12px 0 4px; }
 }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="badge"><span class="dot"></span>INVESTMENT SIMULATOR</div>
   <h1>$10,000 투자 시뮬레이터</h1>
   <div class="sub">"5년 전에 이 종목에 투자했다면?" — 배당 재투자 vs 미재투자 비교</div>
   <div class="time" id="updateTime">Loading...</div>
+</div>
+
+<div class="share-bar">
+  <button class="share-btn twitter" onclick="shareTwitter()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>트위터</button>
+  <button class="share-btn kakao" onclick="shareKakao()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-5.52 0-10 3.36-10 7.5 0 2.66 1.74 5 4.36 6.33-.14.53-.9 3.4-.93 3.61 0 0-.02.17.09.23.11.07.24.03.24.03.32-.04 3.7-2.42 4.28-2.83.62.09 1.27.13 1.96.13 5.52 0 10-3.36 10-7.5S17.52 3 12 3z"/></svg>카카오톡</button>
+  <button class="share-btn telegram" onclick="shareTelegram()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>텔레그램</button>
+  <button class="share-btn instagram" onclick="shareInstagram(this)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>인스타그램</button>
+  <button class="share-btn copy" onclick="copyLink(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>링크복사</button>
 </div>
 
 <div class="controls">
@@ -121,7 +271,7 @@ canvas{width:100%!important}
     <div class="chart-legend">
       <div class="cl-item"><div class="cl-line" style="background:var(--green)"></div>배당 재투자</div>
       <div class="cl-item"><div class="cl-line" style="background:var(--blue)"></div>주가만 (배당 미재투자)</div>
-      <div class="cl-item"><div class="cl-line" style="background:var(--muted);border:1px dashed var(--muted);height:0"></div>투자 원금</div>
+      <div class="cl-item"><div class="cl-line" style="background:var(--text-muted);height:0;border-top:1px dashed var(--text-muted);width:20px"></div>투자 원금</div>
     </div>
   </div>
 </div>
@@ -130,41 +280,68 @@ canvas{width:100%!important}
 
 <div class="footer">데이터 출처: Yahoo Finance (yfinance) · 과거 성과는 미래 수익을 보장하지 않습니다</div>
 
+<div class="toast" id="toast"></div>
+
 <script>
-// Sample data for when JSON not available
+/* ====== SHARE ====== */
+const SHARE_URL = 'https://herdvibe.com/dividend-simulator';
+const SHARE_TITLE = '$10,000 투자 시뮬레이터 — Herdvibe';
+const SHARE_DESC = '배당 재투자 vs 미재투자 시뮬레이션 | Herdvibe';
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+function shareTwitter() {
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TITLE)}&url=${encodeURIComponent(SHARE_URL)}`, '_blank');
+}
+function shareKakao() {
+  if (window.Kakao && !Kakao.isInitialized()) Kakao.init('a43ed7b39fac35458f4f9df925a279b5');
+  if (window.Kakao) {
+    Kakao.Share.sendDefault({
+      objectType: 'feed',
+      content: { title: SHARE_TITLE, description: SHARE_DESC, imageUrl: 'https://herdvibe.com/og-simulator.png', link: { mobileWebUrl: SHARE_URL, webUrl: SHARE_URL } }
+    });
+  }
+}
+function shareTelegram() {
+  window.open(`https://t.me/share/url?url=${encodeURIComponent(SHARE_URL)}&text=${encodeURIComponent(SHARE_TITLE)}`, '_blank');
+}
+function shareInstagram(btn) {
+  try {
+    if (window.parent !== window) { window.parent.postMessage({ type: 'copy', text: SHARE_URL }, '*'); }
+    else { navigator.clipboard.writeText(SHARE_URL); }
+    const orig = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>복사됨!';
+    showToast('링크가 복사되었습니다 - 인스타그램에 붙여넣기 하세요');
+    setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2000);
+  } catch(e) { showToast('복사 실패'); }
+}
+function copyLink(btn) {
+  try {
+    if (window.parent !== window) { window.parent.postMessage({ type: 'copy', text: SHARE_URL }, '*'); }
+    else { navigator.clipboard.writeText(SHARE_URL); }
+    const orig = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>복사됨!';
+    showToast('링크가 복사되었습니다');
+    setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2000);
+  } catch(e) { showToast('복사 실패'); }
+}
+
+/* ====== SAMPLE DATA ====== */
 const SAMPLE_HISTORIES = {
-  "AVGO": {
-    monthlyPrices: generatePrices(60, 300, 1500, 0.015),
-    dividends: generateDivs(20, 3.0, 5.25, "2020-01")
-  },
-  "MO": {
-    monthlyPrices: generatePrices(60, 42, 57, 0.003),
-    dividends: generateDivs(20, 0.86, 1.02, "2020-01")
-  },
-  "XOM": {
-    monthlyPrices: generatePrices(60, 45, 115, 0.012),
-    dividends: generateDivs(20, 0.87, 0.95, "2020-01")
-  },
-  "ABBV": {
-    monthlyPrices: generatePrices(60, 85, 175, 0.01),
-    dividends: generateDivs(20, 1.18, 1.55, "2020-01")
-  },
-  "O": {
-    monthlyPrices: generatePrices(60, 55, 62, 0.001),
-    dividends: generateDivs(60, 0.235, 0.263, "2020-01")
-  },
-  "KO": {
-    monthlyPrices: generatePrices(60, 48, 62, 0.004),
-    dividends: generateDivs(20, 0.41, 0.485, "2020-01")
-  },
-  "VZ": {
-    monthlyPrices: generatePrices(60, 55, 43, -0.003),
-    dividends: generateDivs(20, 0.6275, 0.665, "2020-01")
-  },
-  "JPM": {
-    monthlyPrices: generatePrices(60, 100, 200, 0.01),
-    dividends: generateDivs(20, 0.90, 1.15, "2020-01")
-  },
+  "AVGO": { monthlyPrices: generatePrices(60,300,1500,0.015), dividends: generateDivs(20,3.0,5.25,"2020-01") },
+  "MO": { monthlyPrices: generatePrices(60,42,57,0.003), dividends: generateDivs(20,0.86,1.02,"2020-01") },
+  "XOM": { monthlyPrices: generatePrices(60,45,115,0.012), dividends: generateDivs(20,0.87,0.95,"2020-01") },
+  "ABBV": { monthlyPrices: generatePrices(60,85,175,0.01), dividends: generateDivs(20,1.18,1.55,"2020-01") },
+  "O": { monthlyPrices: generatePrices(60,55,62,0.001), dividends: generateDivs(60,0.235,0.263,"2020-01") },
+  "KO": { monthlyPrices: generatePrices(60,48,62,0.004), dividends: generateDivs(20,0.41,0.485,"2020-01") },
+  "VZ": { monthlyPrices: generatePrices(60,55,43,-0.003), dividends: generateDivs(20,0.6275,0.665,"2020-01") },
+  "JPM": { monthlyPrices: generatePrices(60,100,200,0.01), dividends: generateDivs(20,0.90,1.15,"2020-01") },
 };
 const SAMPLE_NAMES = {"AVGO":"Broadcom","MO":"Altria Group","XOM":"Exxon Mobil","ABBV":"AbbVie",
   "O":"Realty Income","KO":"Coca-Cola","VZ":"Verizon","JPM":"JPMorgan Chase"};
@@ -203,123 +380,114 @@ function populateTickers(tickers, names) {
 
 function simulate() {
   if (!simData) return;
-  
+
   const ticker = document.getElementById('tickerSelect').value;
   const amount = parseFloat(document.getElementById('amountInput').value) || 10000;
   const period = document.getElementById('periodSelect').value;
-  
+
   const hist = simData.histories[ticker];
   if (!hist || !hist.monthlyPrices.length) return;
-  
+
   const months = period === '1y' ? 12 : period === '3y' ? 36 : 60;
   const prices = hist.monthlyPrices.slice(-months);
   const divs = hist.dividends || [];
-  
+
   if (prices.length < 2) return;
-  
+
   const startPrice = prices[0].price;
   const shares = amount / startPrice;
-  
-  // Build dividend map (month -> total dividend per share)
+
   const divMap = {};
   divs.forEach(d => {
     const m = d.date.slice(0,7);
     divMap[m] = (divMap[m] || 0) + d.amount;
   });
-  
-  // Simulate
-  const priceOnly = []; // Just stock price movement
-  const withDivs = [];  // With dividend reinvestment
+
+  const priceOnly = [];
+  const withDivs = [];
   let reinvestShares = shares;
   let totalDivsReceived = 0;
-  
+
   prices.forEach(p => {
-    // Price-only value
     priceOnly.push({ date: p.date, value: +(shares * p.price).toFixed(2) });
-    
-    // Reinvestment: if dividend this month, buy more shares
     const divPerShare = divMap[p.date] || 0;
     if (divPerShare > 0) {
       const divIncome = reinvestShares * divPerShare;
       totalDivsReceived += divIncome;
-      const newShares = divIncome / p.price;
-      reinvestShares += newShares;
+      reinvestShares += divIncome / p.price;
     }
     withDivs.push({ date: p.date, value: +(reinvestShares * p.price).toFixed(2) });
   });
-  
+
   const finalPriceOnly = priceOnly[priceOnly.length-1].value;
   const finalWithDivs = withDivs[withDivs.length-1].value;
   const divBoost = finalWithDivs - finalPriceOnly;
-  
-  // Result cards
   const periodLabel = period==='1y'?'1년':period==='3y'?'3년':'5년';
+
   document.getElementById('resultCards').innerHTML = `
-    <div class="result-card rc-green">
+    <div class="result-card">
       <div class="rc-label">배당 재투자 시</div>
       <div class="rc-value" style="color:var(--green)">$${finalWithDivs.toLocaleString(undefined,{maximumFractionDigits:0})}</div>
       <div class="rc-sub">${((finalWithDivs/amount-1)*100).toFixed(1)}% 수익</div>
     </div>
-    <div class="result-card rc-blue">
+    <div class="result-card">
       <div class="rc-label">주가만 (배당 미재투자)</div>
       <div class="rc-value" style="color:var(--blue)">$${finalPriceOnly.toLocaleString(undefined,{maximumFractionDigits:0})}</div>
       <div class="rc-sub">${((finalPriceOnly/amount-1)*100).toFixed(1)}% 수익</div>
     </div>
-    <div class="result-card rc-gold">
+    <div class="result-card">
       <div class="rc-label">배당 재투자 효과</div>
       <div class="rc-value" style="color:var(--gold)">+$${divBoost.toLocaleString(undefined,{maximumFractionDigits:0})}</div>
       <div class="rc-sub">복리 효과 ${periodLabel}</div>
     </div>`;
-  
-  // KRW conversion (approximate)
+
   const krwRate = 1350;
   const krwInvest = amount * krwRate;
   const krwFinal = finalWithDivs * krwRate;
   document.getElementById('krwNote').innerHTML = `
     <div class="krw-card">
-      <div class="krw-icon">🇰🇷</div>
+      <div class="krw-flag">KRW</div>
       <div class="krw-text">
-        원화 환산 (1 USD ≈ ${krwRate.toLocaleString()}원 기준)<br>
+        원화 환산 (1 USD = ${krwRate.toLocaleString()}원 기준)<br>
         투자 원금 <strong>${(krwInvest/10000).toFixed(0)}만원</strong> →
       </div>
       <div class="krw-val">${(krwFinal/10000).toFixed(0)}만원</div>
     </div>`;
-  
-  // Draw chart
+
   drawChart(priceOnly, withDivs, amount);
 }
 
 function drawChart(priceOnly, withDivs, amount) {
   canvas = document.getElementById('simChart');
   ctx = canvas.getContext('2d');
-  
+
   const dpr = window.devicePixelRatio || 1;
   const rect = canvas.parentElement.getBoundingClientRect();
   const w = rect.width - 48;
   const h = Math.min(350, Math.max(250, w * 0.4));
-  
+
   canvas.width = w * dpr;
   canvas.height = h * dpr;
   canvas.style.width = w + 'px';
   canvas.style.height = h + 'px';
   ctx.scale(dpr, dpr);
-  
-  const pad = {top:20, right:20, bottom:40, left:70};
+
+  const pad = { top: 20, right: 20, bottom: 40, left: 70 };
   const plotW = w - pad.left - pad.right;
   const plotH = h - pad.top - pad.bottom;
-  
+
   const allVals = [...priceOnly.map(p=>p.value), ...withDivs.map(p=>p.value), amount];
   const yMin = Math.min(...allVals) * 0.95;
   const yMax = Math.max(...allVals) * 1.05;
   const n = priceOnly.length;
-  
+
   const xScale = i => pad.left + (i/(n-1)) * plotW;
   const yScale = v => pad.top + ((yMax-v)/(yMax-yMin)) * plotH;
-  
+
   ctx.clearRect(0, 0, w, h);
-  
+
   // Grid
-  ctx.strokeStyle = '#111';
+  ctx.strokeStyle = '#151515';
   ctx.lineWidth = 1;
   const ySteps = 5;
   for (let i = 0; i <= ySteps; i++) {
@@ -327,56 +495,56 @@ function drawChart(priceOnly, withDivs, amount) {
     const y = yScale(v);
     ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(pad.left+plotW, y); ctx.stroke();
     ctx.font = '10px JetBrains Mono';
-    ctx.fillStyle = '#444';
+    ctx.fillStyle = '#52525b';
     ctx.textAlign = 'right';
     ctx.fillText('$'+Math.round(v).toLocaleString(), pad.left-8, y+3);
   }
-  
-  // X labels
+
   ctx.textAlign = 'center';
+  ctx.fillStyle = '#52525b';
   const xStep = Math.max(1, Math.floor(n/6));
   for (let i = 0; i < n; i += xStep) {
     ctx.fillText(priceOnly[i].date, xScale(i), h - 8);
   }
-  
-  // Investment line (dashed)
+
+  // Investment line
   const invY = yScale(amount);
-  ctx.strokeStyle = '#333';
+  ctx.strokeStyle = '#2a2a2a';
   ctx.lineWidth = 1;
   ctx.setLineDash([4,4]);
   ctx.beginPath(); ctx.moveTo(pad.left, invY); ctx.lineTo(pad.left+plotW, invY); ctx.stroke();
   ctx.setLineDash([]);
-  ctx.fillStyle = '#444';
+  ctx.fillStyle = '#52525b';
   ctx.textAlign = 'left';
   ctx.fillText('원금 $'+amount.toLocaleString(), pad.left+4, invY-6);
-  
-  // Fill area between lines
+
+  // Fill area
   ctx.beginPath();
   for (let i = 0; i < n; i++) { ctx[i===0?'moveTo':'lineTo'](xScale(i), yScale(withDivs[i].value)); }
   for (let i = n-1; i >= 0; i--) { ctx.lineTo(xScale(i), yScale(priceOnly[i].value)); }
   ctx.closePath();
-  ctx.fillStyle = 'rgba(0,255,136,0.06)';
+  ctx.fillStyle = 'rgba(34,197,94,0.06)';
   ctx.fill();
-  
+
   // Price-only line
   ctx.beginPath();
-  ctx.strokeStyle = '#4488ff';
+  ctx.strokeStyle = '#4a90ff';
   ctx.lineWidth = 2;
   for (let i = 0; i < n; i++) { ctx[i===0?'moveTo':'lineTo'](xScale(i), yScale(priceOnly[i].value)); }
   ctx.stroke();
-  
+
   // With dividends line
   ctx.beginPath();
-  ctx.strokeStyle = '#00ff88';
+  ctx.strokeStyle = '#22c55e';
   ctx.lineWidth = 2.5;
   for (let i = 0; i < n; i++) { ctx[i===0?'moveTo':'lineTo'](xScale(i), yScale(withDivs[i].value)); }
   ctx.stroke();
-  
+
   // End dots
   const lastX = xScale(n-1);
   [
-    {y: yScale(withDivs[n-1].value), color: '#00ff88', val: withDivs[n-1].value},
-    {y: yScale(priceOnly[n-1].value), color: '#4488ff', val: priceOnly[n-1].value},
+    { y: yScale(withDivs[n-1].value), color: '#22c55e', val: withDivs[n-1].value },
+    { y: yScale(priceOnly[n-1].value), color: '#4a90ff', val: priceOnly[n-1].value },
   ].forEach(dot => {
     ctx.beginPath(); ctx.arc(lastX, dot.y, 4, 0, Math.PI*2);
     ctx.fillStyle = dot.color; ctx.fill();
@@ -395,7 +563,7 @@ async function load() {
     document.getElementById('updateTime').textContent = `마지막 업데이트: ${simData.updated}`;
     populateTickers(simData.tickers, simData.names);
   } catch(e) {
-    document.getElementById('updateTime').textContent = '⚠ 샘플 데이터';
+    document.getElementById('updateTime').textContent = '샘플 데이터';
     simData = { histories: SAMPLE_HISTORIES, tickers: Object.keys(SAMPLE_HISTORIES), names: SAMPLE_NAMES };
     populateTickers(simData.tickers, simData.names);
   }
