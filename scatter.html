@@ -4,146 +4,284 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>배당+주가 매트릭스 | Dividend Matrix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"></script>
 <style>
 :root {
-  --bg: #000; --bg-card: #0a0a0a; --border: #1a1a1a;
-  --text: #e8e8e8; --text-dim: #888; --text-muted: #555;
-  --green: #00ff88; --red: #ff4466; --gold: #ffd700; --blue: #4488ff; --cyan: #00ddcc;
+  --bg: #000000;
+  --surface: #0a0a0a;
+  --surface2: #111111;
+  --border: #1a1a1a;
+  --border-hover: #2a2a2a;
+  --text: #e4e4e7;
+  --text-dim: #71717a;
+  --text-muted: #52525b;
+  --green: #22c55e;
+  --green-dim: rgba(34,197,94,0.12);
+  --red: #ef4444;
+  --red-dim: rgba(239,68,68,0.12);
+  --cyan: #22d3ee;
+  --blue: #4a90ff;
+  --gold: #ffd644;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Noto Sans KR', -apple-system, sans-serif;
+  --radius: 12px;
+  --radius-sm: 8px;
 }
+
 * { margin:0; padding:0; box-sizing:border-box; }
-body { background:var(--bg); color:var(--text); font-family:'Noto Sans KR',sans-serif; min-height:100vh; }
+html { scrollbar-width: none; }
+html::-webkit-scrollbar { display: none; }
 
-.header { padding:40px 24px 20px; max-width:1200px; margin:0 auto; position:relative; }
-.header::before { content:''; position:absolute; top:0;left:0;right:0; height:180px;
-  background:radial-gradient(ellipse at 20% 0%,rgba(0,255,136,0.06) 0%,transparent 60%),
-             radial-gradient(ellipse at 80% 0%,rgba(255,68,102,0.04) 0%,transparent 60%); pointer-events:none; }
-.badge { display:inline-flex; align-items:center; gap:6px; padding:4px 12px;
-  background:rgba(0,255,136,0.08); border:1px solid rgba(0,255,136,0.2); border-radius:20px;
-  font:600 11px 'JetBrains Mono',monospace; color:var(--green); letter-spacing:0.5px;
-  text-transform:uppercase; margin-bottom:14px; }
-.badge .dot { width:6px;height:6px; background:var(--green); border-radius:50%; animation:pulse 2s ease-in-out infinite; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-.header h1 { font-size:30px; font-weight:900; letter-spacing:-1px; margin-bottom:6px;
-  background:linear-gradient(135deg,#fff,#aaa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-.header .sub { font-size:13px; color:var(--text-dim); }
-.header .time { font:11px 'JetBrains Mono',monospace; color:var(--text-muted); margin-top:6px; }
-
-/* Legend */
-.legend { max-width:1200px; margin:0 auto; padding:0 24px 16px; display:flex; flex-wrap:wrap; gap:16px; align-items:center; }
-.legend-item { display:flex; align-items:center; gap:6px; font-size:12px; color:var(--text-dim); }
-.legend-dot { width:10px; height:10px; border-radius:50%; }
-.legend-zone { display:flex; gap:12px; margin-left:auto; }
-.zone-tag { padding:3px 10px; border-radius:12px; font:600 11px 'JetBrains Mono',monospace; }
-.zone-gold { background:rgba(255,215,0,0.1); border:1px solid rgba(255,215,0,0.3); color:var(--gold); }
-.zone-danger { background:rgba(255,68,102,0.1); border:1px solid rgba(255,68,102,0.3); color:var(--red); }
-
-/* Chart container */
-.chart-area { max-width:1200px; margin:0 auto; padding:0 24px 20px; }
-.chart-box { background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:24px; position:relative; overflow:hidden; }
-.chart-box::before { content:''; position:absolute; top:0;left:0;right:0; height:1px;
-  background:linear-gradient(90deg,transparent,rgba(0,255,136,0.3),transparent); }
-
-canvas { width:100% !important; cursor:crosshair; }
-
-/* Quadrant corner overlays */
-.quad-overlay {
-  position:absolute;
-  pointer-events:none;
-  z-index:5;
-  padding:8px 12px;
-  border-radius:8px;
-  background:rgba(0,0,0,0.65);
-  backdrop-filter:blur(4px);
-  max-width:160px;
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
-.quad-overlay .qo-icon { font-size:16px; margin-bottom:2px; }
-.quad-overlay .qo-title { font:700 12px 'Noto Sans KR',sans-serif; margin-bottom:2px; }
-.quad-overlay .qo-desc { font:11px 'Noto Sans KR',sans-serif; color:var(--text-muted); line-height:1.4; }
 
-.qo-top-left { top:32px; left:32px; }
-.qo-top-right { top:32px; right:32px; text-align:right; }
-.qo-bottom-left { bottom:68px; left:32px; }
-.qo-bottom-right { bottom:68px; right:32px; text-align:right; }
+/* ====== HEADER ====== */
+.header {
+  padding: 36px 20px 24px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
 
-/* Bubble note */
+.header h1 {
+  font-size: clamp(22px, 5vw, 36px);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.header .sub { font-size: 13px; color: var(--text-dim); }
+.header .time { font-family: var(--mono); font-size: 11px; color: var(--text-muted); margin-top: 8px; }
+
+/* ====== SHARE ====== */
+.share-bar { display: flex; gap: 6px; justify-content: center; margin: 16px 0 4px; flex-wrap: wrap; }
+.share-btn { display: flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border-hover); background: var(--surface); color: #a1a1aa; font-size: 11px; cursor: pointer; font-family: var(--sans); transition: all 0.2s; }
+.share-btn:hover { border-color: #444; color: var(--text); }
+.share-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+.share-btn.twitter:hover { border-color: #1d9bf0; color: #1d9bf0; }
+.share-btn.kakao:hover { border-color: #fee500; color: #fee500; }
+.share-btn.telegram:hover { border-color: #26a5e4; color: #26a5e4; }
+.share-btn.instagram:hover { border-color: #e1306c; color: #e1306c; }
+.share-btn.instagram.copied { border-color: var(--green); color: var(--green); }
+.share-btn.copy:hover { border-color: var(--green); color: var(--green); }
+.share-btn.copied { border-color: var(--green); color: var(--green); }
+
+/* ====== TOAST ====== */
+.toast { position: fixed; bottom: 20px; right: 20px; background: var(--green); color: #000; padding: 10px 16px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; z-index: 9999; opacity: 0; transform: translateY(10px); transition: all 0.3s ease; pointer-events: none; }
+.toast.show { opacity: 1; transform: translateY(0); }
+
+/* ====== LEGEND ====== */
+.legend {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: center;
+}
+
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-dim); }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* ====== BUBBLE NOTE ====== */
 .bubble-note {
-  max-width:1200px; margin:0 auto; padding:0 24px 10px;
-  font:12px 'JetBrains Mono',monospace; color:var(--text-muted);
-  display:flex; align-items:center; gap:12px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 12px;
+  font: 11px var(--mono);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
 }
-.bubble-note-dot {
-  display:flex; align-items:center; gap:6px;
+
+.bubble-note-dot { display: flex; align-items: center; gap: 5px; }
+.bn-small { width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid var(--text-muted); }
+.bn-large { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--text-muted); }
+
+/* ====== CHART ====== */
+.chart-area { max-width: 1200px; margin: 0 auto; padding: 0 24px 20px; }
+
+.chart-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  position: relative;
 }
-.bn-small { width:8px; height:8px; border-radius:50%; border:1.5px solid var(--text-muted); }
-.bn-large { width:18px; height:18px; border-radius:50%; border:1.5px solid var(--text-muted); }
 
-/* Tooltip */
-.tooltip { position:absolute; display:none; background:rgba(10,10,10,0.95); border:1px solid var(--border);
-  border-radius:10px; padding:12px 16px; pointer-events:none; z-index:100; min-width:200px;
-  backdrop-filter:blur(10px); font-size:13px; }
-.tooltip .tt-ticker { font:700 16px 'JetBrains Mono',monospace; color:var(--text); }
-.tooltip .tt-name { font-size:11px; color:var(--text-muted); margin-bottom:8px; }
-.tooltip .tt-row { display:flex; justify-content:space-between; gap:16px; margin-top:4px; }
-.tooltip .tt-label { color:var(--text-muted); font-size:11px; }
-.tooltip .tt-val { font:600 13px 'JetBrains Mono',monospace; }
+.chart-box::after {
+  content: 'Herdvibe.com';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font: 700 28px var(--mono);
+  color: rgba(255,255,255,0.04);
+  pointer-events: none;
+  z-index: 2;
+  white-space: nowrap;
+}
 
-/* Quadrant stats */
-.quad-stats { max-width:1200px; margin:0 auto; padding:0 24px 20px; display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
-.quad-card { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:14px; text-align:center; }
-.quad-icon { font-size:20px; margin-bottom:6px; }
-.quad-label { font:600 10px 'JetBrains Mono',monospace; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; }
-.quad-value { font:700 18px 'JetBrains Mono',monospace; }
-.quad-desc { font-size:11px; color:var(--text-muted); margin-top:4px; }
+canvas { width: 100% !important; cursor: crosshair; }
 
-/* Top stocks in golden zone */
-.golden-list { max-width:1200px; margin:0 auto; padding:0 24px 40px; }
-.golden-title { font:700 16px 'Noto Sans KR',sans-serif; color:var(--gold); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
-.golden-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:10px; }
-.golden-card { background:var(--bg-card); border:1px solid rgba(255,215,0,0.15); border-radius:12px; padding:14px;
-  transition:border-color 0.2s; }
-.golden-card:hover { border-color:rgba(255,215,0,0.4); }
-.gc-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
-.gc-ticker { font:700 15px 'JetBrains Mono',monospace; }
-.gc-sector { font-size:10px; color:var(--text-muted); padding:2px 8px; border:1px solid var(--border); border-radius:10px; }
-.gc-metrics { display:flex; gap:12px; }
-.gc-metric { }
-.gc-metric-label { font:10px 'JetBrains Mono',monospace; color:var(--text-muted); }
-.gc-metric-val { font:600 14px 'JetBrains Mono',monospace; }
+/* ====== QUADRANT OVERLAYS ====== */
+.quad-overlay {
+  position: absolute;
+  pointer-events: none;
+  z-index: 5;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  max-width: 140px;
+}
 
-.footer { max-width:1200px; margin:0 auto; padding:0 24px 40px; text-align:center;
-  font:11px 'JetBrains Mono',monospace; color:var(--text-muted); }
+.quad-overlay .qo-title { font: 700 11px var(--sans); margin-bottom: 2px; }
+.quad-overlay .qo-desc { font: 10px var(--sans); color: var(--text-muted); line-height: 1.4; }
 
-@media(max-width:768px) {
-  .header { padding:20px 16px 14px; }
-  .header h1 { font-size:22px; }
-  .legend { padding:0 16px 12px; gap:8px; }
-  .legend-zone { margin-left:0; width:100%; justify-content:flex-start; }
-  .chart-area { padding:0 12px 16px; }
-  .chart-box { padding:12px; border-radius:12px; }
-  .quad-overlay { padding:5px 8px; max-width:120px; }
-  .quad-overlay .qo-icon { font-size:13px; }
-  .quad-overlay .qo-title { font-size:10px; }
-  .quad-overlay .qo-desc { font-size:9px; }
-  .qo-top-left { top:16px; left:16px; }
-  .qo-top-right { top:16px; right:16px; }
-  .qo-bottom-left { bottom:50px; left:16px; }
-  .qo-bottom-right { bottom:50px; right:16px; }
-  .quad-stats { grid-template-columns:repeat(2,1fr); padding:0 12px 16px; }
-  .quad-value { font-size:15px; }
-  .golden-list { padding:0 12px 30px; }
-  .golden-grid { grid-template-columns:1fr; }
-  .bubble-note { padding:0 16px 8px; font-size:10px; }
+.qo-top-left { top: 32px; left: 32px; }
+.qo-top-right { top: 32px; right: 32px; text-align: right; }
+.qo-bottom-left { bottom: 68px; left: 32px; }
+.qo-bottom-right { bottom: 68px; right: 32px; text-align: right; }
+
+/* ====== TOOLTIP ====== */
+.tooltip {
+  position: absolute;
+  display: none;
+  background: rgba(10,10,10,0.95);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  pointer-events: none;
+  z-index: 100;
+  min-width: 200px;
+  backdrop-filter: blur(10px);
+  font-size: 13px;
+}
+
+.tooltip .tt-ticker { font: 700 16px var(--mono); color: var(--cyan); }
+.tooltip .tt-name { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; }
+.tooltip .tt-row { display: flex; justify-content: space-between; gap: 16px; margin-top: 4px; }
+.tooltip .tt-label { color: var(--text-muted); font-size: 11px; }
+.tooltip .tt-val { font: 600 13px var(--mono); }
+
+/* ====== QUAD STATS ====== */
+.quad-stats {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.quad-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  text-align: center;
+}
+
+.quad-label {
+  font: 600 10px var(--mono);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.quad-value { font: 700 20px var(--mono); }
+.quad-desc { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+/* ====== GOLDEN LIST ====== */
+.golden-list { max-width: 1200px; margin: 0 auto; padding: 0 24px 40px; }
+
+.golden-title {
+  font: 700 15px var(--sans);
+  color: var(--gold);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.golden-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+
+.golden-card {
+  background: var(--surface);
+  border: 1px solid rgba(255,214,68,0.12);
+  border-radius: var(--radius);
+  padding: 14px;
+  transition: border-color 0.2s;
+}
+
+.golden-card:hover { border-color: rgba(255,214,68,0.35); }
+
+.gc-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.gc-ticker { font: 700 15px var(--mono); color: var(--cyan); }
+.gc-sector { font-size: 10px; color: var(--text-muted); padding: 2px 8px; border: 1px solid var(--border); border-radius: 4px; }
+.gc-metrics { display: flex; gap: 12px; }
+.gc-metric-label { font: 10px var(--mono); color: var(--text-muted); }
+.gc-metric-val { font: 600 14px var(--mono); }
+
+/* ====== FOOTER ====== */
+.footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 40px;
+  text-align: center;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+/* ====== MOBILE ====== */
+@media (max-width: 768px) {
+  .header { padding: 20px 16px 14px; }
+  .header h1 { font-size: 22px; }
+  .legend { padding: 12px 16px 10px; gap: 8px; }
+  .bubble-note { padding: 0 16px 10px; font-size: 10px; flex-wrap: wrap; justify-content: center; }
+  .chart-area { padding: 0 12px 16px; }
+  .chart-box { padding: 12px; }
+  .chart-box::after { font-size: 20px; }
+  .quad-overlay { padding: 4px 7px; max-width: 110px; }
+  .quad-overlay .qo-title { font-size: 10px; }
+  .quad-overlay .qo-desc { font-size: 9px; }
+  .qo-top-left { top: 16px; left: 16px; }
+  .qo-top-right { top: 16px; right: 16px; }
+  .qo-bottom-left { bottom: 50px; left: 16px; }
+  .qo-bottom-right { bottom: 50px; right: 16px; }
+  .quad-stats { grid-template-columns: repeat(2, 1fr); padding: 0 12px 16px; }
+  .quad-value { font-size: 16px; }
+  .golden-list { padding: 0 12px 30px; }
+  .golden-grid { grid-template-columns: 1fr; }
+  .share-bar { margin: 12px 0 4px; }
 }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="badge"><span class="dot"></span>DIVIDEND MATRIX</div>
   <h1>배당+주가 매트릭스</h1>
   <div class="sub">배당수익률 vs 52주 주가수익률 — 오른쪽 위가 최고의 조합</div>
   <div class="time" id="updateTime">Loading...</div>
+</div>
+
+<div class="share-bar">
+  <button class="share-btn twitter" onclick="shareTwitter()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>트위터</button>
+  <button class="share-btn kakao" onclick="shareKakao()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-5.52 0-10 3.36-10 7.5 0 2.66 1.74 5 4.36 6.33-.14.53-.9 3.4-.93 3.61 0 0-.02.17.09.23.11.07.24.03.24.03.32-.04 3.7-2.42 4.28-2.83.62.09 1.27.13 1.96.13 5.52 0 10-3.36 10-7.5S17.52 3 12 3z"/></svg>카카오톡</button>
+  <button class="share-btn telegram" onclick="shareTelegram()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>텔레그램</button>
+  <button class="share-btn instagram" onclick="shareInstagram(this)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>인스타그램</button>
+  <button class="share-btn copy" onclick="copyLink(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>링크복사</button>
 </div>
 
 <div class="legend" id="legendBar"></div>
@@ -157,24 +295,19 @@ canvas { width:100% !important; cursor:crosshair; }
 
 <div class="chart-area">
   <div class="chart-box">
-    <!-- Quadrant corner overlays -->
     <div class="quad-overlay qo-top-left">
-      <div class="qo-icon">🚀</div>
       <div class="qo-title" style="color:var(--cyan)">성장주</div>
       <div class="qo-desc">저배당이지만 주가상승</div>
     </div>
     <div class="quad-overlay qo-top-right">
-      <div class="qo-icon">⭐</div>
       <div class="qo-title" style="color:var(--gold)">황금구간</div>
       <div class="qo-desc">고배당 + 주가상승 (이상적)</div>
     </div>
     <div class="quad-overlay qo-bottom-left">
-      <div class="qo-icon">💀</div>
       <div class="qo-title" style="color:var(--text-muted)">회피</div>
       <div class="qo-desc">저배당 + 주가하락</div>
     </div>
     <div class="quad-overlay qo-bottom-right">
-      <div class="qo-icon">⚠️</div>
       <div class="qo-title" style="color:var(--red)">배당 함정?</div>
       <div class="qo-desc">고배당이지만 주가하락</div>
     </div>
@@ -187,17 +320,69 @@ canvas { width:100% !important; cursor:crosshair; }
 <div class="quad-stats" id="quadStats"></div>
 
 <div class="golden-list">
-  <div class="golden-title">⭐ 황금 구간 (Golden Zone) — 고배당 + 주가 상승</div>
+  <div class="golden-title">황금 구간 (Golden Zone) — 고배당 + 주가 상승</div>
   <div class="golden-grid" id="goldenGrid"></div>
 </div>
 
 <div class="footer">데이터 출처: Yahoo Finance (yfinance) · 투자 판단은 본인의 책임입니다</div>
 
+<div class="toast" id="toast"></div>
+
 <script>
+/* ====== SHARE ====== */
+const SHARE_URL = 'https://herdvibe.com/dividend-matrix';
+const SHARE_TITLE = '배당+주가 매트릭스 — Herdvibe';
+const SHARE_DESC = 'S&P 500 배당수익률 vs 52주 주가수익률 버블차트 | Herdvibe';
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+function shareTwitter() {
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TITLE)}&url=${encodeURIComponent(SHARE_URL)}`, '_blank');
+}
+function shareKakao() {
+  if (window.Kakao && !Kakao.isInitialized()) Kakao.init('a43ed7b39fac35458f4f9df925a279b5');
+  if (window.Kakao) {
+    Kakao.Share.sendDefault({
+      objectType: 'feed',
+      content: { title: SHARE_TITLE, description: SHARE_DESC, imageUrl: 'https://herdvibe.com/og-dividend-matrix.png', link: { mobileWebUrl: SHARE_URL, webUrl: SHARE_URL } }
+    });
+  }
+}
+function shareTelegram() {
+  window.open(`https://t.me/share/url?url=${encodeURIComponent(SHARE_URL)}&text=${encodeURIComponent(SHARE_TITLE)}`, '_blank');
+}
+function shareInstagram(btn) {
+  try {
+    if (window.parent !== window) { window.parent.postMessage({ type: 'copy', text: SHARE_URL }, '*'); }
+    else { navigator.clipboard.writeText(SHARE_URL); }
+    const orig = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>복사됨!';
+    showToast('링크가 복사되었습니다 - 인스타그램에 붙여넣기 하세요');
+    setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2000);
+  } catch(e) { showToast('복사 실패'); }
+}
+function copyLink(btn) {
+  try {
+    if (window.parent !== window) { window.parent.postMessage({ type: 'copy', text: SHARE_URL }, '*'); }
+    else { navigator.clipboard.writeText(SHARE_URL); }
+    const orig = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>복사됨!';
+    showToast('링크가 복사되었습니다');
+    setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2000);
+  } catch(e) { showToast('복사 실패'); }
+}
+
+/* ====== DATA ====== */
 const SECTOR_COLORS = {
-  'Energy':'#ff6b35','Utilities':'#ffd700','Real Estate':'#00ddcc',
-  'Financial Services':'#4488ff','Consumer Defensive':'#00ff88','Healthcare':'#ff66aa',
-  'Technology':'#aa66ff','Industrials':'#ff9944','Communication Services':'#66bbff','Basic Materials':'#88cc44'
+  'Energy':'#ff6b35','Utilities':'#ffd644','Real Estate':'#22d3ee',
+  'Financial Services':'#4a90ff','Consumer Defensive':'#22c55e','Healthcare':'#ff66aa',
+  'Technology':'#a855f7','Industrials':'#ff9944','Communication Services':'#66bbff','Basic Materials':'#88cc44'
 };
 const SECTOR_KR = {
   'Energy':'에너지','Utilities':'유틸리티','Real Estate':'리츠',
@@ -205,7 +390,6 @@ const SECTOR_KR = {
   'Technology':'기술','Industrials':'산업재','Communication Services':'통신','Basic Materials':'소재'
 };
 
-// Sample data
 const SAMPLE = [
   {ticker:"AVGO",name:"Broadcom Inc",dividendYield:1.8,yearReturn:98.5,marketCap:800e9,sector:"Technology",payoutRatio:45},
   {ticker:"OKE",name:"ONEOK Inc",dividendYield:5.6,yearReturn:18.9,marketCap:38.9e9,sector:"Energy",payoutRatio:86},
@@ -249,12 +433,12 @@ function init(data) {
   canvas = document.getElementById('scatterChart');
   ctx = canvas.getContext('2d');
   tooltip = document.getElementById('tooltip');
-  
+
   buildLegend();
   buildQuadStats();
   buildGoldenList();
   drawChart();
-  
+
   window.addEventListener('resize', drawChart);
   canvas.addEventListener('mousemove', handleHover);
   canvas.addEventListener('mouseleave', () => tooltip.style.display = 'none');
@@ -263,43 +447,42 @@ function init(data) {
 }
 
 function buildLegend() {
-  const sectors = [...new Set(allData.map(s=>s.sector))];
-  const bar = document.getElementById('legendBar');
-  bar.innerHTML = sectors.map(s => 
+  const sectors = [...new Set(allData.map(s => s.sector))];
+  document.getElementById('legendBar').innerHTML = sectors.map(s =>
     `<div class="legend-item"><div class="legend-dot" style="background:${SECTOR_COLORS[s]||'#888'}"></div>${SECTOR_KR[s]||s}</div>`
   ).join('');
 }
 
 function buildQuadStats() {
   const golden = allData.filter(s => s.dividendYield >= 3 && s.yearReturn >= 5);
-  const highYieldDown = allData.filter(s => s.dividendYield >= 3 && s.yearReturn < 0);
-  const growthLowDiv = allData.filter(s => s.dividendYield < 3 && s.yearReturn >= 10);
-  const struggling = allData.filter(s => s.dividendYield < 3 && s.yearReturn < 0);
-  
+  const trap = allData.filter(s => s.dividendYield >= 3 && s.yearReturn < 0);
+  const growth = allData.filter(s => s.dividendYield < 3 && s.yearReturn >= 10);
+  const avoid = allData.filter(s => s.dividendYield < 3 && s.yearReturn < 0);
+
   document.getElementById('quadStats').innerHTML = `
-    <div class="quad-card"><div class="quad-icon">⭐</div>
+    <div class="quad-card">
       <div class="quad-label">황금 구간</div>
       <div class="quad-value" style="color:var(--gold)">${golden.length}개</div>
       <div class="quad-desc">고배당 + 주가상승</div></div>
-    <div class="quad-card"><div class="quad-icon">⚠️</div>
+    <div class="quad-card">
       <div class="quad-label">배당 함정?</div>
-      <div class="quad-value" style="color:var(--red)">${highYieldDown.length}개</div>
+      <div class="quad-value" style="color:var(--red)">${trap.length}개</div>
       <div class="quad-desc">고배당 + 주가하락</div></div>
-    <div class="quad-card"><div class="quad-icon">🚀</div>
+    <div class="quad-card">
       <div class="quad-label">성장주</div>
-      <div class="quad-value" style="color:var(--cyan)">${growthLowDiv.length}개</div>
+      <div class="quad-value" style="color:var(--cyan)">${growth.length}개</div>
       <div class="quad-desc">저배당 + 주가상승</div></div>
-    <div class="quad-card"><div class="quad-icon">💀</div>
+    <div class="quad-card">
       <div class="quad-label">위험 구간</div>
-      <div class="quad-value" style="color:var(--text-muted)">${struggling.length}개</div>
+      <div class="quad-value" style="color:var(--text-muted)">${avoid.length}개</div>
       <div class="quad-desc">저배당 + 주가하락</div></div>`;
 }
 
 function buildGoldenList() {
   const golden = allData
     .filter(s => s.dividendYield >= 3 && s.yearReturn >= 5)
-    .sort((a,b) => (b.dividendYield + b.yearReturn) - (a.dividendYield + a.yearReturn));
-  
+    .sort((a, b) => (b.dividendYield + b.yearReturn) - (a.dividendYield + a.yearReturn));
+
   document.getElementById('goldenGrid').innerHTML = golden.map(s => `
     <div class="golden-card">
       <div class="gc-top">
@@ -317,7 +500,7 @@ function buildGoldenList() {
         </div>
         <div class="gc-metric">
           <div class="gc-metric-label">배당성향</div>
-          <div class="gc-metric-val">${s.payoutRatio ? s.payoutRatio.toFixed(0)+'%' : '—'}</div>
+          <div class="gc-metric-val">${s.payoutRatio ? s.payoutRatio.toFixed(0)+'%' : '-'}</div>
         </div>
       </div>
     </div>`).join('');
@@ -328,74 +511,67 @@ function drawChart() {
   const rect = canvas.parentElement.getBoundingClientRect();
   const w = rect.width - 48;
   const h = Math.min(500, Math.max(350, w * 0.55));
-  
+
   canvas.width = w * dpr;
   canvas.height = h * dpr;
   canvas.style.width = w + 'px';
   canvas.style.height = h + 'px';
   ctx.scale(dpr, dpr);
-  
+
   const plotW = w - PADDING.left - PADDING.right;
   const plotH = h - PADDING.top - PADDING.bottom;
-  
-  // Data ranges
-  const yields = allData.map(s=>s.dividendYield);
-  const returns = allData.map(s=>s.yearReturn);
-  const mcaps = allData.map(s=>s.marketCap);
-  
+
+  const yields = allData.map(s => s.dividendYield);
+  const returns = allData.map(s => s.yearReturn);
+  const mcaps = allData.map(s => s.marketCap);
+
   const xMin = 0, xMax = Math.ceil(Math.max(...yields) + 1);
   const yMin = Math.floor(Math.min(...returns) - 5);
   const yMax = Math.ceil(Math.max(...returns) + 5);
   const mcapMax = Math.max(...mcaps);
-  
+
   chartBounds = { xMin, xMax, yMin, yMax, plotW, plotH, w, h };
-  
+
   const xScale = v => PADDING.left + ((v - xMin) / (xMax - xMin)) * plotW;
   const yScale = v => PADDING.top + ((yMax - v) / (yMax - yMin)) * plotH;
-  
-  // Clear
+
   ctx.clearRect(0, 0, w, h);
-  
+
   // Quadrant backgrounds
   const zeroY = yScale(0);
   const threeX = xScale(3);
-  
-  // Golden zone (top-right)
-  ctx.fillStyle = 'rgba(255,215,0,0.03)';
+
+  ctx.fillStyle = 'rgba(255,214,68,0.03)';
   ctx.fillRect(threeX, PADDING.top, PADDING.left + plotW - threeX, zeroY - PADDING.top);
-  
-  // Danger zone (bottom-left)
-  ctx.fillStyle = 'rgba(255,68,102,0.03)';
+
+  ctx.fillStyle = 'rgba(239,68,68,0.02)';
   ctx.fillRect(PADDING.left, zeroY, threeX - PADDING.left, PADDING.top + plotH - zeroY);
-  
-  // Grid lines
+
+  // Grid
   ctx.strokeStyle = '#151515';
   ctx.lineWidth = 1;
-  
-  // X grid
+
   for (let x = 0; x <= xMax; x += 1) {
     const px = xScale(x);
     ctx.beginPath(); ctx.moveTo(px, PADDING.top); ctx.lineTo(px, PADDING.top + plotH); ctx.stroke();
   }
-  // Y grid
   const yStep = yMax - yMin > 60 ? 20 : yMax - yMin > 30 ? 10 : 5;
   for (let y = Math.ceil(yMin/yStep)*yStep; y <= yMax; y += yStep) {
     const py = yScale(y);
     ctx.beginPath(); ctx.moveTo(PADDING.left, py); ctx.lineTo(PADDING.left + plotW, py); ctx.stroke();
   }
-  
-  // Zero line
-  ctx.strokeStyle = 'rgba(255,255,255,0.12)';
-  ctx.lineWidth = 1.5;
+
+  // Zero & 3% lines
+  ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+  ctx.lineWidth = 1;
   ctx.setLineDash([4,4]);
   ctx.beginPath(); ctx.moveTo(PADDING.left, zeroY); ctx.lineTo(PADDING.left+plotW, zeroY); ctx.stroke();
-  // 3% yield line
   ctx.beginPath(); ctx.moveTo(threeX, PADDING.top); ctx.lineTo(threeX, PADDING.top+plotH); ctx.stroke();
   ctx.setLineDash([]);
-  
+
   // Axis labels
   ctx.font = '10px JetBrains Mono';
-  ctx.fillStyle = '#555';
+  ctx.fillStyle = '#52525b';
   ctx.textAlign = 'center';
   for (let x = 0; x <= xMax; x += 1) {
     ctx.fillText(x + '%', xScale(x), PADDING.top + plotH + 20);
@@ -404,25 +580,25 @@ function drawChart() {
   for (let y = Math.ceil(yMin/yStep)*yStep; y <= yMax; y += yStep) {
     ctx.fillText((y>0?'+':'') + y + '%', PADDING.left - 10, yScale(y) + 4);
   }
-  
+
   // Axis titles
   ctx.save();
   ctx.font = '12px Noto Sans KR';
-  ctx.fillStyle = '#666';
+  ctx.fillStyle = '#52525b';
   ctx.textAlign = 'center';
   ctx.fillText('배당수익률 →', PADDING.left + plotW/2, h - 8);
   ctx.translate(14, PADDING.top + plotH/2);
   ctx.rotate(-Math.PI/2);
   ctx.fillText('52주 주가수익률 →', 0, 0);
   ctx.restore();
-  
-  // Draw bubbles (quadrant labels are now HTML overlays)
+
+  // Bubbles
   allData.forEach(s => {
     const x = xScale(s.dividendYield);
     const y = yScale(s.yearReturn);
     const r = Math.max(5, Math.min(25, Math.sqrt(s.marketCap / mcapMax) * 30));
     const color = SECTOR_COLORS[s.sector] || '#888';
-    
+
     ctx.beginPath();
     ctx.arc(x, y, r, 0, Math.PI*2);
     ctx.fillStyle = color + '33';
@@ -430,17 +606,15 @@ function drawChart() {
     ctx.strokeStyle = color + 'aa';
     ctx.lineWidth = 1.5;
     ctx.stroke();
-    
-    // Ticker label
+
     if (r >= 7) {
-      ctx.font = `${Math.max(8,Math.min(11,r*0.9))}px JetBrains Mono`;
+      ctx.font = `${Math.max(8, Math.min(11, r*0.9))}px JetBrains Mono`;
       ctx.fillStyle = color;
       ctx.textAlign = 'center';
       ctx.fillText(s.ticker, x, y + 3);
     }
   });
-  
-  // Store positions for hover
+
   allData._positions = allData.map(s => ({
     x: xScale(s.dividendYield),
     y: yScale(s.yearReturn),
@@ -450,46 +624,41 @@ function drawChart() {
 
 function handleHover(e) {
   const rect = canvas.getBoundingClientRect();
-  const mx = e.clientX - rect.left;
-  const my = e.clientY - rect.top;
-  findPoint(mx, my, e.clientX, e.clientY);
+  findPoint(e.clientX - rect.left, e.clientY - rect.top, e.clientX, e.clientY);
 }
 
 function handleTouch(e) {
   const touch = e.touches[0];
   const rect = canvas.getBoundingClientRect();
-  const mx = touch.clientX - rect.left;
-  const my = touch.clientY - rect.top;
-  findPoint(mx, my, touch.clientX, touch.clientY);
+  findPoint(touch.clientX - rect.left, touch.clientY - rect.top, touch.clientX, touch.clientY);
 }
 
 function findPoint(mx, my, pageX, pageY) {
   if (!allData._positions) return;
   let found = null;
   allData._positions.forEach((p, i) => {
-    const dist = Math.sqrt((mx-p.x)**2 + (my-p.y)**2);
-    if (dist < p.r + 5) found = i;
+    if (Math.sqrt((mx-p.x)**2 + (my-p.y)**2) < p.r + 5) found = i;
   });
-  
+
   if (found !== null) {
     const s = allData[found];
     const mc = s.marketCap >= 1e12 ? (s.marketCap/1e12).toFixed(1)+'T' :
                s.marketCap >= 1e9 ? (s.marketCap/1e9).toFixed(0)+'B' : (s.marketCap/1e6).toFixed(0)+'M';
-    
+
     tooltip.innerHTML = `
       <div class="tt-ticker">${s.ticker}</div>
       <div class="tt-name">${s.name}</div>
       <div class="tt-row"><span class="tt-label">배당수익률</span><span class="tt-val" style="color:var(--green)">${s.dividendYield.toFixed(2)}%</span></div>
       <div class="tt-row"><span class="tt-label">52주 수익률</span><span class="tt-val" style="color:${s.yearReturn>=0?'var(--cyan)':'var(--red)'}">${s.yearReturn>=0?'+':''}${s.yearReturn.toFixed(1)}%</span></div>
       <div class="tt-row"><span class="tt-label">시가총액</span><span class="tt-val">$${mc}</span></div>
-      <div class="tt-row"><span class="tt-label">배당성향</span><span class="tt-val">${s.payoutRatio?s.payoutRatio.toFixed(0)+'%':'—'}</span></div>
+      <div class="tt-row"><span class="tt-label">배당성향</span><span class="tt-val">${s.payoutRatio?s.payoutRatio.toFixed(0)+'%':'-'}</span></div>
       <div class="tt-row"><span class="tt-label">섹터</span><span class="tt-val">${SECTOR_KR[s.sector]||s.sector}</span></div>`;
     tooltip.style.display = 'block';
-    
+
     const chartRect = canvas.parentElement.getBoundingClientRect();
     let tx = pageX - chartRect.left + 15;
     let ty = pageY - chartRect.top - 30;
-    if (tx + 220 > chartRect.width) tx = tx - 240;
+    if (tx + 220 > chartRect.width) tx -= 240;
     if (ty < 0) ty = 10;
     tooltip.style.left = tx + 'px';
     tooltip.style.top = ty + 'px';
@@ -498,7 +667,6 @@ function findPoint(mx, my, pageX, pageY) {
   }
 }
 
-// Load data
 async function load() {
   try {
     const res = await fetch('scatter_data.json');
@@ -507,7 +675,7 @@ async function load() {
     document.getElementById('updateTime').textContent = `마지막 업데이트: ${data.updated}`;
     init(data.stocks);
   } catch(e) {
-    document.getElementById('updateTime').textContent = '⚠ 샘플 데이터 · scatter_data.json 없음';
+    document.getElementById('updateTime').textContent = '샘플 데이터 · scatter_data.json 없음';
     init(SAMPLE);
   }
 }
