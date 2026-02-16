@@ -4,115 +4,281 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>총 수익률 랭킹 | Total Return</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"></script>
 <style>
-:root { --bg:#000;--card:#0a0a0a;--row:#0d0d0d;--row-h:#141414;--border:#1a1a1a;--border2:#222;
-  --text:#e8e8e8;--dim:#888;--muted:#555;--green:#00ff88;--red:#ff4466;--gold:#ffd700;--blue:#4488ff;--cyan:#00ddcc;--purple:#aa66ff; }
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;min-height:100vh}
+:root {
+  --bg: #000000;
+  --surface: #0a0a0a;
+  --surface2: #111111;
+  --border: #1a1a1a;
+  --border-hover: #2a2a2a;
+  --text: #e4e4e7;
+  --text-dim: #71717a;
+  --text-muted: #52525b;
+  --green: #22c55e;
+  --red: #ef4444;
+  --cyan: #22d3ee;
+  --blue: #4a90ff;
+  --gold: #ffd644;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Noto Sans KR', -apple-system, sans-serif;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
 
-.header{padding:40px 24px 20px;max-width:1400px;margin:0 auto;position:relative}
-.header::before{content:'';position:absolute;top:0;left:0;right:0;height:180px;
-  background:radial-gradient(ellipse at 30% 0%,rgba(0,255,136,0.06) 0%,transparent 60%),
-  radial-gradient(ellipse at 70% 0%,rgba(170,102,255,0.04) 0%,transparent 60%);pointer-events:none}
-.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:rgba(170,102,255,0.08);
-  border:1px solid rgba(170,102,255,0.25);border-radius:20px;font:600 11px 'JetBrains Mono',monospace;
-  color:var(--purple);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:14px}
-.badge .dot{width:6px;height:6px;background:var(--purple);border-radius:50%;animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
-.header h1{font-size:30px;font-weight:900;letter-spacing:-1px;margin-bottom:6px;
-  background:linear-gradient(135deg,#fff,#aaa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.sub{font-size:13px;color:var(--dim)}.time{font:11px 'JetBrains Mono',monospace;color:var(--muted);margin-top:6px}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scrollbar-width: none; }
+html::-webkit-scrollbar { display: none; }
 
-/* Period tabs */
-.tabs{max-width:1400px;margin:0 auto;padding:0 24px 16px;display:flex;gap:8px}
-.tab{padding:8px 20px;border-radius:20px;border:1px solid var(--border2);background:transparent;
-  color:var(--dim);font:500 13px 'Noto Sans KR',sans-serif;cursor:pointer;transition:all 0.2s;-webkit-tap-highlight-color:transparent}
-.tab:hover{border-color:var(--dim);color:var(--text)}
-.tab.active{background:rgba(170,102,255,0.12);border-color:var(--purple);color:var(--purple)}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
 
-/* Key insight */
-.insight{max-width:1400px;margin:0 auto;padding:0 24px 16px}
-.insight-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;
-  display:flex;gap:24px;align-items:center;flex-wrap:wrap}
-.insight-stat{text-align:center;min-width:120px}
-.insight-label{font:10px 'JetBrains Mono',monospace;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
-.insight-val{font:700 22px 'JetBrains Mono',monospace}
-.insight-desc{flex:1;font-size:13px;color:var(--dim);min-width:200px;line-height:1.6}
+/* ====== HEADER ====== */
+.header {
+  padding: 36px 20px 24px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
 
-/* Table */
-.table-wrap{max-width:1400px;margin:0 auto;padding:0 24px 20px;overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:13px}
-thead th{padding:12px 14px;text-align:left;font:600 10px 'JetBrains Mono',monospace;
-  text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);border-bottom:1px solid var(--border);
-  cursor:pointer;user-select:none;white-space:nowrap;transition:color 0.2s;position:sticky;top:0;background:var(--bg);z-index:10}
-thead th:hover{color:var(--purple)}
-thead th.sorted{color:var(--purple)}
-tbody tr{border-bottom:1px solid var(--border);transition:background 0.15s}
-tbody tr:hover{background:var(--row-h)}
-tbody td{padding:14px;white-space:nowrap}
+.header h1 {
+  font-size: clamp(22px, 5vw, 36px);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
 
-.rank{font:700 14px 'JetBrains Mono',monospace;color:var(--muted);text-align:center;width:30px}
-.rank-top{color:var(--gold)}
-.ticker-cell{display:flex;flex-direction:column;gap:2px}
-.t-sym{font:700 14px 'JetBrains Mono',monospace;color:var(--text)}
-.t-name{font-size:11px;color:var(--muted);max-width:140px;overflow:hidden;text-overflow:ellipsis}
-.mono{font-family:'JetBrains Mono',monospace}
+.sub { font-size: 13px; color: var(--text-dim); }
+.time { font-family: var(--mono); font-size: 11px; color: var(--text-muted); margin-top: 8px; }
 
-/* Return bar visualization */
-.return-bar-wrap{display:flex;align-items:center;gap:8px;min-width:180px}
-.return-bar-track{flex:1;height:20px;background:var(--row);border-radius:4px;position:relative;overflow:hidden;min-width:100px}
-.return-bar-price{position:absolute;top:0;bottom:0;left:0;border-radius:4px 0 0 4px;transition:width 0.5s}
-.return-bar-div{position:absolute;top:0;bottom:0;border-radius:0 4px 4px 0;transition:left 0.5s,width 0.5s}
-.return-val{font:700 13px 'JetBrains Mono',monospace;min-width:55px;text-align:right}
+/* ====== SHARE ====== */
+.share-bar { display: flex; gap: 6px; justify-content: center; margin: 16px 0 4px; flex-wrap: wrap; }
+.share-btn { display: flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border-hover); background: var(--surface); color: #a1a1aa; font-size: 11px; cursor: pointer; font-family: var(--sans); transition: all 0.2s; }
+.share-btn:hover { border-color: #444; color: var(--text); }
+.share-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+.share-btn.twitter:hover { border-color: #1d9bf0; color: #1d9bf0; }
+.share-btn.kakao:hover { border-color: #fee500; color: #fee500; }
+.share-btn.telegram:hover { border-color: #26a5e4; color: #26a5e4; }
+.share-btn.instagram:hover { border-color: #e1306c; color: #e1306c; }
+.share-btn.instagram.copied { border-color: var(--green); color: var(--green); }
+.share-btn.copy:hover { border-color: var(--green); color: var(--green); }
+.share-btn.copied { border-color: var(--green); color: var(--green); }
 
-.consec{font:600 12px 'JetBrains Mono',monospace;color:var(--gold)}
-.sector-tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:500;border:1px solid var(--border2);color:var(--dim)}
+.toast { position: fixed; bottom: 20px; right: 20px; background: var(--green); color: #000; padding: 10px 16px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; z-index: 9999; opacity: 0; transform: translateY(10px); transition: all 0.3s ease; pointer-events: none; }
+.toast.show { opacity: 1; transform: translateY(0); }
 
-/* Mobile cards */
-.card-list{display:none}
-.stock-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:10px}
-.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
-.card-rank{font:11px 'JetBrains Mono',monospace;color:var(--muted);background:var(--row);border-radius:6px;padding:2px 8px;margin-right:8px}
-.card-rank-top{color:var(--gold)}
-.card-ticker{font:700 16px 'JetBrains Mono',monospace}
-.card-name{font-size:12px;color:var(--muted);margin-top:2px}
-.card-total{font:700 20px 'JetBrains Mono',monospace;text-align:right}
-.card-bar{height:24px;background:var(--row);border-radius:6px;position:relative;overflow:hidden;margin:10px 0}
-.card-bar-price{position:absolute;top:0;bottom:0;left:0;border-radius:6px 0 0 6px}
-.card-bar-div{position:absolute;top:0;bottom:0;border-radius:0 6px 6px 0}
-.card-bar-labels{display:flex;justify-content:space-between;font:11px 'JetBrains Mono',monospace;color:var(--dim)}
-.card-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
+/* ====== TABS ====== */
+.tabs {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 16px 24px 12px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
 
-.footer{max-width:1400px;margin:0 auto;padding:0 24px 40px;text-align:center;font:11px 'JetBrains Mono',monospace;color:var(--muted)}
+.tab {
+  padding: 8px 20px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-hover);
+  background: transparent;
+  color: var(--text-dim);
+  font: 500 13px var(--sans);
+  cursor: pointer;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
 
-/* Legend bar */
-.bar-legend{max-width:1400px;margin:0 auto;padding:0 24px 12px;display:flex;gap:16px;align-items:center;font-size:12px;color:var(--dim)}
-.bl-item{display:flex;align-items:center;gap:5px}
-.bl-swatch{width:12px;height:12px;border-radius:3px}
+.tab:hover { border-color: var(--text-dim); color: var(--text); }
+.tab.active { background: var(--cyan); border-color: var(--cyan); color: #000; font-weight: 600; }
 
-@media(max-width:768px){
-  .header{padding:20px 16px 14px} .header h1{font-size:22px}
-  .tabs{padding:0 16px 12px;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .tabs::-webkit-scrollbar{display:none}
-  .tab{white-space:nowrap;flex-shrink:0;padding:8px 16px}
-  .insight{padding:0 16px 12px}
-  .insight-card{padding:14px;gap:14px}
-  .insight-val{font-size:18px}
-  .table-wrap table{display:none!important}
-  .card-list{display:block;padding:0 16px 20px}
-  .bar-legend{padding:0 16px 10px}
-  .footer{padding:0 16px 30px}
+/* ====== INSIGHT ====== */
+.insight { max-width: 1400px; margin: 0 auto; padding: 0 24px 16px; }
+
+.insight-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.insight-stat { text-align: center; min-width: 120px; }
+.insight-label { font: 10px var(--mono); color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+.insight-val { font: 700 22px var(--mono); }
+.insight-desc { flex: 1; font-size: 13px; color: var(--text-dim); min-width: 200px; line-height: 1.6; }
+
+/* ====== BAR LEGEND ====== */
+.bar-legend {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px 12px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.bl-item { display: flex; align-items: center; gap: 5px; }
+.bl-swatch { width: 12px; height: 12px; border-radius: 3px; }
+
+/* ====== TABLE ====== */
+.table-wrap { max-width: 1400px; margin: 0 auto; padding: 0 24px 20px; overflow-x: auto; }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+
+thead th {
+  padding: 12px 14px;
+  text-align: left;
+  font: 600 10px var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+
+thead th:hover { color: var(--cyan); }
+thead th.sorted { color: var(--cyan); }
+
+tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+tbody tr:hover { background: var(--surface2); }
+tbody td { padding: 14px; white-space: nowrap; }
+
+.rank { font: 700 14px var(--mono); color: var(--text-muted); text-align: center; width: 30px; }
+.rank-top { color: var(--gold); }
+
+.ticker-cell { display: flex; flex-direction: column; gap: 2px; }
+.t-sym { font: 700 14px var(--mono); color: var(--cyan); }
+.t-name { font-size: 11px; color: var(--text-muted); max-width: 140px; overflow: hidden; text-overflow: ellipsis; }
+
+.mono { font-family: var(--mono); }
+
+/* Return bar */
+.return-bar-wrap { display: flex; align-items: center; gap: 8px; min-width: 180px; }
+.return-bar-track { flex: 1; height: 20px; background: var(--surface2); border-radius: 4px; position: relative; overflow: hidden; min-width: 100px; }
+.return-bar-price { position: absolute; top: 0; bottom: 0; left: 0; border-radius: 4px 0 0 4px; transition: width 0.5s; }
+.return-bar-div { position: absolute; top: 0; bottom: 0; border-radius: 0 4px 4px 0; transition: left 0.5s, width 0.5s; }
+.return-val { font: 700 13px var(--mono); min-width: 55px; text-align: right; }
+
+.consec { font: 600 12px var(--mono); color: var(--gold); }
+
+.sector-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  border: 1px solid var(--border-hover);
+  color: var(--text-dim);
+}
+
+/* ====== MOBILE CARDS ====== */
+.card-list { display: none; }
+
+.stock-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 10px;
+}
+
+.card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+
+.card-rank { font: 11px var(--mono); color: var(--text-muted); background: var(--surface2); border-radius: 6px; padding: 2px 8px; margin-right: 8px; }
+.card-rank-top { color: var(--gold); }
+
+.card-ticker { font: 700 16px var(--mono); color: var(--cyan); }
+.card-name { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+.card-total { font: 700 20px var(--mono); text-align: right; }
+
+.card-bar { height: 24px; background: var(--surface2); border-radius: 6px; position: relative; overflow: hidden; margin: 10px 0; }
+.card-bar-price { position: absolute; top: 0; bottom: 0; left: 0; border-radius: 6px 0 0 6px; }
+.card-bar-div { position: absolute; top: 0; bottom: 0; border-radius: 0 6px 6px 0; }
+
+.card-bar-labels { display: flex; justify-content: space-between; font: 11px var(--mono); color: var(--text-dim); }
+
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+/* ====== FOOTER ====== */
+.footer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px 40px;
+  text-align: center;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+/* ====== MOBILE ====== */
+@media (max-width: 768px) {
+  .header { padding: 20px 16px 14px; }
+  .header h1 { font-size: 22px; }
+
+  .tabs {
+    padding: 12px 16px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { white-space: nowrap; flex-shrink: 0; padding: 8px 16px; }
+
+  .insight { padding: 0 16px 12px; }
+  .insight-card { padding: 14px; gap: 14px; }
+  .insight-val { font-size: 18px; }
+
+  .table-wrap table { display: none !important; }
+  .card-list { display: block; padding: 0 16px 20px; }
+  .bar-legend { padding: 0 16px 10px; }
+  .footer { padding: 0 16px 30px; }
+  .share-bar { margin: 12px 0 4px; }
 }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="badge"><span class="dot"></span>TOTAL RETURN</div>
   <h1>총 수익률 랭킹</h1>
   <div class="sub">주가 수익 + 배당 수익 = 진짜 수익률 · 배당 재투자의 힘을 확인하세요</div>
   <div class="time" id="updateTime">Loading...</div>
+</div>
+
+<div class="share-bar">
+  <button class="share-btn twitter" onclick="shareTwitter()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>트위터</button>
+  <button class="share-btn kakao" onclick="shareKakao()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-5.52 0-10 3.36-10 7.5 0 2.66 1.74 5 4.36 6.33-.14.53-.9 3.4-.93 3.61 0 0-.02.17.09.23.11.07.24.03.24.03.32-.04 3.7-2.42 4.28-2.83.62.09 1.27.13 1.96.13 5.52 0 10-3.36 10-7.5S17.52 3 12 3z"/></svg>카카오톡</button>
+  <button class="share-btn telegram" onclick="shareTelegram()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>텔레그램</button>
+  <button class="share-btn instagram" onclick="shareInstagram(this)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>인스타그램</button>
+  <button class="share-btn copy" onclick="copyLink(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>링크복사</button>
 </div>
 
 <div class="tabs">
@@ -141,7 +307,59 @@ tbody td{padding:14px;white-space:nowrap}
 
 <div class="footer">데이터 출처: Yahoo Finance (yfinance) · 배당 재투자 미반영 단순 합산 기준</div>
 
+<div class="toast" id="toast"></div>
+
 <script>
+/* ====== SHARE ====== */
+const SHARE_URL = 'https://herdvibe.com/total-return';
+const SHARE_TITLE = '총 수익률 랭킹 — Herdvibe';
+const SHARE_DESC = 'S&P 500 주가+배당 총수익률 랭킹 | Herdvibe';
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+function shareTwitter() {
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TITLE)}&url=${encodeURIComponent(SHARE_URL)}`, '_blank');
+}
+function shareKakao() {
+  if (window.Kakao && !Kakao.isInitialized()) Kakao.init('a43ed7b39fac35458f4f9df925a279b5');
+  if (window.Kakao) {
+    Kakao.Share.sendDefault({
+      objectType: 'feed',
+      content: { title: SHARE_TITLE, description: SHARE_DESC, imageUrl: 'https://herdvibe.com/og-total-return.png', link: { mobileWebUrl: SHARE_URL, webUrl: SHARE_URL } }
+    });
+  }
+}
+function shareTelegram() {
+  window.open(`https://t.me/share/url?url=${encodeURIComponent(SHARE_URL)}&text=${encodeURIComponent(SHARE_TITLE)}`, '_blank');
+}
+function shareInstagram(btn) {
+  try {
+    if (window.parent !== window) { window.parent.postMessage({ type: 'copy', text: SHARE_URL }, '*'); }
+    else { navigator.clipboard.writeText(SHARE_URL); }
+    const orig = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>복사됨!';
+    showToast('링크가 복사되었습니다 - 인스타그램에 붙여넣기 하세요');
+    setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2000);
+  } catch(e) { showToast('복사 실패'); }
+}
+function copyLink(btn) {
+  try {
+    if (window.parent !== window) { window.parent.postMessage({ type: 'copy', text: SHARE_URL }, '*'); }
+    else { navigator.clipboard.writeText(SHARE_URL); }
+    const orig = btn.innerHTML;
+    btn.classList.add('copied');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>복사됨!';
+    showToast('링크가 복사되었습니다');
+    setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2000);
+  } catch(e) { showToast('복사 실패'); }
+}
+
+/* ====== DATA ====== */
 const SECTOR_KR = {'Energy':'에너지','Utilities':'유틸리티','Real Estate':'리츠',
   'Financial Services':'금융','Consumer Defensive':'필수소비','Healthcare':'헬스케어',
   'Technology':'기술','Industrials':'산업재','Communication Services':'통신','Basic Materials':'소재'};
@@ -183,7 +401,7 @@ let allData = [], currentPeriod = '1y';
 
 function setPeriod(p) {
   currentPeriod = p;
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   event.target.classList.add('active');
   render();
 }
@@ -191,21 +409,20 @@ function setPeriod(p) {
 function render() {
   const stocks = allData
     .filter(s => s.totalReturns && s.totalReturns[currentPeriod])
-    .sort((a,b) => b.totalReturns[currentPeriod].totalReturn - a.totalReturns[currentPeriod].totalReturn);
-  
+    .sort((a, b) => b.totalReturns[currentPeriod].totalReturn - a.totalReturns[currentPeriod].totalReturn);
+
   if (!stocks.length) return;
-  
-  // Insight
-  const avgTotal = stocks.reduce((s,x)=>s+x.totalReturns[currentPeriod].totalReturn,0)/stocks.length;
-  const avgDiv = stocks.reduce((s,x)=>s+x.totalReturns[currentPeriod].divReturn,0)/stocks.length;
+
+  const avgTotal = stocks.reduce((s, x) => s + x.totalReturns[currentPeriod].totalReturn, 0) / stocks.length;
+  const avgDiv = stocks.reduce((s, x) => s + x.totalReturns[currentPeriod].divReturn, 0) / stocks.length;
   const best = stocks[0];
-  const periodLabel = currentPeriod==='1y'?'1년':currentPeriod==='3y'?'3년':'5년';
-  
+  const periodLabel = currentPeriod === '1y' ? '1년' : currentPeriod === '3y' ? '3년' : '5년';
+
   document.getElementById('insightArea').innerHTML = `
     <div class="insight-card">
       <div class="insight-stat">
         <div class="insight-label">평균 총수익률 (${periodLabel})</div>
-        <div class="insight-val" style="color:${avgTotal>=0?'var(--green)':'var(--red)'}">${avgTotal>=0?'+':''}${avgTotal.toFixed(1)}%</div>
+        <div class="insight-val" style="color:${avgTotal >= 0 ? 'var(--green)' : 'var(--red)'}">${avgTotal >= 0 ? '+' : ''}${avgTotal.toFixed(1)}%</div>
       </div>
       <div class="insight-stat">
         <div class="insight-label">배당이 추가한 수익</div>
@@ -216,75 +433,70 @@ function render() {
         <div class="insight-val" style="color:var(--gold)">${best.ticker}</div>
       </div>
       <div class="insight-desc">
-        💡 주가만 보면 놓치는 수익! ${periodLabel} 기준 배당이 평균 <strong style="color:var(--cyan)">${avgDiv.toFixed(1)}%p</strong> 추가 수익을 만들었습니다.
+        주가만 보면 놓치는 수익! ${periodLabel} 기준 배당이 평균 <strong style="color:var(--cyan)">${avgDiv.toFixed(1)}%p</strong> 추가 수익을 만들었습니다.
       </div>
     </div>`;
-  
-  // Scale for bars
+
   const maxAbs = Math.max(...stocks.map(s => Math.abs(s.totalReturns[currentPeriod].totalReturn)), 1);
-  
-  // Desktop table
-  document.getElementById('tbody').innerHTML = stocks.map((s,i) => {
+
+  document.getElementById('tbody').innerHTML = stocks.map((s, i) => {
     const r = s.totalReturns[currentPeriod];
     const totalColor = r.totalReturn >= 0 ? 'var(--green)' : 'var(--red)';
-    
-    // Bar widths (handle negative)
     const barMax = maxAbs;
     const priceW = Math.abs(r.priceReturn) / barMax * 50;
     const divW = Math.abs(r.divReturn) / barMax * 50;
-    const priceColor = r.priceReturn >= 0 ? 'rgba(68,136,255,0.6)' : 'rgba(255,68,102,0.4)';
-    
+    const priceColor = r.priceReturn >= 0 ? 'rgba(74,144,255,0.6)' : 'rgba(239,68,68,0.4)';
+
     return `<tr>
-      <td class="rank ${i<3?'rank-top':''}">${i+1}</td>
+      <td class="rank ${i < 3 ? 'rank-top' : ''}">${i + 1}</td>
       <td><div class="ticker-cell"><span class="t-sym">${s.ticker}</span><span class="t-name">${s.name}</span></div></td>
-      <td class="mono" style="color:${totalColor};font-weight:700;font-size:15px">${r.totalReturn>=0?'+':''}${r.totalReturn.toFixed(1)}%</td>
+      <td class="mono" style="color:${totalColor};font-weight:700;font-size:15px">${r.totalReturn >= 0 ? '+' : ''}${r.totalReturn.toFixed(1)}%</td>
       <td>
         <div class="return-bar-wrap">
           <div class="return-bar-track">
             <div class="return-bar-price" style="width:${priceW}%;background:${priceColor}"></div>
-            <div class="return-bar-div" style="left:${priceW}%;width:${divW}%;background:rgba(0,255,136,0.5)"></div>
+            <div class="return-bar-div" style="left:${priceW}%;width:${divW}%;background:rgba(34,197,94,0.5)"></div>
           </div>
-          <span class="mono" style="font-size:11px;color:var(--dim)">${r.priceReturn>=0?'+':''}${r.priceReturn.toFixed(0)} + ${r.divReturn.toFixed(0)}</span>
+          <span class="mono" style="font-size:11px;color:var(--text-dim)">${r.priceReturn >= 0 ? '+' : ''}${r.priceReturn.toFixed(0)} + ${r.divReturn.toFixed(0)}</span>
         </div>
       </td>
       <td class="mono" style="color:var(--green)">${s.dividendYield.toFixed(2)}%</td>
-      <td class="consec">${s.consecIncreases>0?s.consecIncreases+'년 연속 ↑':'—'}</td>
-      <td class="hide-mobile"><span class="sector-tag">${SECTOR_KR[s.sector]||s.sector}</span></td>
+      <td class="consec">${s.consecIncreases > 0 ? s.consecIncreases + '년 연속' : '-'}</td>
+      <td class="hide-mobile"><span class="sector-tag">${SECTOR_KR[s.sector] || s.sector}</span></td>
     </tr>`;
   }).join('');
-  
-  // Mobile cards
-  document.getElementById('cardList').innerHTML = stocks.map((s,i) => {
+
+  document.getElementById('cardList').innerHTML = stocks.map((s, i) => {
     const r = s.totalReturns[currentPeriod];
     const totalColor = r.totalReturn >= 0 ? 'var(--green)' : 'var(--red)';
     const priceW = Math.max(1, Math.abs(r.priceReturn) / maxAbs * 50);
     const divW = Math.max(1, Math.abs(r.divReturn) / maxAbs * 50);
-    const priceColor = r.priceReturn >= 0 ? 'rgba(68,136,255,0.6)' : 'rgba(255,68,102,0.4)';
-    
+    const priceColor = r.priceReturn >= 0 ? 'rgba(74,144,255,0.6)' : 'rgba(239,68,68,0.4)';
+
     return `<div class="stock-card">
       <div class="card-top">
         <div style="display:flex;align-items:center">
-          <span class="card-rank ${i<3?'card-rank-top':''}">${i+1}</span>
+          <span class="card-rank ${i < 3 ? 'card-rank-top' : ''}">${i + 1}</span>
           <div><div class="card-ticker">${s.ticker}</div><div class="card-name">${s.name}</div></div>
         </div>
-        <div class="card-total" style="color:${totalColor}">${r.totalReturn>=0?'+':''}${r.totalReturn.toFixed(1)}%</div>
+        <div class="card-total" style="color:${totalColor}">${r.totalReturn >= 0 ? '+' : ''}${r.totalReturn.toFixed(1)}%</div>
       </div>
       <div class="card-bar">
         <div class="card-bar-price" style="width:${priceW}%;background:${priceColor}"></div>
-        <div class="card-bar-div" style="left:${priceW}%;width:${divW}%;background:rgba(0,255,136,0.5)"></div>
+        <div class="card-bar-div" style="left:${priceW}%;width:${divW}%;background:rgba(34,197,94,0.5)"></div>
       </div>
       <div class="card-bar-labels">
-        <span>주가 ${r.priceReturn>=0?'+':''}${r.priceReturn.toFixed(1)}%</span>
+        <span>주가 ${r.priceReturn >= 0 ? '+' : ''}${r.priceReturn.toFixed(1)}%</span>
         <span style="color:var(--green)">배당 +${r.divReturn.toFixed(1)}%</span>
       </div>
       <div class="card-bottom">
-        <span class="sector-tag">${SECTOR_KR[s.sector]||s.sector}</span>
-        <span class="consec">${s.consecIncreases>0?s.consecIncreases+'년 연속 ↑':'—'}</span>
+        <span class="sector-tag">${SECTOR_KR[s.sector] || s.sector}</span>
+        <span class="consec">${s.consecIncreases > 0 ? s.consecIncreases + '년 연속' : '-'}</span>
         <span class="mono" style="font-size:12px;color:var(--green)">${s.dividendYield.toFixed(1)}%</span>
       </div>
     </div>`;
   }).join('');
-  
+
   document.getElementById('mainTable').style.display = 'table';
 }
 
@@ -296,7 +508,7 @@ async function load() {
     document.getElementById('updateTime').textContent = `마지막 업데이트: ${data.updated}`;
     allData = data.stocks;
   } catch(e) {
-    document.getElementById('updateTime').textContent = '⚠ 샘플 데이터';
+    document.getElementById('updateTime').textContent = '샘플 데이터';
     allData = SAMPLE;
   }
   render();
