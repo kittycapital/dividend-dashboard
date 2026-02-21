@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-20 22:30",
+  "updated": "2026-02-21 22:29",
   "stocks": [
     {
       "ticker": "PFE",
@@ -1381,6 +1381,41 @@
       }
     },
     {
+      "ticker": "ABBV",
+      "name": "AbbVie Inc.",
+      "price": 224.81,
+      "dividendYield": 3.0,
+      "dividendRate": 6.74,
+      "payoutRatio": 278.0,
+      "marketCap": 397325729792,
+      "sector": "Healthcare",
+      "yearReturn": 14.98,
+      "divMonths": [
+        1,
+        4,
+        7,
+        10
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": 14.98,
+          "divReturn": 3.4,
+          "totalReturn": 18.38
+        },
+        "3y": {
+          "priceReturn": 64.84,
+          "divReturn": 13.88,
+          "totalReturn": 78.72
+        },
+        "5y": {
+          "priceReturn": 154.26,
+          "divReturn": 33.87,
+          "totalReturn": 188.14
+        }
+      }
+    },
+    {
       "ticker": "FITB",
       "name": "Fifth Third Bancorp",
       "price": 53.62,
@@ -1413,41 +1448,6 @@
           "priceReturn": 85.05,
           "divReturn": 23.26,
           "totalReturn": 108.31
-        }
-      }
-    },
-    {
-      "ticker": "ABBV",
-      "name": "AbbVie Inc.",
-      "price": 224.81,
-      "dividendYield": 2.96,
-      "dividendRate": 6.65,
-      "payoutRatio": 278.0,
-      "marketCap": 397325729792,
-      "sector": "Healthcare",
-      "yearReturn": 14.98,
-      "divMonths": [
-        1,
-        4,
-        7,
-        10
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 14.98,
-          "divReturn": 3.4,
-          "totalReturn": 18.38
-        },
-        "3y": {
-          "priceReturn": 64.84,
-          "divReturn": 13.88,
-          "totalReturn": 78.72
-        },
-        "5y": {
-          "priceReturn": 154.26,
-          "divReturn": 33.87,
-          "totalReturn": 188.14
         }
       }
     },
@@ -1950,6 +1950,43 @@
       }
     },
     {
+      "ticker": "KO",
+      "name": "Coca-Cola Company (The)",
+      "price": 79.84,
+      "dividendYield": 2.58,
+      "dividendRate": 2.06,
+      "payoutRatio": 67.1,
+      "marketCap": 343440457728,
+      "sector": "Consumer Defensive",
+      "yearReturn": 15.2,
+      "divMonths": [
+        3,
+        5,
+        6,
+        9,
+        11,
+        12
+      ],
+      "consecIncreases": 23,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": 15.2,
+          "divReturn": 2.94,
+          "totalReturn": 18.14
+        },
+        "3y": {
+          "priceReturn": 46.12,
+          "divReturn": 10.65,
+          "totalReturn": 56.77
+        },
+        "5y": {
+          "priceReturn": 83.29,
+          "divReturn": 21.26,
+          "totalReturn": 104.55
+        }
+      }
+    },
+    {
       "ticker": "AMGN",
       "name": "Amgen Inc.",
       "price": 374.75,
@@ -2061,43 +2098,6 @@
           "priceReturn": 19.89,
           "divReturn": 14.38,
           "totalReturn": 34.27
-        }
-      }
-    },
-    {
-      "ticker": "KO",
-      "name": "Coca-Cola Company (The)",
-      "price": 79.84,
-      "dividendYield": 2.56,
-      "dividendRate": 2.04,
-      "payoutRatio": 67.1,
-      "marketCap": 343440457728,
-      "sector": "Consumer Defensive",
-      "yearReturn": 15.2,
-      "divMonths": [
-        3,
-        5,
-        6,
-        9,
-        11,
-        12
-      ],
-      "consecIncreases": 23,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 15.2,
-          "divReturn": 2.94,
-          "totalReturn": 18.14
-        },
-        "3y": {
-          "priceReturn": 46.12,
-          "divReturn": 10.65,
-          "totalReturn": 56.77
-        },
-        "5y": {
-          "priceReturn": 83.29,
-          "divReturn": 21.26,
-          "totalReturn": 104.55
         }
       }
     },
@@ -2884,9 +2884,9 @@
           "totalReturn": 64.04
         },
         "5y": {
-          "priceReturn": 76.12,
-          "divReturn": 6.01,
-          "totalReturn": 82.13
+          "priceReturn": 76.53,
+          "divReturn": 6.02,
+          "totalReturn": 82.55
         }
       }
     },
