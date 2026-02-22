@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-21 22:29",
+  "updated": "2026-02-22 11:50",
   "stocks": [
     {
       "ticker": "RTX",
@@ -10,29 +10,29 @@
       "payoutRatio": 53.8,
       "marketCap": 275061571584,
       "sector": "Industrials",
-      "yearReturn": 68.46,
+      "yearReturn": 69.02,
       "divMonths": [
         2,
         5,
         8,
         11
       ],
-      "consecIncreases": 33,
+      "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 68.46,
-          "divReturn": 2.19,
-          "totalReturn": 70.65
+          "priceReturn": 69.02,
+          "divReturn": 2.76,
+          "totalReturn": 71.78
         },
         "3y": {
-          "priceReturn": 117.83,
-          "divReturn": 7.94,
-          "totalReturn": 125.78
+          "priceReturn": 118.56,
+          "divReturn": 8.69,
+          "totalReturn": 127.25
         },
         "5y": {
-          "priceReturn": 214.84,
-          "divReturn": 17.88,
-          "totalReturn": 232.71
+          "priceReturn": 215.88,
+          "divReturn": 18.98,
+          "totalReturn": 234.86
         }
       }
     },
@@ -416,7 +416,7 @@
           "totalReturn": 58.32
         },
         "5y": {
-          "priceReturn": 228.5,
+          "priceReturn": 228.49,
           "divReturn": 41.75,
           "totalReturn": 270.25
         }
@@ -723,6 +723,41 @@
       }
     },
     {
+      "ticker": "MPC",
+      "name": "Marathon Petroleum Corporation",
+      "price": 196.76,
+      "dividendYield": 1.94,
+      "dividendRate": 3.82,
+      "payoutRatio": 28.2,
+      "marketCap": 59146547200,
+      "sector": "Energy",
+      "yearReturn": 30.73,
+      "divMonths": [
+        2,
+        5,
+        8,
+        11
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": 30.73,
+          "divReturn": 2.54,
+          "totalReturn": 33.27
+        },
+        "3y": {
+          "priceReturn": 70.53,
+          "divReturn": 9.05,
+          "totalReturn": 79.57
+        },
+        "5y": {
+          "priceReturn": 306.2,
+          "divReturn": 31.83,
+          "totalReturn": 338.04
+        }
+      }
+    },
+    {
       "ticker": "PNC",
       "name": "PNC Financial Services Group, I",
       "price": 232.97,
@@ -762,41 +797,6 @@
           "priceReturn": 63.74,
           "divReturn": 21.15,
           "totalReturn": 84.89
-        }
-      }
-    },
-    {
-      "ticker": "MPC",
-      "name": "Marathon Petroleum Corporation",
-      "price": 196.76,
-      "dividendYield": 1.94,
-      "dividendRate": 3.82,
-      "payoutRatio": 28.2,
-      "marketCap": 59146547200,
-      "sector": "Energy",
-      "yearReturn": 30.08,
-      "divMonths": [
-        2,
-        5,
-        8,
-        11
-      ],
-      "consecIncreases": 4,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 30.08,
-          "divReturn": 1.86,
-          "totalReturn": 31.94
-        },
-        "3y": {
-          "priceReturn": 69.68,
-          "divReturn": 8.14,
-          "totalReturn": 77.82
-        },
-        "5y": {
-          "priceReturn": 304.18,
-          "divReturn": 29.62,
-          "totalReturn": 333.8
         }
       }
     },
@@ -1031,6 +1031,45 @@
       }
     },
     {
+      "ticker": "CVX",
+      "name": "Chevron Corporation",
+      "price": 183.93,
+      "dividendYield": 3.87,
+      "dividendRate": 7.12,
+      "payoutRatio": 103.2,
+      "marketCap": 367741108224,
+      "sector": "Energy",
+      "yearReturn": 22.49,
+      "divMonths": [
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": 22.49,
+          "divReturn": 4.6,
+          "totalReturn": 27.09
+        },
+        "3y": {
+          "priceReturn": 29.71,
+          "divReturn": 13.87,
+          "totalReturn": 43.58
+        },
+        "5y": {
+          "priceReturn": 130.21,
+          "divReturn": 38.65,
+          "totalReturn": 168.86
+        }
+      }
+    },
+    {
       "ticker": "PM",
       "name": "Philip Morris International Inc",
       "price": 183.4,
@@ -1178,45 +1217,6 @@
           "priceReturn": 12.16,
           "divReturn": 21.8,
           "totalReturn": 33.96
-        }
-      }
-    },
-    {
-      "ticker": "CVX",
-      "name": "Chevron Corporation",
-      "price": 183.93,
-      "dividendYield": 3.87,
-      "dividendRate": 7.12,
-      "payoutRatio": 103.2,
-      "marketCap": 367741108224,
-      "sector": "Energy",
-      "yearReturn": 21.3,
-      "divMonths": [
-        1,
-        2,
-        4,
-        5,
-        7,
-        8,
-        10,
-        11
-      ],
-      "consecIncreases": 38,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 21.3,
-          "divReturn": 3.38,
-          "totalReturn": 24.68
-        },
-        "3y": {
-          "priceReturn": 28.45,
-          "divReturn": 12.49,
-          "totalReturn": 40.95
-        },
-        "5y": {
-          "priceReturn": 127.98,
-          "divReturn": 36.07,
-          "totalReturn": 164.05
         }
       }
     },
@@ -1422,6 +1422,88 @@
       }
     },
     {
+      "ticker": "COP",
+      "name": "ConocoPhillips",
+      "price": 110.53,
+      "dividendYield": 3.04,
+      "dividendRate": 3.36,
+      "payoutRatio": 50.1,
+      "marketCap": 136583938048,
+      "sector": "Energy",
+      "yearReturn": 16.72,
+      "divMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": 16.72,
+          "divReturn": 3.42,
+          "totalReturn": 20.14
+        },
+        "3y": {
+          "priceReturn": 16.12,
+          "divReturn": 11.07,
+          "totalReturn": 27.19
+        },
+        "5y": {
+          "priceReturn": 159.73,
+          "divReturn": 41.26,
+          "totalReturn": 200.99
+        }
+      }
+    },
+    {
+      "ticker": "ED",
+      "name": "Consolidated Edison, Inc.",
+      "price": 109.81,
+      "dividendYield": 3.13,
+      "dividendRate": 3.44,
+      "payoutRatio": 59.1,
+      "marketCap": 39634337792,
+      "sector": "Utilities",
+      "yearReturn": 15.49,
+      "divMonths": [
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": 15.49,
+          "divReturn": 3.62,
+          "totalReturn": 19.1
+        },
+        "3y": {
+          "priceReturn": 31.26,
+          "divReturn": 12.0,
+          "totalReturn": 43.26
+        },
+        "5y": {
+          "priceReturn": 92.68,
+          "divReturn": 28.66,
+          "totalReturn": 121.34
+        }
+      }
+    },
+    {
       "ticker": "BMY",
       "name": "Bristol-Myers Squibb Company",
       "price": 60.66,
@@ -1497,49 +1579,6 @@
       }
     },
     {
-      "ticker": "COP",
-      "name": "ConocoPhillips",
-      "price": 110.53,
-      "dividendYield": 3.04,
-      "dividendRate": 3.36,
-      "payoutRatio": 50.1,
-      "marketCap": 136583938048,
-      "sector": "Energy",
-      "yearReturn": 15.82,
-      "divMonths": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12
-      ],
-      "consecIncreases": 1,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 15.82,
-          "divReturn": 2.51,
-          "totalReturn": 18.33
-        },
-        "3y": {
-          "priceReturn": 15.22,
-          "divReturn": 10.11,
-          "totalReturn": 25.33
-        },
-        "5y": {
-          "priceReturn": 157.72,
-          "divReturn": 38.99,
-          "totalReturn": 196.71
-        }
-      }
-    },
-    {
       "ticker": "EXC",
       "name": "Exelon Corporation",
       "price": 47.79,
@@ -1608,45 +1647,6 @@
           "priceReturn": 74.24,
           "divReturn": 28.04,
           "totalReturn": 102.27
-        }
-      }
-    },
-    {
-      "ticker": "ED",
-      "name": "Consolidated Edison, Inc.",
-      "price": 109.81,
-      "dividendYield": 3.13,
-      "dividendRate": 3.44,
-      "payoutRatio": 59.1,
-      "marketCap": 39634337792,
-      "sector": "Utilities",
-      "yearReturn": 14.58,
-      "divMonths": [
-        1,
-        2,
-        4,
-        5,
-        7,
-        8,
-        10,
-        11
-      ],
-      "consecIncreases": 37,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 14.58,
-          "divReturn": 2.66,
-          "totalReturn": 17.25
-        },
-        "3y": {
-          "priceReturn": 30.24,
-          "divReturn": 10.85,
-          "totalReturn": 41.09
-        },
-        "5y": {
-          "priceReturn": 91.17,
-          "divReturn": 26.89,
-          "totalReturn": 118.06
         }
       }
     },
@@ -1842,6 +1842,45 @@
       }
     },
     {
+      "ticker": "SO",
+      "name": "Southern Company (The)",
+      "price": 94.3,
+      "dividendYield": 3.14,
+      "dividendRate": 2.96,
+      "payoutRatio": 72.6,
+      "marketCap": 103834198016,
+      "sector": "Utilities",
+      "yearReturn": 10.18,
+      "divMonths": [
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": 10.18,
+          "divReturn": 3.46,
+          "totalReturn": 13.63
+        },
+        "3y": {
+          "priceReturn": 60.05,
+          "divReturn": 14.66,
+          "totalReturn": 74.71
+        },
+        "5y": {
+          "priceReturn": 91.65,
+          "divReturn": 28.45,
+          "totalReturn": 120.1
+        }
+      }
+    },
+    {
       "ticker": "SWK",
       "name": "Stanley Black & Decker, Inc.",
       "price": 91.96,
@@ -1878,45 +1917,6 @@
           "priceReturn": -37.49,
           "divReturn": 10.83,
           "totalReturn": -26.66
-        }
-      }
-    },
-    {
-      "ticker": "SO",
-      "name": "Southern Company (The)",
-      "price": 94.3,
-      "dividendYield": 3.14,
-      "dividendRate": 2.96,
-      "payoutRatio": 72.6,
-      "marketCap": 103834198016,
-      "sector": "Utilities",
-      "yearReturn": 9.32,
-      "divMonths": [
-        1,
-        2,
-        4,
-        5,
-        7,
-        8,
-        10,
-        11
-      ],
-      "consecIncreases": 25,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 9.32,
-          "divReturn": 2.57,
-          "totalReturn": 11.89
-        },
-        "3y": {
-          "priceReturn": 58.8,
-          "divReturn": 13.3,
-          "totalReturn": 72.1
-        },
-        "5y": {
-          "priceReturn": 90.16,
-          "divReturn": 26.74,
-          "totalReturn": 116.9
         }
       }
     },
@@ -2344,7 +2344,7 @@
         10,
         11
       ],
-      "consecIncreases": 20,
+      "consecIncreases": 0,
       "totalReturns": {
         "1y": {
           "priceReturn": NaN,
@@ -2352,14 +2352,14 @@
           "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 60.57,
-          "divReturn": 3.47,
-          "totalReturn": 64.04
+          "priceReturn": 60.94,
+          "divReturn": 3.85,
+          "totalReturn": 64.78
         },
         "5y": {
           "priceReturn": 76.53,
-          "divReturn": 6.02,
-          "totalReturn": 82.55
+          "divReturn": 6.43,
+          "totalReturn": 82.95
         }
       }
     },
