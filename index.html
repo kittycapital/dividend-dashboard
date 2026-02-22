@@ -469,10 +469,29 @@ function shareKakao() {
 function shareTelegram() {
   window.open(`https://t.me/share/url?url=${encodeURIComponent(SHARE_URL)}&text=${encodeURIComponent(SHARE_TITLE)}`, '_blank');
 }
+function fallbackCopy(text) {
+  if (window.parent !== window) {
+    window.parent.postMessage({ type: 'copy', text: text }, '*');
+  } else if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).catch(function() {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch(e) {}
+      document.body.removeChild(ta);
+    });
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch(e) {}
+    document.body.removeChild(ta);
+  }
+}
+
 function shareInstagram(btn) {
   try {
-    if (window.parent !== window) { window.parent.postMessage({ type: 'copy', text: SHARE_URL }, '*'); }
-    else { navigator.clipboard.writeText(SHARE_URL); }
+    fallbackCopy(SHARE_URL);
     const orig = btn.innerHTML;
     btn.classList.add('copied');
     btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>복사됨!';
@@ -482,8 +501,7 @@ function shareInstagram(btn) {
 }
 function copyLink(btn) {
   try {
-    if (window.parent !== window) { window.parent.postMessage({ type: 'copy', text: SHARE_URL }, '*'); }
-    else { navigator.clipboard.writeText(SHARE_URL); }
+    fallbackCopy(SHARE_URL);
     const orig = btn.innerHTML;
     btn.classList.add('copied');
     btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>복사됨!';
