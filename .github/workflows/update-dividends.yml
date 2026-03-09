@@ -2,7 +2,7 @@ name: Update Dividend Data
 
 on:
   schedule:
-    - cron: '0 22 * * *'  # 7 AM KST (22:00 UTC)
+    - cron: '0 22 * * 0-4'  # 평일만 (Sun-Thu UTC = Mon-Fri KST)
   workflow_dispatch:
 
 permissions:
