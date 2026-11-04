@@ -1,16 +1,356 @@
 {
-  "updated": "2026-11-03 03:20",
+  "updated": "2026-11-04 01:58",
   "stocks": [
     {
-      "ticker": "VLO",
-      "name": "Valero Energy Corporation",
-      "price": 381.46,
-      "dividendYield": 1.26,
-      "dividendRate": 4.8,
-      "payoutRatio": 10.8,
-      "marketCap": 106383245312,
+      "ticker": "VICI",
+      "name": "VICI Properties Inc.",
+      "price": 24.42,
+      "dividendYield": 7.53,
+      "dividendRate": 1.84,
+      "payoutRatio": 83.8,
+      "marketCap": 26888509440,
+      "sector": "Real Estate",
+      "yearReturn": NaN,
+      "divMonths": [
+        3,
+        6,
+        9,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 6.4,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 21.58,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 37.55,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "GIS",
+      "name": "General Mills, Inc.",
+      "price": 34.08,
+      "dividendYield": 7.16,
+      "dividendRate": 2.44,
+      "payoutRatio": 59.4,
+      "marketCap": 18222139392,
+      "sector": "Consumer Defensive",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        4,
+        7,
+        10
+      ],
+      "consecIncreases": 7,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 5.62,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 12.86,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 22.72,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "VZ",
+      "name": "Verizon Communications Inc.",
+      "price": 45.24,
+      "dividendYield": 6.26,
+      "dividendRate": 2.83,
+      "payoutRatio": 71.8,
+      "marketCap": 187501625344,
+      "sector": "Communication Services",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        9,
+        10,
+        12
+      ],
+      "consecIncreases": 22,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 7.63,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 28.01,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 35.6,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "MO",
+      "name": "Altria Group, Inc.",
+      "price": 76.94,
+      "dividendYield": 5.77,
+      "dividendRate": 4.44,
+      "payoutRatio": 88.4,
+      "marketCap": 127984844800,
+      "sector": "Consumer Defensive",
+      "yearReturn": NaN,
+      "divMonths": [
+        3,
+        4,
+        6,
+        9,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 7.99,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 38.11,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 65.21,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "PFE",
+      "name": "Pfizer, Inc.",
+      "price": 30.0,
+      "dividendYield": 5.73,
+      "dividendRate": 1.72,
+      "payoutRatio": 226.3,
+      "marketCap": 170990206976,
+      "sector": "Healthcare",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 7.57,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 19.84,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 24.51,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "O",
+      "name": "Realty Income Corporation",
+      "price": 57.5,
+      "dividendYield": 5.67,
+      "dividendRate": 3.26,
+      "payoutRatio": 234.7,
+      "marketCap": 54407536640,
+      "sector": "Real Estate",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 6.11,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 22.42,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 29.32,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "T",
+      "name": "AT&T Inc.",
+      "price": 21.39,
+      "dividendYield": 5.19,
+      "dividendRate": 1.11,
+      "payoutRatio": 59.4,
+      "marketCap": 144093167616,
+      "sector": "Communication Services",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        9,
+        10
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 4.77,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 24.62,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 41.29,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "CCI",
+      "name": "Crown Castle Inc.",
+      "price": 86.58,
+      "dividendYield": 4.91,
+      "dividendRate": 4.25,
+      "payoutRatio": 172.8,
+      "marketCap": 36835930112,
+      "sector": "Real Estate",
+      "yearReturn": NaN,
+      "divMonths": [
+        3,
+        6,
+        9,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 4.95,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 19.08,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 19.75,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "KMB",
+      "name": "Kimberly-Clark Corporation",
+      "price": 104.46,
+      "dividendYield": 4.9,
+      "dividendRate": 5.12,
+      "payoutRatio": 100.2,
+      "marketCap": 64100818944,
+      "sector": "Consumer Defensive",
+      "yearReturn": NaN,
+      "divMonths": [
+        2,
+        3,
+        5,
+        6,
+        8,
+        9,
+        11,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 5.33,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 14.0,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 22.47,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "OKE",
+      "name": "ONEOK, Inc.",
+      "price": 91.94,
+      "dividendYield": 4.66,
+      "dividendRate": 4.28,
+      "payoutRatio": 65.8,
+      "marketCap": 57963614208,
       "sector": "Energy",
-      "yearReturn": 127.01,
+      "yearReturn": NaN,
       "divMonths": [
         1,
         2,
@@ -21,35 +361,156 @@
         10,
         11
       ],
+      "consecIncreases": 4,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": NaN,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 21.63,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 41.01,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "PEP",
+      "name": "Pepsico, Inc.",
+      "price": 137.27,
+      "dividendYield": 4.31,
+      "dividendRate": 5.92,
+      "payoutRatio": 73.0,
+      "marketCap": 187063484416,
+      "sector": "Consumer Defensive",
+      "yearReturn": NaN,
+      "divMonths": [
+        2,
+        3,
+        5,
+        6,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 127.01,
-          "divReturn": 2.81,
-          "totalReturn": 129.82
+          "priceReturn": NaN,
+          "divReturn": 4.23,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 227.65,
-          "divReturn": 11.53,
-          "totalReturn": 239.18
+          "priceReturn": NaN,
+          "divReturn": 11.1,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 486.86,
-          "divReturn": 32.89,
-          "totalReturn": 519.75
+          "priceReturn": NaN,
+          "divReturn": 18.52,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "TFC",
+      "name": "Truist Financial Corporation",
+      "price": 49.41,
+      "dividendYield": 4.21,
+      "dividendRate": 2.08,
+      "payoutRatio": 53.6,
+      "marketCap": 59217313792,
+      "sector": "Financial Services",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 4.96,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 23.53,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 20.51,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "RF",
+      "name": "Regions Financial Corporation",
+      "price": 28.6,
+      "dividendYield": 4.2,
+      "dividendRate": 1.2,
+      "payoutRatio": 43.3,
+      "marketCap": 24365185024,
+      "sector": "Financial Services",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 4.72,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 22.69,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 23.46,
+          "totalReturn": NaN
         }
       }
     },
     {
       "ticker": "DOW",
       "name": "Dow Inc.",
-      "price": 34.18,
-      "dividendYield": 4.1,
+      "price": 33.79,
+      "dividendYield": 4.14,
       "dividendRate": 1.4,
       "payoutRatio": 700.0,
-      "marketCap": 24742283264,
+      "marketCap": 24459970560,
       "sector": "Basic Materials",
-      "yearReturn": 54.4,
+      "yearReturn": NaN,
       "divMonths": [
         2,
         5,
@@ -59,19 +520,141 @@
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 54.4,
-          "divReturn": 6.32,
-          "totalReturn": 60.72
+          "priceReturn": NaN,
+          "divReturn": 6.5,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": -18.3,
-          "divReturn": 15.9,
-          "totalReturn": -2.41
+          "priceReturn": NaN,
+          "divReturn": 16.02,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": -23.9,
-          "divReturn": 27.27,
-          "totalReturn": 3.37
+          "priceReturn": NaN,
+          "divReturn": 28.17,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "BMY",
+      "name": "Bristol-Myers Squibb Company",
+      "price": 61.71,
+      "dividendYield": 4.08,
+      "dividendRate": 2.52,
+      "payoutRatio": 55.9,
+      "marketCap": 126140538880,
+      "sector": "Healthcare",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        12
+      ],
+      "consecIncreases": 5,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 5.77,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 16.15,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 24.58,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "SPG",
+      "name": "Simon Property Group, Inc.",
+      "price": 222.08,
+      "dividendYield": 4.01,
+      "dividendRate": 8.9,
+      "payoutRatio": 62.1,
+      "marketCap": 84306788352,
+      "sector": "Real Estate",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 5.1,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 24.98,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 30.97,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "D",
+      "name": "Dominion Energy, Inc.",
+      "price": 66.78,
+      "dividendYield": 4.0,
+      "dividendRate": 2.67,
+      "payoutRatio": 88.1,
+      "marketCap": 58737422336,
+      "sector": "Utilities",
+      "yearReturn": NaN,
+      "divMonths": [
+        2,
+        3,
+        5,
+        6,
+        8,
+        9,
+        11,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 4.7,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 20.25,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 22.12,
+          "totalReturn": NaN
         }
       }
     },
@@ -108,922 +691,21 @@
       }
     },
     {
-      "ticker": "MPC",
-      "name": "Marathon Petroleum Corporation",
-      "price": 430.39,
-      "dividendYield": 1.02,
-      "dividendRate": 4.4,
-      "payoutRatio": 13.5,
-      "marketCap": 120864178176,
-      "sector": "Energy",
-      "yearReturn": 123.49,
-      "divMonths": [
-        2,
-        5,
-        8,
-        11
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 123.49,
-          "divReturn": 2.08,
-          "totalReturn": 125.57
-        },
-        "3y": {
-          "priceReturn": 202.84,
-          "divReturn": 7.7,
-          "totalReturn": 210.54
-        },
-        "5y": {
-          "priceReturn": 655.5,
-          "divReturn": 28.54,
-          "totalReturn": 684.04
-        }
-      }
-    },
-    {
-      "ticker": "PSX",
-      "name": "Phillips 66",
-      "price": 275.04,
-      "dividendYield": 1.93,
-      "dividendRate": 5.32,
-      "payoutRatio": 16.1,
-      "marketCap": 107285504000,
-      "sector": "Energy",
-      "yearReturn": 105.33,
-      "divMonths": [
-        2,
-        5,
-        7,
-        8,
-        10,
-        11
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 105.33,
-          "divReturn": 3.74,
-          "totalReturn": 109.07
-        },
-        "3y": {
-          "priceReturn": 159.99,
-          "divReturn": 13.34,
-          "totalReturn": 173.32
-        },
-        "5y": {
-          "priceReturn": 317.76,
-          "divReturn": 33.43,
-          "totalReturn": 351.2
-        }
-      }
-    },
-    {
-      "ticker": "TXN",
-      "name": "Texas Instruments Incorporated",
-      "price": 302.02,
-      "dividendYield": 2.01,
-      "dividendRate": 6.08,
-      "payoutRatio": 73.7,
-      "marketCap": 276121059328,
-      "sector": "Technology",
-      "yearReturn": 91.13,
-      "divMonths": [
-        1,
-        3,
-        4,
-        5,
-        6,
-        7,
-        9,
-        10,
-        11,
-        12
-      ],
-      "consecIncreases": 23,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 91.13,
-          "divReturn": 3.66,
-          "totalReturn": 94.79
-        },
-        "3y": {
-          "priceReturn": 118.13,
-          "divReturn": 11.95,
-          "totalReturn": 130.08
-        },
-        "5y": {
-          "priceReturn": 83.7,
-          "divReturn": 15.97,
-          "totalReturn": 99.66
-        }
-      }
-    },
-    {
-      "ticker": "NUE",
-      "name": "Nucor Corporation",
-      "price": 277.65,
-      "dividendYield": 0.81,
-      "dividendRate": 2.24,
-      "payoutRatio": 17.8,
-      "marketCap": 62992031744,
-      "sector": "Basic Materials",
-      "yearReturn": 89.64,
-      "divMonths": [
-        3,
-        6,
-        9,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 89.64,
-          "divReturn": 1.53,
-          "totalReturn": 91.17
-        },
-        "3y": {
-          "priceReturn": 90.13,
-          "divReturn": 4.52,
-          "totalReturn": 94.65
-        },
-        "5y": {
-          "priceReturn": 170.84,
-          "divReturn": 10.38,
-          "totalReturn": 181.22
-        }
-      }
-    },
-    {
-      "ticker": "MRK",
-      "name": "Merck & Company, Inc.",
-      "price": 148.36,
-      "dividendYield": 2.29,
-      "dividendRate": 3.4,
-      "payoutRatio": 266.7,
-      "marketCap": 366029570048,
-      "sector": "Healthcare",
-      "yearReturn": 85.13,
-      "divMonths": [
-        2,
-        3,
-        5,
-        6,
-        8,
-        9,
-        11,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 85.13,
-          "divReturn": 4.24,
-          "totalReturn": 89.38
-        },
-        "3y": {
-          "priceReturn": 57.26,
-          "divReturn": 10.3,
-          "totalReturn": 67.56
-        },
-        "5y": {
-          "priceReturn": 94.95,
-          "divReturn": 20.24,
-          "totalReturn": 115.18
-        }
-      }
-    },
-    {
-      "ticker": "COP",
-      "name": "ConocoPhillips",
-      "price": 146.84,
-      "dividendYield": 2.29,
-      "dividendRate": 3.36,
-      "payoutRatio": 43.7,
-      "marketCap": 176404398080,
-      "sector": "Energy",
-      "yearReturn": 71.02,
-      "divMonths": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 71.02,
-          "divReturn": 3.91,
-          "totalReturn": 74.93
-        },
-        "3y": {
-          "priceReturn": 33.96,
-          "divReturn": 8.58,
-          "totalReturn": 42.54
-        },
-        "5y": {
-          "priceReturn": 139.6,
-          "divReturn": 29.24,
-          "totalReturn": 168.84
-        }
-      }
-    },
-    {
-      "ticker": "SWK",
-      "name": "Stanley Black & Decker, Inc.",
-      "price": 106.71,
-      "dividendYield": 3.15,
-      "dividendRate": 3.36,
-      "payoutRatio": 81.2,
-      "marketCap": 16114985984,
-      "sector": "Industrials",
-      "yearReturn": 67.7,
-      "divMonths": [
-        2,
-        3,
-        5,
-        6,
-        8,
-        9,
-        10,
-        11,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 67.7,
-          "divReturn": 5.23,
-          "totalReturn": 72.94
-        },
-        "3y": {
-          "priceReturn": 35.44,
-          "divReturn": 12.53,
-          "totalReturn": 47.97
-        },
-        "5y": {
-          "priceReturn": -31.55,
-          "divReturn": 10.42,
-          "totalReturn": -21.13
-        }
-      }
-    },
-    {
-      "ticker": "XOM",
-      "name": "ExxonMobil Holdings Corporation",
-      "price": 179.67,
-      "dividendYield": 2.29,
-      "dividendRate": 4.12,
-      "payoutRatio": 52.5,
-      "marketCap": 732873949184,
-      "sector": "Energy",
-      "yearReturn": 62.52,
-      "divMonths": [
-        2,
-        3,
-        5,
-        6,
-        8,
-        11
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 62.52,
-          "divReturn": 3.73,
-          "totalReturn": 66.24
-        },
-        "3y": {
-          "priceReturn": 83.97,
-          "divReturn": 12.16,
-          "totalReturn": 96.13
-        },
-        "5y": {
-          "priceReturn": 234.88,
-          "divReturn": 35.49,
-          "totalReturn": 270.37
-        }
-      }
-    },
-    {
-      "ticker": "AMGN",
-      "name": "Amgen Inc.",
-      "price": 465.45,
-      "dividendYield": 2.17,
-      "dividendRate": 10.08,
-      "payoutRatio": 60.9,
-      "marketCap": 251637170176,
-      "sector": "Healthcare",
-      "yearReturn": 61.45,
-      "divMonths": [
-        2,
-        5,
-        8,
-        11
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 61.45,
-          "divReturn": 3.45,
-          "totalReturn": 64.89
-        },
-        "3y": {
-          "priceReturn": 88.7,
-          "divReturn": 11.44,
-          "totalReturn": 100.14
-        },
-        "5y": {
-          "priceReturn": 149.3,
-          "divReturn": 23.63,
-          "totalReturn": 172.93
-        }
-      }
-    },
-    {
-      "ticker": "CVX",
-      "name": "Chevron Corporation",
-      "price": 227.77,
-      "dividendYield": 3.13,
-      "dividendRate": 7.12,
-      "payoutRatio": 67.2,
-      "marketCap": 444379299840,
-      "sector": "Energy",
-      "yearReturn": 53.69,
-      "divMonths": [
-        1,
-        2,
-        4,
-        5,
-        7,
-        8,
-        10,
-        11
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 53.69,
-          "divReturn": 4.76,
-          "totalReturn": 58.45
-        },
-        "3y": {
-          "priceReturn": 74.93,
-          "divReturn": 15.52,
-          "totalReturn": 90.45
-        },
-        "5y": {
-          "priceReturn": 146.28,
-          "divReturn": 34.34,
-          "totalReturn": 180.63
-        }
-      }
-    },
-    {
-      "ticker": "EOG",
-      "name": "EOG Resources, Inc.",
-      "price": 157.89,
-      "dividendYield": 2.58,
-      "dividendRate": 4.08,
-      "payoutRatio": 31.4,
-      "marketCap": 82817908736,
-      "sector": "Energy",
-      "yearReturn": 54.22,
-      "divMonths": [
-        1,
-        3,
-        4,
-        6,
-        7,
-        9,
-        10,
-        12
-      ],
-      "consecIncreases": 2,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 54.22,
-          "divReturn": 3.99,
-          "totalReturn": 58.2
-        },
-        "3y": {
-          "priceReturn": 37.08,
-          "divReturn": 11.43,
-          "totalReturn": 48.51
-        },
-        "5y": {
-          "priceReturn": 120.3,
-          "divReturn": 39.44,
-          "totalReturn": 159.74
-        }
-      }
-    },
-    {
-      "ticker": "OKE",
-      "name": "ONEOK, Inc.",
-      "price": 92.52,
-      "dividendYield": 4.63,
-      "dividendRate": 4.28,
-      "payoutRatio": 65.8,
-      "marketCap": 58329272320,
-      "sector": "Energy",
-      "yearReturn": 48.58,
-      "divMonths": [
-        1,
-        2,
-        4,
-        5,
-        7,
-        8,
-        10,
-        11
-      ],
-      "consecIncreases": 4,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 48.58,
-          "divReturn": 6.81,
-          "totalReturn": 55.39
-        },
-        "3y": {
-          "priceReturn": 60.56,
-          "divReturn": 19.59,
-          "totalReturn": 80.15
-        },
-        "5y": {
-          "priceReturn": 89.04,
-          "divReturn": 38.52,
-          "totalReturn": 127.56
-        }
-      }
-    },
-    {
-      "ticker": "MO",
-      "name": "Altria Group, Inc.",
-      "price": 77.17,
-      "dividendYield": 5.75,
-      "dividendRate": 4.44,
-      "payoutRatio": 88.4,
-      "marketCap": 128367427584,
-      "sector": "Consumer Defensive",
-      "yearReturn": 45.38,
-      "divMonths": [
-        3,
-        4,
-        6,
-        9,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 45.38,
-          "divReturn": 8.08,
-          "totalReturn": 53.47
-        },
-        "3y": {
-          "priceReturn": 136.98,
-          "divReturn": 37.99,
-          "totalReturn": 174.97
-        },
-        "5y": {
-          "priceReturn": 152.03,
-          "divReturn": 64.7,
-          "totalReturn": 216.73
-        }
-      }
-    },
-    {
-      "ticker": "PM",
-      "name": "Philip Morris International Inc",
-      "price": 208.29,
-      "dividendYield": 3.07,
-      "dividendRate": 6.4,
-      "payoutRatio": 87.7,
-      "marketCap": 324643553280,
-      "sector": "Consumer Defensive",
-      "yearReturn": 49.14,
-      "divMonths": [
-        3,
-        6,
-        9,
-        10,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 49.14,
-          "divReturn": 4.3,
-          "totalReturn": 53.44
-        },
-        "3y": {
-          "priceReturn": 157.39,
-          "divReturn": 20.74,
-          "totalReturn": 178.13
-        },
-        "5y": {
-          "priceReturn": 176.72,
-          "divReturn": 35.75,
-          "totalReturn": 212.47
-        }
-      }
-    },
-    {
-      "ticker": "JNJ",
-      "name": "Johnson & Johnson",
-      "price": 270.56,
-      "dividendYield": 1.98,
-      "dividendRate": 5.36,
-      "payoutRatio": 80.1,
-      "marketCap": 651321868288,
-      "sector": "Healthcare",
-      "yearReturn": 48.53,
-      "divMonths": [
-        2,
-        5,
-        8,
-        11
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 48.53,
-          "divReturn": 2.9,
-          "totalReturn": 51.43
-        },
-        "3y": {
-          "priceReturn": 94.69,
-          "divReturn": 10.95,
-          "totalReturn": 105.64
-        },
-        "5y": {
-          "priceReturn": 88.48,
-          "divReturn": 16.89,
-          "totalReturn": 105.37
-        }
-      }
-    },
-    {
-      "ticker": "BMY",
-      "name": "Bristol-Myers Squibb Company",
-      "price": 63.02,
-      "dividendYield": 4.0,
-      "dividendRate": 2.52,
-      "payoutRatio": 55.9,
-      "marketCap": 128818290688,
-      "sector": "Healthcare",
-      "yearReturn": 43.03,
-      "divMonths": [
-        1,
-        3,
-        4,
-        5,
-        6,
-        7,
-        9,
-        10,
-        12
-      ],
-      "consecIncreases": 5,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 43.03,
-          "divReturn": 5.72,
-          "totalReturn": 48.75
-        },
-        "3y": {
-          "priceReturn": 37.43,
-          "divReturn": 16.14,
-          "totalReturn": 53.57
-        },
-        "5y": {
-          "priceReturn": 30.58,
-          "divReturn": 24.53,
-          "totalReturn": 55.11
-        }
-      }
-    },
-    {
-      "ticker": "KO",
-      "name": "Coca-Cola Company (The)",
-      "price": 95.83,
-      "dividendYield": 2.21,
-      "dividendRate": 2.12,
-      "payoutRatio": 62.0,
-      "marketCap": 412251324416,
-      "sector": "Consumer Defensive",
-      "yearReturn": 44.74,
-      "divMonths": [
-        3,
-        5,
-        6,
-        9,
-        11,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 44.74,
-          "divReturn": 3.17,
-          "totalReturn": 47.91
-        },
-        "3y": {
-          "priceReturn": 84.12,
-          "divReturn": 11.59,
-          "totalReturn": 95.71
-        },
-        "5y": {
-          "priceReturn": 97.07,
-          "divReturn": 19.72,
-          "totalReturn": 116.79
-        }
-      }
-    },
-    {
-      "ticker": "GILD",
-      "name": "Gilead Sciences, Inc.",
-      "price": 170.33,
-      "dividendYield": 1.93,
-      "dividendRate": 3.28,
-      "payoutRatio": 43.5,
-      "marketCap": 211266863104,
-      "sector": "Healthcare",
-      "yearReturn": 43.01,
-      "divMonths": [
-        3,
-        6,
-        9,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 43.01,
-          "divReturn": 2.73,
-          "totalReturn": 45.74
-        },
-        "3y": {
-          "priceReturn": 129.46,
-          "divReturn": 12.73,
-          "totalReturn": 142.19
-        },
-        "5y": {
-          "priceReturn": 201.93,
-          "divReturn": 27.17,
-          "totalReturn": 229.1
-        }
-      }
-    },
-    {
-      "ticker": "ABBV",
-      "name": "AbbVie Inc.",
-      "price": 288.84,
-      "dividendYield": 2.4,
-      "dividendRate": 6.92,
-      "payoutRatio": 190.4,
-      "marketCap": 510414159872,
-      "sector": "Healthcare",
-      "yearReturn": 40.35,
-      "divMonths": [
-        1,
-        4,
-        7,
-        10
-      ],
-      "consecIncreases": 13,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 40.35,
-          "divReturn": 3.36,
-          "totalReturn": 43.71
-        },
-        "3y": {
-          "priceReturn": 125.67,
-          "divReturn": 15.38,
-          "totalReturn": 141.04
-        },
-        "5y": {
-          "priceReturn": 193.42,
-          "divReturn": 31.74,
-          "totalReturn": 225.15
-        }
-      }
-    },
-    {
-      "ticker": "CSCO",
-      "name": "Cisco Systems, Inc.",
-      "price": 101.61,
-      "dividendYield": 1.65,
-      "dividendRate": 1.68,
-      "payoutRatio": 49.9,
-      "marketCap": 400606265344,
-      "sector": "Technology",
-      "yearReturn": 39.01,
-      "divMonths": [
-        1,
-        3,
-        4,
-        7,
-        9,
-        10,
-        11
-      ],
-      "consecIncreases": 15,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 39.01,
-          "divReturn": 2.28,
-          "totalReturn": 41.29
-        },
-        "3y": {
-          "priceReturn": 106.78,
-          "divReturn": 9.95,
-          "totalReturn": 116.73
-        },
-        "5y": {
-          "priceReturn": 102.12,
-          "divReturn": 15.81,
-          "totalReturn": 117.93
-        }
-      }
-    },
-    {
-      "ticker": "FITB",
-      "name": "Fifth Third Bancorp",
-      "price": 54.97,
-      "dividendYield": 3.06,
-      "dividendRate": 1.68,
-      "payoutRatio": 53.9,
-      "marketCap": 49851883520,
+      "ticker": "KEY",
+      "name": "KeyCorp",
+      "price": 21.23,
+      "dividendYield": 3.86,
+      "dividendRate": 0.82,
+      "payoutRatio": 47.7,
+      "marketCap": 22465075200,
       "sector": "Financial Services",
-      "yearReturn": 36.77,
-      "divMonths": [
-        3,
-        6,
-        9,
-        10,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 36.77,
-          "divReturn": 4.03,
-          "totalReturn": 40.8
-        },
-        "3y": {
-          "priceReturn": 131.24,
-          "divReturn": 19.14,
-          "totalReturn": 150.38
-        },
-        "5y": {
-          "priceReturn": 48.49,
-          "divReturn": 19.23,
-          "totalReturn": 67.73
-        }
-      }
-    },
-    {
-      "ticker": "PFE",
-      "name": "Pfizer, Inc.",
-      "price": 30.67,
-      "dividendYield": 5.61,
-      "dividendRate": 1.72,
-      "payoutRatio": 226.3,
-      "marketCap": 174808989696,
-      "sector": "Healthcare",
-      "yearReturn": 33.09,
-      "divMonths": [
-        1,
-        2,
-        3,
-        5,
-        6,
-        7,
-        8,
-        9,
-        11
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 33.09,
-          "divReturn": 7.46,
-          "totalReturn": 40.56
-        },
-        "3y": {
-          "priceReturn": 18.99,
-          "divReturn": 19.79,
-          "totalReturn": 38.77
-        },
-        "5y": {
-          "priceReturn": -10.84,
-          "divReturn": 24.19,
-          "totalReturn": 13.34
-        }
-      }
-    },
-    {
-      "ticker": "USB",
-      "name": "U.S. Bancorp",
-      "price": 60.49,
-      "dividendYield": 3.57,
-      "dividendRate": 2.16,
-      "payoutRatio": 41.5,
-      "marketCap": 94246535168,
-      "sector": "Financial Services",
-      "yearReturn": 34.74,
-      "divMonths": [
-        1,
-        3,
-        6,
-        9,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 34.74,
-          "divReturn": 4.68,
-          "totalReturn": 39.42
-        },
-        "3y": {
-          "priceReturn": 93.67,
-          "divReturn": 19.5,
-          "totalReturn": 113.16
-        },
-        "5y": {
-          "priceReturn": 21.89,
-          "divReturn": 19.89,
-          "totalReturn": 41.78
-        }
-      }
-    },
-    {
-      "ticker": "APD",
-      "name": "Air Products and Chemicals, Inc",
-      "price": 316.03,
-      "dividendYield": 2.29,
-      "dividendRate": 7.24,
-      "payoutRatio": 75.7,
-      "marketCap": 70375309312,
-      "sector": "Basic Materials",
-      "yearReturn": 35.54,
-      "divMonths": [
-        1,
-        3,
-        4,
-        6,
-        7,
-        9,
-        10,
-        12
-      ],
-      "consecIncreases": 2,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 35.54,
-          "divReturn": 3.1,
-          "totalReturn": 38.64
-        },
-        "3y": {
-          "priceReturn": 16.53,
-          "divReturn": 7.9,
-          "totalReturn": 24.42
-        },
-        "5y": {
-          "priceReturn": 18.72,
-          "divReturn": 13.02,
-          "totalReturn": 31.73
-        }
-      }
-    },
-    {
-      "ticker": "LMT",
-      "name": "Lockheed Martin Corporation",
-      "price": 643.15,
-      "dividendYield": 2.24,
-      "dividendRate": 14.4,
-      "payoutRatio": 49.0,
-      "marketCap": 148570636288,
-      "sector": "Industrials",
-      "yearReturn": 35.22,
+      "yearReturn": NaN,
       "divMonths": [
         2,
         3,
         5,
         6,
+        7,
         8,
         9,
         11,
@@ -1032,189 +714,107 @@
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 35.22,
-          "divReturn": 2.9,
-          "totalReturn": 38.12
+          "priceReturn": NaN,
+          "divReturn": 4.93,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 53.68,
-          "divReturn": 9.46,
-          "totalReturn": 63.14
+          "priceReturn": NaN,
+          "divReturn": 25.24,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 121.88,
-          "divReturn": 21.67,
-          "totalReturn": 143.54
+          "priceReturn": NaN,
+          "divReturn": 22.01,
+          "totalReturn": NaN
         }
       }
     },
     {
-      "ticker": "SPG",
-      "name": "Simon Property Group, Inc.",
-      "price": 221.73,
-      "dividendYield": 4.01,
-      "dividendRate": 8.9,
-      "payoutRatio": 62.1,
-      "marketCap": 84173914112,
+      "ticker": "AMT",
+      "name": "American Tower Corporation (REI",
+      "price": 187.29,
+      "dividendYield": 3.82,
+      "dividendRate": 7.16,
+      "payoutRatio": 99.6,
+      "marketCap": 86858268672,
       "sector": "Real Estate",
-      "yearReturn": 31.32,
+      "yearReturn": NaN,
       "divMonths": [
-        1,
-        2,
-        3,
         4,
-        5,
         6,
-        7,
-        8,
         9,
         10,
-        11,
         12
       ],
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 31.32,
-          "divReturn": 5.27,
-          "totalReturn": 36.59
+          "priceReturn": NaN,
+          "divReturn": 4.08,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 117.88,
-          "divReturn": 24.81,
-          "totalReturn": 142.69
+          "priceReturn": NaN,
+          "divReturn": 12.12,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 73.98,
-          "divReturn": 30.88,
-          "totalReturn": 104.85
+          "priceReturn": NaN,
+          "divReturn": 13.64,
+          "totalReturn": NaN
         }
       }
     },
     {
-      "ticker": "SJM",
-      "name": "The J.M. Smucker Company",
-      "price": 131.35,
-      "dividendYield": 3.41,
-      "dividendRate": 4.48,
-      "payoutRatio": 205.6,
-      "marketCap": 14031225856,
-      "sector": "Consumer Defensive",
-      "yearReturn": 31.95,
+      "ticker": "EXC",
+      "name": "Exelon Corporation",
+      "price": 45.5,
+      "dividendYield": 3.69,
+      "dividendRate": 1.68,
+      "payoutRatio": 64.8,
+      "marketCap": 47087800320,
+      "sector": "Utilities",
+      "yearReturn": NaN,
       "divMonths": [
         2,
+        3,
         5,
+        6,
         8,
         9,
+        10,
         11
       ],
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 31.95,
-          "divReturn": 4.44,
-          "totalReturn": 36.4
+          "priceReturn": NaN,
+          "divReturn": 3.71,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 30.05,
-          "divReturn": 12.89,
-          "totalReturn": 42.94
+          "priceReturn": NaN,
+          "divReturn": 13.26,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 24.62,
-          "divReturn": 20.05,
-          "totalReturn": 44.67
-        }
-      }
-    },
-    {
-      "ticker": "CL",
-      "name": "Colgate-Palmolive Company",
-      "price": 97.43,
-      "dividendYield": 2.18,
-      "dividendRate": 2.12,
-      "payoutRatio": 81.7,
-      "marketCap": 77449109504,
-      "sector": "Consumer Defensive",
-      "yearReturn": 33.06,
-      "divMonths": [
-        1,
-        4,
-        7,
-        10
-      ],
-      "consecIncreases": 53,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 33.06,
-          "divReturn": 2.88,
-          "totalReturn": 35.94
-        },
-        "3y": {
-          "priceReturn": 39.58,
-          "divReturn": 8.81,
-          "totalReturn": 48.39
-        },
-        "5y": {
-          "priceReturn": 42.0,
-          "divReturn": 14.46,
-          "totalReturn": 56.46
-        }
-      }
-    },
-    {
-      "ticker": "PNC",
-      "name": "PNC Financial Services Group, I",
-      "price": 231.66,
-      "dividendYield": 3.45,
-      "dividendRate": 8.0,
-      "payoutRatio": 37.4,
-      "marketCap": 92025208832,
-      "sector": "Financial Services",
-      "yearReturn": 30.94,
-      "divMonths": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12
-      ],
-      "consecIncreases": 16,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 30.94,
-          "divReturn": 4.18,
-          "totalReturn": 35.13
-        },
-        "3y": {
-          "priceReturn": 109.24,
-          "divReturn": 18.34,
-          "totalReturn": 127.58
-        },
-        "5y": {
-          "priceReturn": 31.24,
-          "divReturn": 18.21,
-          "totalReturn": 49.45
+          "priceReturn": NaN,
+          "divReturn": 23.05,
+          "totalReturn": NaN
         }
       }
     },
     {
       "ticker": "KMI",
       "name": "Kinder Morgan, Inc.",
-      "price": 32.71,
-      "dividendYield": 3.64,
+      "price": 32.87,
+      "dividendYield": 3.62,
       "dividendRate": 1.19,
       "payoutRatio": 72.8,
-      "marketCap": 72868569088,
+      "marketCap": 73225003008,
       "sector": "Energy",
-      "yearReturn": 30.15,
+      "yearReturn": NaN,
       "divMonths": [
         1,
         2,
@@ -1228,32 +828,337 @@
       "consecIncreases": 9,
       "totalReturns": {
         "1y": {
-          "priceReturn": 30.15,
-          "divReturn": 4.7,
-          "totalReturn": 34.85
+          "priceReturn": NaN,
+          "divReturn": NaN,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 122.39,
-          "divReturn": 21.78,
-          "totalReturn": 144.16
+          "priceReturn": NaN,
+          "divReturn": 24.09,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 152.68,
-          "divReturn": 41.98,
-          "totalReturn": 194.65
+          "priceReturn": NaN,
+          "divReturn": 44.54,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "USB",
+      "name": "U.S. Bancorp",
+      "price": 59.89,
+      "dividendYield": 3.61,
+      "dividendRate": 2.16,
+      "payoutRatio": 41.5,
+      "marketCap": 93311696896,
+      "sector": "Financial Services",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        3,
+        6,
+        9,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 4.7,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 19.62,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 20.4,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "PSA",
+      "name": "Public Storage",
+      "price": 333.39,
+      "dividendYield": 3.6,
+      "dividendRate": 12.0,
+      "payoutRatio": 126.2,
+      "marketCap": 62291742720,
+      "sector": "Real Estate",
+      "yearReturn": NaN,
+      "divMonths": [
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 4.53,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 16.37,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 25.61,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "SJM",
+      "name": "The J.M. Smucker Company",
+      "price": 127.98,
+      "dividendYield": 3.5,
+      "dividendRate": 4.48,
+      "payoutRatio": 205.6,
+      "marketCap": 13671231488,
+      "sector": "Consumer Defensive",
+      "yearReturn": NaN,
+      "divMonths": [
+        2,
+        5,
+        8,
+        9,
+        11
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 4.44,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 12.96,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 20.14,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "PNC",
+      "name": "PNC Financial Services Group, I",
+      "price": 229.41,
+      "dividendYield": 3.49,
+      "dividendRate": 8.0,
+      "payoutRatio": 37.4,
+      "marketCap": 91131420672,
+      "sector": "Financial Services",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "consecIncreases": 16,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 4.18,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 18.59,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 18.65,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "DUK",
+      "name": "Duke Energy Corporation (Holdin",
+      "price": 126.51,
+      "dividendYield": 3.43,
+      "dividendRate": 4.34,
+      "payoutRatio": 64.2,
+      "marketCap": 98640125952,
+      "sector": "Utilities",
+      "yearReturn": NaN,
+      "divMonths": [
+        2,
+        5,
+        8,
+        11
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 3.58,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 15.72,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 24.72,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "PLD",
+      "name": "Prologis, Inc.",
+      "price": 129.08,
+      "dividendYield": 3.32,
+      "dividendRate": 4.28,
+      "payoutRatio": 93.0,
+      "marketCap": 125477560320,
+      "sector": "Real Estate",
+      "yearReturn": NaN,
+      "divMonths": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 3.51,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 12.55,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 14.39,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "WEC",
+      "name": "WEC Energy Group, Inc.",
+      "price": 115.4,
+      "dividendYield": 3.3,
+      "dividendRate": 3.81,
+      "payoutRatio": 68.2,
+      "marketCap": 37965713408,
+      "sector": "Utilities",
+      "yearReturn": NaN,
+      "divMonths": [
+        2,
+        5,
+        6,
+        8,
+        11
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 3.47,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 14.19,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 21.79,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "SO",
+      "name": "Southern Company (The)",
+      "price": 93.75,
+      "dividendYield": 3.24,
+      "dividendRate": 3.04,
+      "payoutRatio": 71.8,
+      "marketCap": 107846533120,
+      "sector": "Utilities",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 3.34,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 14.03,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 27.28,
+          "totalReturn": NaN
         }
       }
     },
     {
       "ticker": "CFG",
       "name": "Citizens Financial Group, Inc.",
-      "price": 64.93,
-      "dividendYield": 3.2,
+      "price": 64.37,
+      "dividendYield": 3.23,
       "dividendRate": 2.08,
       "payoutRatio": 37.2,
-      "marketCap": 27218333696,
+      "marketCap": 26983585792,
       "sector": "Financial Services",
-      "yearReturn": 30.98,
+      "yearReturn": NaN,
       "divMonths": [
         1,
         2,
@@ -1267,32 +1172,72 @@
       "consecIncreases": 2,
       "totalReturns": {
         "1y": {
-          "priceReturn": 30.98,
-          "divReturn": 3.83,
-          "totalReturn": 34.81
+          "priceReturn": NaN,
+          "divReturn": 3.85,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 177.07,
-          "divReturn": 22.62,
-          "totalReturn": 199.68
+          "priceReturn": NaN,
+          "divReturn": 22.9,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 64.44,
-          "divReturn": 21.78,
-          "totalReturn": 86.22
+          "priceReturn": NaN,
+          "divReturn": 22.07,
+          "totalReturn": NaN
         }
       }
     },
     {
-      "ticker": "WELL",
-      "name": "Welltower Inc.",
-      "price": 239.0,
-      "dividendYield": 1.42,
-      "dividendRate": 3.4,
-      "payoutRatio": 130.1,
-      "marketCap": 175332753408,
-      "sector": "Real Estate",
-      "yearReturn": 33.02,
+      "ticker": "SWK",
+      "name": "Stanley Black & Decker, Inc.",
+      "price": 104.62,
+      "dividendYield": 3.21,
+      "dividendRate": 3.36,
+      "payoutRatio": 81.2,
+      "marketCap": 15799361536,
+      "sector": "Industrials",
+      "yearReturn": NaN,
+      "divMonths": [
+        2,
+        3,
+        5,
+        6,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 5.21,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 12.84,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 10.6,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "CVX",
+      "name": "Chevron Corporation",
+      "price": 225.27,
+      "dividendYield": 3.16,
+      "dividendRate": 7.12,
+      "payoutRatio": 67.2,
+      "marketCap": 439501783040,
+      "sector": "Energy",
+      "yearReturn": NaN,
       "divMonths": [
         1,
         2,
@@ -1301,78 +1246,146 @@
         7,
         8,
         10,
-        11,
-        12
+        11
       ],
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 33.02,
-          "divReturn": 1.71,
-          "totalReturn": 34.73
+          "priceReturn": NaN,
+          "divReturn": 4.78,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 186.5,
-          "divReturn": 9.97,
-          "totalReturn": 196.48
+          "priceReturn": NaN,
+          "divReturn": 15.59,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 225.3,
-          "divReturn": 17.97,
-          "totalReturn": 243.26
+          "priceReturn": NaN,
+          "divReturn": 34.19,
+          "totalReturn": NaN
         }
       }
     },
     {
-      "ticker": "KEY",
-      "name": "KeyCorp",
-      "price": 21.49,
-      "dividendYield": 3.82,
-      "dividendRate": 0.82,
-      "payoutRatio": 47.7,
-      "marketCap": 22740201472,
+      "ticker": "FITB",
+      "name": "Fifth Third Bancorp",
+      "price": 53.93,
+      "dividendYield": 3.12,
+      "dividendRate": 1.68,
+      "payoutRatio": 53.9,
+      "marketCap": 48891482112,
       "sector": "Financial Services",
-      "yearReturn": 27.56,
+      "yearReturn": NaN,
       "divMonths": [
-        2,
         3,
-        5,
         6,
-        7,
-        8,
         9,
-        11,
+        10,
         12
       ],
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 27.56,
-          "divReturn": 4.87,
-          "totalReturn": 32.43
+          "priceReturn": NaN,
+          "divReturn": 3.97,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 118.15,
-          "divReturn": 24.97,
-          "totalReturn": 143.13
+          "priceReturn": NaN,
+          "divReturn": 19.39,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 14.47,
-          "divReturn": 21.63,
-          "totalReturn": 36.1
+          "priceReturn": NaN,
+          "divReturn": 19.55,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "SRE",
+      "name": "DBA Sempra",
+      "price": 85.36,
+      "dividendYield": 3.08,
+      "dividendRate": 2.63,
+      "payoutRatio": 75.3,
+      "marketCap": 55816933376,
+      "sector": "Utilities",
+      "yearReturn": NaN,
+      "divMonths": [
+        3,
+        6,
+        7,
+        9,
+        10,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 2.92,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 11.66,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 22.51,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "PM",
+      "name": "Philip Morris International Inc",
+      "price": 208.03,
+      "dividendYield": 3.08,
+      "dividendRate": 6.4,
+      "payoutRatio": 87.7,
+      "marketCap": 324238344192,
+      "sector": "Consumer Defensive",
+      "yearReturn": NaN,
+      "divMonths": [
+        3,
+        6,
+        9,
+        10,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 4.21,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 20.86,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 36.14,
+          "totalReturn": NaN
         }
       }
     },
     {
       "ticker": "ED",
       "name": "Consolidated Edison, Inc.",
-      "price": 118.48,
-      "dividendYield": 3.0,
+      "price": 116.81,
+      "dividendYield": 3.04,
       "dividendRate": 3.55,
       "payoutRatio": 57.2,
-      "marketCap": 43817299968,
+      "marketCap": 43199680512,
       "sector": "Utilities",
-      "yearReturn": 26.67,
+      "yearReturn": NaN,
       "divMonths": [
         1,
         2,
@@ -1386,458 +1399,183 @@
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 26.67,
-          "divReturn": 3.76,
-          "totalReturn": 30.42
+          "priceReturn": NaN,
+          "divReturn": 3.71,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 45.69,
-          "divReturn": 12.53,
-          "totalReturn": 58.22
+          "priceReturn": NaN,
+          "divReturn": 12.47,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 82.95,
-          "divReturn": 25.57,
-          "totalReturn": 108.51
+          "priceReturn": NaN,
+          "divReturn": 25.8,
+          "totalReturn": NaN
         }
       }
     },
     {
-      "ticker": "PSA",
-      "name": "Public Storage",
-      "price": 333.24,
-      "dividendYield": 3.6,
-      "dividendRate": 12.0,
-      "payoutRatio": 126.2,
-      "marketCap": 62263709696,
-      "sector": "Real Estate",
-      "yearReturn": 25.0,
-      "divMonths": [
-        2,
-        3,
-        5,
-        6,
-        7,
-        8,
-        9,
-        11,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 25.0,
-          "divReturn": 4.5,
-          "totalReturn": 29.5
-        },
-        "3y": {
-          "priceReturn": 48.48,
-          "divReturn": 16.04,
-          "totalReturn": 64.52
-        },
-        "5y": {
-          "priceReturn": 25.17,
-          "divReturn": 25.6,
-          "totalReturn": 50.76
-        }
-      }
-    },
-    {
-      "ticker": "LIN",
-      "name": "Linde plc",
-      "price": 519.72,
-      "dividendYield": 1.23,
-      "dividendRate": 6.4,
-      "payoutRatio": 41.8,
-      "marketCap": 238595014656,
-      "sector": "Basic Materials",
-      "yearReturn": 27.8,
-      "divMonths": [
-        3,
-        5,
-        6,
-        8,
-        9,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 27.8,
-          "divReturn": 1.55,
-          "totalReturn": 29.35
-        },
-        "3y": {
-          "priceReturn": 37.59,
-          "divReturn": 4.67,
-          "totalReturn": 42.26
-        },
-        "5y": {
-          "priceReturn": 69.33,
-          "divReturn": 8.86,
-          "totalReturn": 78.2
-        }
-      }
-    },
-    {
-      "ticker": "VZ",
-      "name": "Verizon Communications Inc.",
-      "price": 45.05,
-      "dividendYield": 6.28,
-      "dividendRate": 2.83,
-      "payoutRatio": 71.8,
-      "marketCap": 186714144768,
+      "ticker": "TMUS",
+      "name": "T-Mobile US, Inc.",
+      "price": 154.41,
+      "dividendYield": 3.03,
+      "dividendRate": 4.68,
+      "payoutRatio": 39.3,
+      "marketCap": 163562274816,
       "sector": "Communication Services",
-      "yearReturn": 21.73,
-      "divMonths": [
-        1,
-        3,
-        4,
-        6,
-        7,
-        9,
-        10,
-        12
-      ],
-      "consecIncreases": 22,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 21.73,
-          "divReturn": 7.6,
-          "totalReturn": 29.34
-        },
-        "3y": {
-          "priceReturn": 52.08,
-          "divReturn": 27.72,
-          "totalReturn": 79.8
-        },
-        "5y": {
-          "priceReturn": 17.15,
-          "divReturn": 34.87,
-          "totalReturn": 52.02
-        }
-      }
-    },
-    {
-      "ticker": "RF",
-      "name": "Regions Financial Corporation",
-      "price": 28.97,
-      "dividendYield": 4.14,
-      "dividendRate": 1.2,
-      "payoutRatio": 43.3,
-      "marketCap": 24680398848,
-      "sector": "Financial Services",
-      "yearReturn": 24.35,
-      "divMonths": [
-        1,
-        2,
-        3,
-        4,
-        6,
-        7,
-        8,
-        9,
-        10,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 24.35,
-          "divReturn": 4.7,
-          "totalReturn": 29.05
-        },
-        "3y": {
-          "priceReturn": 109.87,
-          "divReturn": 22.31,
-          "totalReturn": 132.18
-        },
-        "5y": {
-          "priceReturn": 44.19,
-          "divReturn": 23.04,
-          "totalReturn": 67.24
-        }
-      }
-    },
-    {
-      "ticker": "WMB",
-      "name": "Williams Companies, Inc. (The)",
-      "price": 71.19,
-      "dividendYield": 2.95,
-      "dividendRate": 2.1,
-      "payoutRatio": 81.7,
-      "marketCap": 87077298176,
-      "sector": "Energy",
-      "yearReturn": 24.27,
-      "divMonths": [
-        2,
-        3,
-        4,
-        5,
-        6,
-        8,
-        9,
-        11,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 24.27,
-          "divReturn": 3.62,
-          "totalReturn": 27.89
-        },
-        "3y": {
-          "priceReturn": 120.74,
-          "divReturn": 18.37,
-          "totalReturn": 139.1
-        },
-        "5y": {
-          "priceReturn": 213.37,
-          "divReturn": 41.28,
-          "totalReturn": 254.65
-        }
-      }
-    },
-    {
-      "ticker": "AAPL",
-      "name": "Apple Inc.",
-      "price": 338.32,
-      "dividendYield": 0.32,
-      "dividendRate": 1.08,
-      "payoutRatio": 12.0,
-      "marketCap": 4937503211520,
-      "sector": "Technology",
-      "yearReturn": 26.21,
+      "yearReturn": NaN,
       "divMonths": [
         2,
         5,
-        6,
         8,
         11
       ],
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 26.21,
-          "divReturn": 0.4,
-          "totalReturn": 26.61
+          "priceReturn": NaN,
+          "divReturn": 2.02,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 94.11,
-          "divReturn": 1.76,
-          "totalReturn": 95.87
+          "priceReturn": NaN,
+          "divReturn": 7.28,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 128.97,
-          "divReturn": 3.32,
-          "totalReturn": 132.28
+          "priceReturn": NaN,
+          "divReturn": 8.75,
+          "totalReturn": NaN
         }
       }
     },
     {
-      "ticker": "D",
-      "name": "Dominion Energy, Inc.",
-      "price": 67.72,
-      "dividendYield": 3.94,
-      "dividendRate": 2.67,
-      "payoutRatio": 88.1,
-      "marketCap": 59564216320,
+      "ticker": "XEL",
+      "name": "Xcel Energy Inc.",
+      "price": 78.76,
+      "dividendYield": 3.01,
+      "dividendRate": 2.37,
+      "payoutRatio": 54.7,
+      "marketCap": 50554032128,
       "sector": "Utilities",
-      "yearReturn": 20.73,
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 2.97,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 12.37,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 20.0,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "AEP",
+      "name": "American Electric Power Company",
+      "price": 129.86,
+      "dividendYield": 2.99,
+      "dividendRate": 3.88,
+      "payoutRatio": 62.1,
+      "marketCap": 70712188928,
+      "sector": "Utilities",
+      "yearReturn": NaN,
       "divMonths": [
         2,
-        3,
         5,
         6,
         8,
-        9,
+        10,
         11,
         12
       ],
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 20.73,
-          "divReturn": 4.76,
-          "totalReturn": 25.49
+          "priceReturn": NaN,
+          "divReturn": 3.26,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 78.85,
-          "divReturn": 21.17,
-          "totalReturn": 100.02
+          "priceReturn": NaN,
+          "divReturn": 15.52,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 12.36,
-          "divReturn": 22.1,
-          "totalReturn": 34.47
+          "priceReturn": NaN,
+          "divReturn": 24.94,
+          "totalReturn": NaN
         }
       }
     },
     {
-      "ticker": "ITW",
-      "name": "Illinois Tool Works Inc.",
-      "price": 290.05,
-      "dividendYield": 2.37,
-      "dividendRate": 6.88,
-      "payoutRatio": 58.4,
-      "marketCap": 82432204800,
-      "sector": "Industrials",
-      "yearReturn": 22.35,
+      "ticker": "NEE",
+      "name": "NextEra Energy, Inc.",
+      "price": 84.33,
+      "dividendYield": 2.95,
+      "dividendRate": 2.49,
+      "payoutRatio": 43.9,
+      "marketCap": 176865820672,
+      "sector": "Utilities",
+      "yearReturn": NaN,
       "divMonths": [
-        1,
         2,
         3,
-        4,
         5,
         6,
-        7,
         8,
-        9,
-        10,
         11,
         12
       ],
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 22.35,
-          "divReturn": 2.76,
-          "totalReturn": 25.11
+          "priceReturn": NaN,
+          "divReturn": 3.07,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 33.68,
-          "divReturn": 8.46,
-          "totalReturn": 42.14
+          "priceReturn": NaN,
+          "divReturn": 12.34,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 42.45,
-          "divReturn": 14.08,
-          "totalReturn": 56.53
-        }
-      }
-    },
-    {
-      "ticker": "TFC",
-      "name": "Truist Financial Corporation",
-      "price": 50.17,
-      "dividendYield": 4.15,
-      "dividendRate": 2.08,
-      "payoutRatio": 53.6,
-      "marketCap": 60128161792,
-      "sector": "Financial Services",
-      "yearReturn": 18.32,
-      "divMonths": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        7,
-        8,
-        10,
-        11
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 18.32,
-          "divReturn": 4.91,
-          "totalReturn": 23.22
-        },
-        "3y": {
-          "priceReturn": 86.42,
-          "divReturn": 23.19,
-          "totalReturn": 109.6
-        },
-        "5y": {
-          "priceReturn": -2.02,
-          "divReturn": 20.08,
-          "totalReturn": 18.05
-        }
-      }
-    },
-    {
-      "ticker": "EMR",
-      "name": "Emerson Electric Company",
-      "price": 165.96,
-      "dividendYield": 1.34,
-      "dividendRate": 2.22,
-      "payoutRatio": 48.0,
-      "marketCap": 92572491776,
-      "sector": "Industrials",
-      "yearReturn": 20.38,
-      "divMonths": [
-        2,
-        5,
-        8,
-        10,
-        11
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 20.38,
-          "divReturn": 1.61,
-          "totalReturn": 21.99
-        },
-        "3y": {
-          "priceReturn": 90.23,
-          "divReturn": 7.37,
-          "totalReturn": 97.6
-        },
-        "5y": {
-          "priceReturn": 92.31,
-          "divReturn": 12.25,
-          "totalReturn": 104.56
-        }
-      }
-    },
-    {
-      "ticker": "RTX",
-      "name": "RTX Corporation",
-      "price": 202.79,
-      "dividendYield": 1.44,
-      "dividendRate": 2.92,
-      "payoutRatio": 45.9,
-      "marketCap": 273653039104,
-      "sector": "Industrials",
-      "yearReturn": 16.24,
-      "divMonths": [
-        2,
-        5,
-        8,
-        11
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 16.24,
-          "divReturn": 1.62,
-          "totalReturn": 17.86
-        },
-        "3y": {
-          "priceReturn": 160.26,
-          "divReturn": 10.11,
-          "totalReturn": 170.38
-        },
-        "5y": {
-          "priceReturn": 154.63,
-          "divReturn": 15.42,
-          "totalReturn": 170.05
+          "priceReturn": NaN,
+          "divReturn": 13.7,
+          "totalReturn": NaN
         }
       }
     },
     {
       "ticker": "MDT",
       "name": "Medtronic plc.",
-      "price": 99.29,
-      "dividendYield": 2.9,
+      "price": 98.88,
+      "dividendYield": 2.91,
       "dividendRate": 2.88,
       "payoutRatio": 70.0,
-      "marketCap": 127005605888,
+      "marketCap": 126481154048,
       "sector": "Healthcare",
-      "yearReturn": 13.73,
+      "yearReturn": NaN,
       "divMonths": [
         1,
         3,
@@ -1851,32 +1589,144 @@
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 13.73,
-          "divReturn": 3.28,
-          "totalReturn": 17.0
+          "priceReturn": NaN,
+          "divReturn": 3.27,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 50.97,
-          "divReturn": 12.86,
-          "totalReturn": 63.83
+          "priceReturn": NaN,
+          "divReturn": 12.71,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": -3.86,
-          "divReturn": 13.38,
-          "totalReturn": 9.53
+          "priceReturn": NaN,
+          "divReturn": 13.44,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "WMB",
+      "name": "Williams Companies, Inc. (The)",
+      "price": 72.47,
+      "dividendYield": 2.9,
+      "dividendRate": 2.1,
+      "payoutRatio": 81.7,
+      "marketCap": 88642953216,
+      "sector": "Energy",
+      "yearReturn": NaN,
+      "divMonths": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        11,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 3.78,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 18.53,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 41.31,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "DLR",
+      "name": "Digital Realty Trust, Inc.",
+      "price": 180.25,
+      "dividendYield": 2.71,
+      "dividendRate": 4.88,
+      "payoutRatio": 205.9,
+      "marketCap": 68073885696,
+      "sector": "Real Estate",
+      "yearReturn": NaN,
+      "divMonths": [
+        3,
+        6,
+        9,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 2.98,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 12.38,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 18.47,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "IBM",
+      "name": "International Business Machines",
+      "price": 250.04,
+      "dividendYield": 2.7,
+      "dividendRate": 6.76,
+      "payoutRatio": 57.5,
+      "marketCap": 236317999104,
+      "sector": "Technology",
+      "yearReturn": NaN,
+      "divMonths": [
+        2,
+        5,
+        7,
+        8,
+        10,
+        11
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 2.3,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 14.8,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 33.36,
+          "totalReturn": NaN
         }
       }
     },
     {
       "ticker": "PG",
       "name": "Procter & Gamble Company (The)",
-      "price": 163.56,
-      "dividendYield": 2.66,
+      "price": 162.06,
+      "dividendYield": 2.68,
       "dividendRate": 4.35,
       "payoutRatio": 64.6,
-      "marketCap": 379096596480,
+      "marketCap": 375619911680,
       "sector": "Consumer Defensive",
-      "yearReturn": 13.71,
+      "yearReturn": NaN,
       "divMonths": [
         1,
         4,
@@ -1887,32 +1737,71 @@
       "consecIncreases": 23,
       "totalReturns": {
         "1y": {
-          "priceReturn": 13.71,
-          "divReturn": 3.01,
-          "totalReturn": 16.71
+          "priceReturn": NaN,
+          "divReturn": 3.02,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 17.98,
-          "divReturn": 8.99,
-          "totalReturn": 26.97
+          "priceReturn": NaN,
+          "divReturn": 8.94,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 28.27,
-          "divReturn": 15.54,
-          "totalReturn": 43.81
+          "priceReturn": NaN,
+          "divReturn": 15.51,
+          "totalReturn": NaN
         }
       }
     },
     {
-      "ticker": "KMB",
-      "name": "Kimberly-Clark Corporation",
-      "price": 108.25,
-      "dividendYield": 4.73,
-      "dividendRate": 5.12,
-      "payoutRatio": 100.2,
-      "marketCap": 36001681408,
-      "sector": "Consumer Defensive",
-      "yearReturn": 11.27,
+      "ticker": "EOG",
+      "name": "EOG Resources, Inc.",
+      "price": 155.17,
+      "dividendYield": 2.63,
+      "dividendRate": 4.08,
+      "payoutRatio": 31.4,
+      "marketCap": 82647973888,
+      "sector": "Energy",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        3,
+        4,
+        6,
+        7,
+        9,
+        10,
+        12
+      ],
+      "consecIncreases": 2,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 4.0,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 11.59,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 39.46,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "BAC",
+      "name": "Bank of America Corporation",
+      "price": 49.66,
+      "dividendYield": 2.58,
+      "dividendRate": 1.28,
+      "payoutRatio": 27.6,
+      "marketCap": 342664380416,
+      "sector": "Financial Services",
+      "yearReturn": NaN,
       "divMonths": [
         2,
         3,
@@ -1926,37 +1815,114 @@
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 11.27,
-          "divReturn": 5.24,
-          "totalReturn": 16.51
+          "priceReturn": NaN,
+          "divReturn": 2.21,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 2.59,
-          "divReturn": 14.16,
-          "totalReturn": 16.75
+          "priceReturn": NaN,
+          "divReturn": 12.14,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": -0.4,
-          "divReturn": 22.32,
-          "totalReturn": 21.92
+          "priceReturn": NaN,
+          "divReturn": 11.82,
+          "totalReturn": NaN
         }
       }
     },
     {
-      "ticker": "AEP",
-      "name": "American Electric Power Company",
-      "price": 130.33,
-      "dividendYield": 2.98,
-      "dividendRate": 3.88,
-      "payoutRatio": 62.1,
-      "marketCap": 70968115200,
-      "sector": "Utilities",
-      "yearReturn": 12.05,
+      "ticker": "ABBV",
+      "name": "AbbVie Inc.",
+      "price": 286.0,
+      "dividendYield": 2.42,
+      "dividendRate": 6.92,
+      "payoutRatio": 190.4,
+      "marketCap": 505395544064,
+      "sector": "Healthcare",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        4,
+        7,
+        10
+      ],
+      "consecIncreases": 13,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 3.3,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 15.4,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 31.87,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "XOM",
+      "name": "ExxonMobil Holdings Corporation",
+      "price": 177.46,
+      "dividendYield": 2.41,
+      "dividendRate": 4.28,
+      "payoutRatio": 42.4,
+      "marketCap": 723859406848,
+      "sector": "Energy",
+      "yearReturn": NaN,
       "divMonths": [
         2,
+        3,
         5,
         6,
         8,
+        11
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 3.71,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 12.38,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 35.22,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "ITW",
+      "name": "Illinois Tool Works Inc.",
+      "price": 286.64,
+      "dividendYield": 2.4,
+      "dividendRate": 6.88,
+      "payoutRatio": 58.4,
+      "marketCap": 81463091200,
+      "sector": "Industrials",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
         10,
         11,
         12
@@ -1964,35 +1930,160 @@
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 12.05,
-          "divReturn": 3.27,
-          "totalReturn": 15.32
+          "priceReturn": NaN,
+          "divReturn": 2.74,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 82.17,
-          "divReturn": 15.43,
-          "totalReturn": 97.6
+          "priceReturn": NaN,
+          "divReturn": 8.53,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 83.69,
-          "divReturn": 24.64,
-          "totalReturn": 108.33
+          "priceReturn": NaN,
+          "divReturn": 13.87,
+          "totalReturn": NaN
         }
       }
     },
     {
-      "ticker": "AMT",
-      "name": "American Tower Corporation (REI",
-      "price": 188.3,
-      "dividendYield": 3.8,
-      "dividendRate": 7.16,
-      "payoutRatio": 99.6,
-      "marketCap": 87326679040,
-      "sector": "Real Estate",
-      "yearReturn": 10.94,
+      "ticker": "MRK",
+      "name": "Merck & Company, Inc.",
+      "price": 144.67,
+      "dividendYield": 2.35,
+      "dividendRate": 3.4,
+      "payoutRatio": 266.7,
+      "marketCap": 356925702144,
+      "sector": "Healthcare",
+      "yearReturn": NaN,
       "divMonths": [
+        2,
+        3,
+        5,
+        6,
+        8,
+        9,
+        11,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 4.17,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 10.21,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 19.82,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "WFC",
+      "name": "Wells Fargo & Company",
+      "price": 85.53,
+      "dividendYield": 2.34,
+      "dividendRate": 2.0,
+      "payoutRatio": 26.1,
+      "marketCap": 256748257280,
+      "sector": "Financial Services",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 2.17,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 11.86,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 16.0,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "COP",
+      "name": "ConocoPhillips",
+      "price": 144.4,
+      "dividendYield": 2.33,
+      "dividendRate": 3.36,
+      "payoutRatio": 43.7,
+      "marketCap": 173473120256,
+      "sector": "Energy",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 3.94,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 8.67,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 29.01,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "APD",
+      "name": "Air Products and Chemicals, Inc",
+      "price": 312.97,
+      "dividendYield": 2.31,
+      "dividendRate": 7.24,
+      "payoutRatio": 75.7,
+      "marketCap": 69693890560,
+      "sector": "Basic Materials",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        3,
         4,
         6,
+        7,
         9,
         10,
         12
@@ -2000,32 +2091,324 @@
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 10.94,
-          "divReturn": 4.17,
-          "totalReturn": 15.1
+          "priceReturn": NaN,
+          "divReturn": 2.29,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 9.85,
-          "divReturn": 11.87,
-          "totalReturn": 21.72
+          "priceReturn": NaN,
+          "divReturn": 7.23,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": -21.06,
-          "divReturn": 13.56,
-          "totalReturn": -7.5
+          "priceReturn": NaN,
+          "divReturn": 12.29,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "LMT",
+      "name": "Lockheed Martin Corporation",
+      "price": 639.0,
+      "dividendYield": 2.25,
+      "dividendRate": 14.4,
+      "payoutRatio": 49.0,
+      "marketCap": 147611959296,
+      "sector": "Industrials",
+      "yearReturn": NaN,
+      "divMonths": [
+        2,
+        3,
+        5,
+        6,
+        8,
+        9,
+        11,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 2.92,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 9.51,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 21.4,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "KO",
+      "name": "Coca-Cola Company (The)",
+      "price": 94.8,
+      "dividendYield": 2.24,
+      "dividendRate": 2.12,
+      "payoutRatio": 62.0,
+      "marketCap": 407820369920,
+      "sector": "Consumer Defensive",
+      "yearReturn": NaN,
+      "divMonths": [
+        3,
+        5,
+        6,
+        9,
+        11,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 3.14,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 11.54,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 19.61,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "QCOM",
+      "name": "QUALCOMM Incorporated",
+      "price": 164.43,
+      "dividendYield": 2.24,
+      "dividendRate": 3.68,
+      "payoutRatio": 41.5,
+      "marketCap": 175584837632,
+      "sector": "Technology",
+      "yearReturn": NaN,
+      "divMonths": [
+        2,
+        3,
+        5,
+        6,
+        8,
+        9,
+        11,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 2.14,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 9.24,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 11.68,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "CL",
+      "name": "Colgate-Palmolive Company",
+      "price": 95.62,
+      "dividendYield": 2.22,
+      "dividendRate": 2.12,
+      "payoutRatio": 81.7,
+      "marketCap": 76010299392,
+      "sector": "Consumer Defensive",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        4,
+        7,
+        10
+      ],
+      "consecIncreases": 53,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 2.82,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 8.76,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 14.45,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "AMGN",
+      "name": "Amgen Inc.",
+      "price": 461.26,
+      "dividendYield": 2.19,
+      "dividendRate": 10.08,
+      "payoutRatio": 60.9,
+      "marketCap": 249371918336,
+      "sector": "Healthcare",
+      "yearReturn": NaN,
+      "divMonths": [
+        2,
+        5,
+        8,
+        11
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 3.44,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 11.31,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 23.98,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "JNJ",
+      "name": "Johnson & Johnson",
+      "price": 266.17,
+      "dividendYield": 2.01,
+      "dividendRate": 5.36,
+      "payoutRatio": 80.1,
+      "marketCap": 640753795072,
+      "sector": "Healthcare",
+      "yearReturn": NaN,
+      "divMonths": [
+        2,
+        5,
+        8,
+        11
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 2.89,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 10.93,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 16.93,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "PSX",
+      "name": "Phillips 66",
+      "price": 271.94,
+      "dividendYield": 1.96,
+      "dividendRate": 5.32,
+      "payoutRatio": 16.1,
+      "marketCap": 106076274688,
+      "sector": "Energy",
+      "yearReturn": NaN,
+      "divMonths": [
+        2,
+        5,
+        7,
+        8,
+        10,
+        11
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 3.8,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 13.33,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 34.33,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "GILD",
+      "name": "Gilead Sciences, Inc.",
+      "price": 167.47,
+      "dividendYield": 1.96,
+      "dividendRate": 3.28,
+      "payoutRatio": 43.5,
+      "marketCap": 207719497728,
+      "sector": "Healthcare",
+      "yearReturn": NaN,
+      "divMonths": [
+        3,
+        6,
+        9,
+        12
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 2.71,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 12.8,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 27.56,
+          "totalReturn": NaN
         }
       }
     },
     {
       "ticker": "JPM",
       "name": "JP Morgan Chase & Co.",
-      "price": 340.58,
-      "dividendYield": 1.94,
+      "price": 337.98,
+      "dividendYield": 1.95,
       "dividendRate": 6.6,
       "payoutRatio": 25.7,
-      "marketCap": 904444248064,
+      "marketCap": 897539768320,
       "sector": "Financial Services",
-      "yearReturn": 12.22,
+      "yearReturn": NaN,
       "divMonths": [
         1,
         3,
@@ -2039,32 +2422,73 @@
       "consecIncreases": 16,
       "totalReturns": {
         "1y": {
-          "priceReturn": 12.22,
+          "priceReturn": NaN,
           "divReturn": 2.03,
-          "totalReturn": 14.24
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 153.81,
-          "divReturn": 12.15,
-          "totalReturn": 165.96
+          "priceReturn": NaN,
+          "divReturn": 12.06,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 126.1,
-          "divReturn": 16.17,
-          "totalReturn": 142.27
+          "priceReturn": NaN,
+          "divReturn": 16.38,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "TXN",
+      "name": "Texas Instruments Incorporated",
+      "price": 312.49,
+      "dividendYield": 1.95,
+      "dividendRate": 6.08,
+      "payoutRatio": 73.7,
+      "marketCap": 285693247488,
+      "sector": "Technology",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12
+      ],
+      "consecIncreases": 23,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 3.71,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 12.17,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 15.81,
+          "totalReturn": NaN
         }
       }
     },
     {
       "ticker": "MMM",
       "name": "3M Company",
-      "price": 178.36,
-      "dividendYield": 1.75,
+      "price": 177.05,
+      "dividendYield": 1.76,
       "dividendRate": 3.12,
       "payoutRatio": 45.8,
-      "marketCap": 91984257024,
+      "marketCap": 91308654592,
       "sector": "Industrials",
-      "yearReturn": 12.0,
+      "yearReturn": NaN,
       "divMonths": [
         2,
         5,
@@ -2075,32 +2499,32 @@
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 12.0,
-          "divReturn": 1.93,
-          "totalReturn": 13.93
+          "priceReturn": NaN,
+          "divReturn": 1.95,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 146.79,
-          "divReturn": 13.67,
-          "totalReturn": 160.46
+          "priceReturn": NaN,
+          "divReturn": 13.72,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 39.46,
-          "divReturn": 15.53,
-          "totalReturn": 54.99
+          "priceReturn": NaN,
+          "divReturn": 15.67,
+          "totalReturn": NaN
         }
       }
     },
     {
       "ticker": "GD",
       "name": "General Dynamics Corporation",
-      "price": 373.46,
+      "price": 374.5,
       "dividendYield": 1.7,
       "dividendRate": 6.36,
       "payoutRatio": 36.9,
-      "marketCap": 100917747712,
+      "marketCap": 101198782464,
       "sector": "Industrials",
-      "yearReturn": 11.22,
+      "yearReturn": NaN,
       "divMonths": [
         1,
         2,
@@ -2118,108 +2542,70 @@
       "consecIncreases": 13,
       "totalReturns": {
         "1y": {
-          "priceReturn": 11.22,
-          "divReturn": 1.87,
-          "totalReturn": 13.08
+          "priceReturn": NaN,
+          "divReturn": 1.86,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 62.77,
-          "divReturn": 7.74,
-          "totalReturn": 70.51
+          "priceReturn": NaN,
+          "divReturn": 7.72,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 105.9,
-          "divReturn": 15.42,
-          "totalReturn": 121.32
+          "priceReturn": NaN,
+          "divReturn": 15.65,
+          "totalReturn": NaN
         }
       }
     },
     {
-      "ticker": "WEC",
-      "name": "WEC Energy Group, Inc.",
-      "price": 116.9,
-      "dividendYield": 3.26,
-      "dividendRate": 3.81,
-      "payoutRatio": 68.2,
-      "marketCap": 38459203584,
-      "sector": "Utilities",
-      "yearReturn": 9.3,
+      "ticker": "CSCO",
+      "name": "Cisco Systems, Inc.",
+      "price": 102.97,
+      "dividendYield": 1.63,
+      "dividendRate": 1.68,
+      "payoutRatio": 49.9,
+      "marketCap": 405968191488,
+      "sector": "Technology",
+      "yearReturn": NaN,
       "divMonths": [
-        2,
-        5,
-        6,
-        8,
-        11
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 9.3,
-          "divReturn": 3.51,
-          "totalReturn": 12.81
-        },
-        "3y": {
-          "priceReturn": 55.03,
-          "divReturn": 13.99,
-          "totalReturn": 69.02
-        },
-        "5y": {
-          "priceReturn": 54.29,
-          "divReturn": 21.75,
-          "totalReturn": 76.04
-        }
-      }
-    },
-    {
-      "ticker": "PLD",
-      "name": "Prologis, Inc.",
-      "price": 129.65,
-      "dividendYield": 3.3,
-      "dividendRate": 4.28,
-      "payoutRatio": 93.0,
-      "marketCap": 126031642624,
-      "sector": "Real Estate",
-      "yearReturn": 7.65,
-      "divMonths": [
-        2,
+        1,
         3,
         4,
-        5,
-        6,
         7,
         9,
         10,
-        12
+        11
       ],
-      "consecIncreases": 0,
+      "consecIncreases": 15,
       "totalReturns": {
         "1y": {
-          "priceReturn": 7.65,
-          "divReturn": 3.5,
-          "totalReturn": 11.15
+          "priceReturn": NaN,
+          "divReturn": 2.35,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 34.02,
-          "divReturn": 12.36,
-          "totalReturn": 46.38
+          "priceReturn": NaN,
+          "divReturn": 9.9,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 1.74,
-          "divReturn": 14.41,
-          "totalReturn": 16.15
+          "priceReturn": NaN,
+          "divReturn": 15.96,
+          "totalReturn": NaN
         }
       }
     },
     {
-      "ticker": "DUK",
-      "name": "Duke Energy Corporation (Holdin",
-      "price": 128.38,
-      "dividendYield": 3.38,
-      "dividendRate": 4.34,
-      "payoutRatio": 64.2,
-      "marketCap": 100098170880,
-      "sector": "Utilities",
-      "yearReturn": 7.45,
+      "ticker": "RTX",
+      "name": "RTX Corporation",
+      "price": 203.82,
+      "dividendYield": 1.43,
+      "dividendRate": 2.92,
+      "payoutRatio": 45.9,
+      "marketCap": 275042959360,
+      "sector": "Industrials",
+      "yearReturn": NaN,
       "divMonths": [
         2,
         5,
@@ -2229,42 +2615,39 @@
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 7.45,
-          "divReturn": 3.58,
-          "totalReturn": 11.03
+          "priceReturn": NaN,
+          "divReturn": 1.63,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 59.2,
-          "divReturn": 15.62,
-          "totalReturn": 74.82
+          "priceReturn": NaN,
+          "divReturn": 10.15,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 51.8,
-          "divReturn": 24.36,
-          "totalReturn": 76.16
+          "priceReturn": NaN,
+          "divReturn": 15.53,
+          "totalReturn": NaN
         }
       }
     },
     {
-      "ticker": "O",
-      "name": "Realty Income Corporation",
-      "price": 57.58,
-      "dividendYield": 5.66,
-      "dividendRate": 3.26,
-      "payoutRatio": 234.7,
-      "marketCap": 54483238912,
+      "ticker": "WELL",
+      "name": "Welltower Inc.",
+      "price": 241.17,
+      "dividendYield": 1.41,
+      "dividendRate": 3.4,
+      "payoutRatio": 130.1,
+      "marketCap": 176924688384,
       "sector": "Real Estate",
-      "yearReturn": 4.4,
+      "yearReturn": NaN,
       "divMonths": [
         1,
         2,
-        3,
         4,
         5,
-        6,
         7,
         8,
-        9,
         10,
         11,
         12
@@ -2272,70 +2655,144 @@
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 4.4,
-          "divReturn": 5.89,
-          "totalReturn": 10.29
+          "priceReturn": NaN,
+          "divReturn": 1.69,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 33.66,
-          "divReturn": 22.25,
-          "totalReturn": 55.91
+          "priceReturn": NaN,
+          "divReturn": 10.01,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 6.74,
-          "divReturn": 28.92,
-          "totalReturn": 35.66
+          "priceReturn": NaN,
+          "divReturn": 18.49,
+          "totalReturn": NaN
         }
       }
     },
     {
-      "ticker": "NEE",
-      "name": "NextEra Energy, Inc.",
-      "price": 85.03,
-      "dividendYield": 2.93,
-      "dividendRate": 2.49,
-      "payoutRatio": 43.9,
-      "marketCap": 178333941760,
-      "sector": "Utilities",
-      "yearReturn": 6.96,
+      "ticker": "EMR",
+      "name": "Emerson Electric Company",
+      "price": 166.39,
+      "dividendYield": 1.33,
+      "dividendRate": 2.22,
+      "payoutRatio": 48.0,
+      "marketCap": 93195034624,
+      "sector": "Industrials",
+      "yearReturn": NaN,
       "divMonths": [
         2,
+        5,
+        8,
+        10,
+        11
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 1.64,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 7.39,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 12.01,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "LIN",
+      "name": "Linde plc",
+      "price": 511.55,
+      "dividendYield": 1.25,
+      "dividendRate": 6.4,
+      "payoutRatio": 41.8,
+      "marketCap": 234844307456,
+      "sector": "Basic Materials",
+      "yearReturn": NaN,
+      "divMonths": [
         3,
         5,
         6,
         8,
-        11,
+        9,
         12
       ],
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 6.96,
-          "divReturn": 3.06,
-          "totalReturn": 10.03
+          "priceReturn": NaN,
+          "divReturn": 1.53,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 56.54,
-          "divReturn": 12.27,
-          "totalReturn": 68.81
+          "priceReturn": NaN,
+          "divReturn": 4.66,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 14.1,
-          "divReturn": 13.63,
-          "totalReturn": 27.73
+          "priceReturn": NaN,
+          "divReturn": 8.78,
+          "totalReturn": NaN
+        }
+      }
+    },
+    {
+      "ticker": "VLO",
+      "name": "Valero Energy Corporation",
+      "price": 387.65,
+      "dividendYield": 1.24,
+      "dividendRate": 4.8,
+      "payoutRatio": 10.8,
+      "marketCap": 108109545472,
+      "sector": "Energy",
+      "yearReturn": NaN,
+      "divMonths": [
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11
+      ],
+      "consecIncreases": 0,
+      "totalReturns": {
+        "1y": {
+          "priceReturn": NaN,
+          "divReturn": 2.86,
+          "totalReturn": NaN
+        },
+        "3y": {
+          "priceReturn": NaN,
+          "divReturn": 11.58,
+          "totalReturn": NaN
+        },
+        "5y": {
+          "priceReturn": NaN,
+          "divReturn": 32.69,
+          "totalReturn": NaN
         }
       }
     },
     {
       "ticker": "CAT",
       "name": "Caterpillar, Inc.",
-      "price": 613.62,
-      "dividendYield": 1.06,
+      "price": 623.94,
+      "dividendYield": 1.04,
       "dividendRate": 6.52,
       "payoutRatio": 26.0,
-      "marketCap": 282065698816,
+      "marketCap": 286809554944,
       "sector": "Industrials",
-      "yearReturn": 8.46,
+      "yearReturn": NaN,
       "divMonths": [
         1,
         4,
@@ -2346,450 +2803,67 @@
       "consecIncreases": 13,
       "totalReturns": {
         "1y": {
-          "priceReturn": 8.46,
-          "divReturn": 1.11,
-          "totalReturn": 9.57
+          "priceReturn": NaN,
+          "divReturn": 1.16,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 165.11,
-          "divReturn": 7.58,
-          "totalReturn": 172.69
+          "priceReturn": NaN,
+          "divReturn": 7.66,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 227.5,
-          "divReturn": 14.5,
-          "totalReturn": 242.0
+          "priceReturn": NaN,
+          "divReturn": 14.49,
+          "totalReturn": NaN
         }
       }
     },
     {
-      "ticker": "SO",
-      "name": "Southern Company (The)",
-      "price": 94.61,
-      "dividendYield": 3.21,
-      "dividendRate": 3.04,
-      "payoutRatio": 71.8,
-      "marketCap": 108835848192,
-      "sector": "Utilities",
-      "yearReturn": 4.92,
+      "ticker": "MPC",
+      "name": "Marathon Petroleum Corporation",
+      "price": 427.34,
+      "dividendYield": 1.03,
+      "dividendRate": 4.4,
+      "payoutRatio": 13.5,
+      "marketCap": 124756205568,
+      "sector": "Energy",
+      "yearReturn": NaN,
       "divMonths": [
-        1,
         2,
-        4,
         5,
-        7,
         8,
-        10,
         11
       ],
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": 4.92,
-          "divReturn": 3.33,
-          "totalReturn": 8.25
-        },
-        "3y": {
-          "priceReturn": 49.04,
-          "divReturn": 13.8,
-          "totalReturn": 62.84
-        },
-        "5y": {
-          "priceReturn": 81.58,
-          "divReturn": 27.25,
-          "totalReturn": 108.84
-        }
-      }
-    },
-    {
-      "ticker": "DLR",
-      "name": "Digital Realty Trust, Inc.",
-      "price": 175.95,
-      "dividendYield": 2.77,
-      "dividendRate": 4.88,
-      "payoutRatio": 205.9,
-      "marketCap": 66449928192,
-      "sector": "Real Estate",
-      "yearReturn": 5.25,
-      "divMonths": [
-        3,
-        6,
-        9,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 5.25,
-          "divReturn": 2.92,
-          "totalReturn": 8.17
-        },
-        "3y": {
-          "priceReturn": 44.89,
-          "divReturn": 12.06,
-          "totalReturn": 56.95
-        },
-        "5y": {
-          "priceReturn": 31.58,
-          "divReturn": 18.2,
-          "totalReturn": 49.78
-        }
-      }
-    },
-    {
-      "ticker": "EXC",
-      "name": "Exelon Corporation",
-      "price": 46.45,
-      "dividendYield": 3.62,
-      "dividendRate": 1.68,
-      "payoutRatio": 64.8,
-      "marketCap": 48070950912,
-      "sector": "Utilities",
-      "yearReturn": 4.23,
-      "divMonths": [
-        2,
-        3,
-        5,
-        6,
-        8,
-        9,
-        10,
-        11
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 4.23,
-          "divReturn": 3.72,
-          "totalReturn": 7.96
-        },
-        "3y": {
-          "priceReturn": 28.25,
-          "divReturn": 13.09,
-          "totalReturn": 41.34
-        },
-        "5y": {
-          "priceReturn": 43.94,
-          "divReturn": 23.07,
-          "totalReturn": 67.01
-        }
-      }
-    },
-    {
-      "ticker": "CCI",
-      "name": "Crown Castle Inc.",
-      "price": 87.03,
-      "dividendYield": 4.88,
-      "dividendRate": 4.25,
-      "payoutRatio": 172.8,
-      "marketCap": 38032109568,
-      "sector": "Real Estate",
-      "yearReturn": 2.22,
-      "divMonths": [
-        3,
-        6,
-        9,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 2.22,
-          "divReturn": 4.99,
-          "totalReturn": 7.22
-        },
-        "3y": {
-          "priceReturn": 3.95,
-          "divReturn": 18.83,
-          "totalReturn": 22.78
-        },
-        "5y": {
-          "priceReturn": -39.04,
-          "divReturn": 19.55,
-          "totalReturn": -19.5
-        }
-      }
-    },
-    {
-      "ticker": "PEP",
-      "name": "Pepsico, Inc.",
-      "price": 140.42,
-      "dividendYield": 4.22,
-      "dividendRate": 5.92,
-      "payoutRatio": 73.0,
-      "marketCap": 191356108800,
-      "sector": "Consumer Defensive",
-      "yearReturn": 1.75,
-      "divMonths": [
-        2,
-        3,
-        5,
-        6,
-        8,
-        9,
-        10,
-        11,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 1.75,
-          "divReturn": 4.21,
-          "totalReturn": 5.95
-        },
-        "3y": {
-          "priceReturn": -6.18,
-          "divReturn": 11.09,
-          "totalReturn": 4.91
-        },
-        "5y": {
-          "priceReturn": 0.51,
-          "divReturn": 18.53,
-          "totalReturn": 19.03
-        }
-      }
-    },
-    {
-      "ticker": "XEL",
-      "name": "Xcel Energy Inc.",
-      "price": 79.33,
-      "dividendYield": 2.99,
-      "dividendRate": 2.37,
-      "payoutRatio": 54.7,
-      "marketCap": 50919899136,
-      "sector": "Utilities",
-      "yearReturn": 0.66,
-      "divMonths": [
-        1,
-        3,
-        4,
-        6,
-        7,
-        8,
-        9,
-        10,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 0.66,
-          "divReturn": 2.98,
-          "totalReturn": 3.64
-        },
-        "3y": {
-          "priceReturn": 43.81,
-          "divReturn": 12.27,
-          "totalReturn": 56.09
-        },
-        "5y": {
-          "priceReturn": 46.71,
-          "divReturn": 19.86,
-          "totalReturn": 66.57
-        }
-      }
-    },
-    {
-      "ticker": "WFC",
-      "name": "Wells Fargo & Company",
-      "price": 85.89,
-      "dividendYield": 2.33,
-      "dividendRate": 2.0,
-      "payoutRatio": 26.1,
-      "marketCap": 257828929536,
-      "sector": "Financial Services",
-      "yearReturn": 0.53,
-      "divMonths": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        7,
-        8,
-        10,
-        11
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": 0.53,
-          "divReturn": 2.17,
-          "totalReturn": 2.7
-        },
-        "3y": {
-          "priceReturn": 119.99,
-          "divReturn": 11.78,
-          "totalReturn": 131.77
-        },
-        "5y": {
-          "priceReturn": 86.57,
-          "divReturn": 15.64,
-          "totalReturn": 102.21
-        }
-      }
-    },
-    {
-      "ticker": "MSFT",
-      "name": "Microsoft Corporation",
-      "price": 507.12,
-      "dividendYield": 0.77,
-      "dividendRate": 3.92,
-      "payoutRatio": 19.0,
-      "marketCap": 3765971714048,
-      "sector": "Technology",
-      "yearReturn": -1.11,
-      "divMonths": [
-        2,
-        5,
-        8,
-        10,
-        11
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": -1.11,
-          "divReturn": 0.71,
-          "totalReturn": -0.4
-        },
-        "3y": {
-          "priceReturn": 47.11,
-          "divReturn": 2.89,
-          "totalReturn": 50.0
-        },
-        "5y": {
-          "priceReturn": 58.2,
-          "divReturn": 4.73,
-          "totalReturn": 62.93
-        }
-      }
-    },
-    {
-      "ticker": "SRE",
-      "name": "DBA Sempra",
-      "price": 85.97,
-      "dividendYield": 3.06,
-      "dividendRate": 2.63,
-      "payoutRatio": 75.3,
-      "marketCap": 56215814144,
-      "sector": "Utilities",
-      "yearReturn": -4.34,
-      "divMonths": [
-        3,
-        6,
-        7,
-        9,
-        10,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": -4.34,
-          "divReturn": 2.91,
-          "totalReturn": -1.43
-        },
-        "3y": {
-          "priceReturn": 30.55,
-          "divReturn": 11.58,
-          "totalReturn": 42.13
-        },
-        "5y": {
-          "priceReturn": 56.88,
-          "divReturn": 22.36,
-          "totalReturn": 79.24
-        }
-      }
-    },
-    {
-      "ticker": "BAC",
-      "name": "Bank of America Corporation",
-      "price": 49.57,
-      "dividendYield": 2.58,
-      "dividendRate": 1.28,
-      "payoutRatio": 27.6,
-      "marketCap": 342043361280,
-      "sector": "Financial Services",
-      "yearReturn": -5.48,
-      "divMonths": [
-        2,
-        3,
-        5,
-        6,
-        8,
-        9,
-        11,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": -5.48,
+          "priceReturn": NaN,
           "divReturn": 2.21,
-          "totalReturn": -3.26
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 87.42,
-          "divReturn": 12.1,
-          "totalReturn": 99.52
+          "priceReturn": NaN,
+          "divReturn": 7.74,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 15.83,
-          "divReturn": 11.57,
-          "totalReturn": 27.39
+          "priceReturn": NaN,
+          "divReturn": 28.59,
+          "totalReturn": NaN
         }
       }
     },
     {
-      "ticker": "T",
-      "name": "AT&T Inc.",
-      "price": 21.44,
-      "dividendYield": 5.18,
-      "dividendRate": 1.11,
-      "payoutRatio": 59.4,
-      "marketCap": 144429989888,
-      "sector": "Communication Services",
-      "yearReturn": -8.43,
-      "divMonths": [
-        1,
-        3,
-        4,
-        6,
-        7,
-        9,
-        10
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": -8.43,
-          "divReturn": 4.75,
-          "totalReturn": -3.68
-        },
-        "3y": {
-          "priceReturn": 56.94,
-          "divReturn": 24.42,
-          "totalReturn": 81.36
-        },
-        "5y": {
-          "priceReturn": 50.27,
-          "divReturn": 40.67,
-          "totalReturn": 90.94
-        }
-      }
-    },
-    {
-      "ticker": "VICI",
-      "name": "VICI Properties Inc.",
-      "price": 25.0,
-      "dividendYield": 7.36,
-      "dividendRate": 1.84,
-      "payoutRatio": 83.8,
-      "marketCap": 27527139328,
-      "sector": "Real Estate",
-      "yearReturn": -11.09,
+      "ticker": "NUE",
+      "name": "Nucor Corporation",
+      "price": 273.53,
+      "dividendYield": 0.82,
+      "dividendRate": 2.24,
+      "payoutRatio": 17.8,
+      "marketCap": 62057304064,
+      "sector": "Basic Materials",
+      "yearReturn": NaN,
       "divMonths": [
         3,
         6,
@@ -2799,71 +2873,32 @@
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": -11.09,
-          "divReturn": 6.44,
-          "totalReturn": -4.65
+          "priceReturn": NaN,
+          "divReturn": 1.57,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 2.4,
-          "divReturn": 21.45,
-          "totalReturn": 23.86
+          "priceReturn": NaN,
+          "divReturn": 4.5,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 11.11,
-          "divReturn": 36.85,
-          "totalReturn": 47.96
-        }
-      }
-    },
-    {
-      "ticker": "QCOM",
-      "name": "QUALCOMM Incorporated",
-      "price": 162.08,
-      "dividendYield": 2.27,
-      "dividendRate": 3.68,
-      "payoutRatio": 41.5,
-      "marketCap": 173075431424,
-      "sector": "Technology",
-      "yearReturn": -8.45,
-      "divMonths": [
-        2,
-        3,
-        5,
-        6,
-        8,
-        9,
-        11,
-        12
-      ],
-      "consecIncreases": 0,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": -8.45,
-          "divReturn": 2.04,
-          "totalReturn": -6.4
-        },
-        "3y": {
-          "priceReturn": 44.5,
-          "divReturn": 9.27,
-          "totalReturn": 53.77
-        },
-        "5y": {
-          "priceReturn": 30.49,
-          "divReturn": 13.17,
-          "totalReturn": 43.66
+          "priceReturn": NaN,
+          "divReturn": 10.24,
+          "totalReturn": NaN
         }
       }
     },
     {
       "ticker": "AVGO",
       "name": "Broadcom Inc.",
-      "price": 322.23,
-      "dividendYield": 0.81,
+      "price": 332.13,
+      "dividendYield": 0.78,
       "dividendRate": 2.6,
       "payoutRatio": 32.4,
-      "marketCap": 1538206859264,
+      "marketCap": 1585465786368,
       "sector": "Technology",
-      "yearReturn": -10.46,
+      "yearReturn": NaN,
       "divMonths": [
         3,
         6,
@@ -2873,36 +2908,35 @@
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": -10.46,
-          "divReturn": 0.72,
-          "totalReturn": -9.74
+          "priceReturn": NaN,
+          "divReturn": 0.74,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 277.1,
-          "divReturn": 8.27,
-          "totalReturn": 285.37
+          "priceReturn": NaN,
+          "divReturn": 8.29,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 549.03,
-          "divReturn": 21.24,
-          "totalReturn": 570.27
+          "priceReturn": NaN,
+          "divReturn": 21.0,
+          "totalReturn": NaN
         }
       }
     },
     {
-      "ticker": "IBM",
-      "name": "International Business Machines",
-      "price": 252.51,
-      "dividendYield": 2.68,
-      "dividendRate": 6.76,
-      "payoutRatio": 57.5,
-      "marketCap": 238652456960,
+      "ticker": "MSFT",
+      "name": "Microsoft Corporation",
+      "price": 520.99,
+      "dividendYield": 0.75,
+      "dividendRate": 3.92,
+      "payoutRatio": 19.0,
+      "marketCap": 3868973072384,
       "sector": "Technology",
-      "yearReturn": -14.98,
+      "yearReturn": NaN,
       "divMonths": [
         2,
         5,
-        7,
         8,
         10,
         11
@@ -2910,89 +2944,55 @@
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": -14.98,
-          "divReturn": 2.27,
-          "totalReturn": -12.71
+          "priceReturn": NaN,
+          "divReturn": 0.71,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 87.27,
-          "divReturn": 14.91,
-          "totalReturn": 102.18
+          "priceReturn": NaN,
+          "divReturn": 2.86,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 151.57,
-          "divReturn": 33.18,
-          "totalReturn": 184.74
+          "priceReturn": NaN,
+          "divReturn": 4.7,
+          "totalReturn": NaN
         }
       }
     },
     {
-      "ticker": "GIS",
-      "name": "General Mills, Inc.",
-      "price": 34.75,
-      "dividendYield": 7.02,
-      "dividendRate": 2.44,
-      "payoutRatio": 59.4,
-      "marketCap": 18580377600,
-      "sector": "Consumer Defensive",
-      "yearReturn": -19.99,
-      "divMonths": [
-        1,
-        4,
-        7,
-        10
-      ],
-      "consecIncreases": 7,
-      "totalReturns": {
-        "1y": {
-          "priceReturn": -19.99,
-          "divReturn": 5.62,
-          "totalReturn": -14.37
-        },
-        "3y": {
-          "priceReturn": -38.77,
-          "divReturn": 12.76,
-          "totalReturn": -26.01
-        },
-        "5y": {
-          "priceReturn": -32.39,
-          "divReturn": 22.57,
-          "totalReturn": -9.82
-        }
-      }
-    },
-    {
-      "ticker": "TMUS",
-      "name": "T-Mobile US, Inc.",
-      "price": 160.15,
-      "dividendYield": 2.92,
-      "dividendRate": 4.68,
-      "payoutRatio": 39.3,
-      "marketCap": 169642491904,
-      "sector": "Communication Services",
-      "yearReturn": -19.57,
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "price": 331.9,
+      "dividendYield": 0.33,
+      "dividendRate": 1.08,
+      "payoutRatio": 12.0,
+      "marketCap": 4843808227328,
+      "sector": "Technology",
+      "yearReturn": NaN,
       "divMonths": [
         2,
         5,
+        6,
         8,
         11
       ],
       "consecIncreases": 0,
       "totalReturns": {
         "1y": {
-          "priceReturn": -19.57,
-          "divReturn": 2.05,
-          "totalReturn": -17.52
+          "priceReturn": NaN,
+          "divReturn": 0.39,
+          "totalReturn": NaN
         },
         "3y": {
-          "priceReturn": 14.2,
-          "divReturn": 7.27,
-          "totalReturn": 21.48
+          "priceReturn": NaN,
+          "divReturn": 1.73,
+          "totalReturn": NaN
         },
         "5y": {
-          "priceReturn": 38.13,
-          "divReturn": 8.8,
-          "totalReturn": 46.93
+          "priceReturn": NaN,
+          "divReturn": 3.33,
+          "totalReturn": NaN
         }
       }
     }
